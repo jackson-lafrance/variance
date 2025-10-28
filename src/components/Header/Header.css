@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5em;
+  margin-bottom: 1em;
+  flex-wrap: wrap;
+}
+
+.header > * {
+  display: flex;
+  align-items: center;
+}

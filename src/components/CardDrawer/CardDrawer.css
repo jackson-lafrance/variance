@@ -1,0 +1,84 @@
+.card-drawer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.875em;
+  padding: 2.5em;
+}
+
+.draw-button {
+  padding: 0.75em 2em;
+  font-size: 1em;
+  font-weight: 600;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0.125em 0.5em rgba(33, 150, 243, 0.3);
+}
+
+.draw-button:hover {
+  background: #1976d2;
+  transform: translateY(-0.125em);
+  box-shadow: 0 0.25em 0.75em rgba(33, 150, 243, 0.4);
+}
+
+.draw-button:active {
+  transform: translateY(0);
+  box-shadow: 0 0.125em 0.25em rgba(33, 150, 243, 0.3);
+}
+
+.card {
+  width: 11.25em;
+  height: 16.25em;
+  background: white;
+  border: 0.1875em solid;
+  border-radius: 0.75em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0.25em 0.75em rgba(0, 0, 0, 0.15);
+  animation: cardAppear 0.3s ease-out;
+  position: relative;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625em;
+}
+
+.card-rank {
+  font-size: 3em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.card-suit {
+  font-size: 4.5em;
+  line-height: 1;
+}
+
+.card-name {
+  position: absolute;
+  bottom: 0.75em;
+  font-size: 0.875em;
+  font-weight: 600;
+  color: #666;
+  font-family: monospace;
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotateY(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}

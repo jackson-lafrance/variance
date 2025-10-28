@@ -1,0 +1,268 @@
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e8e8e8;
+  border-radius: 0.75em;
+  padding: 1.5em 1.75em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.05);
+  border: 0.125em solid transparent;
+  color: #1a1a1a;
+  align-self: flex-start;
+}
+
+.dark-mode-toggle:hover {
+  background: #ffffff;
+  box-shadow: 0 0.375em 1.25em rgba(0, 0, 0, 0.1);
+  border-color: #d8d8d8;
+  transform: translateY(-0.0625em);
+}
+
+.dark-mode-toggle svg {
+  transition: transform 0.3s ease;
+}
+
+.dark-mode-toggle:hover svg {
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* Dark mode styles */
+body.dark-mode {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .app {
+  background: #1a1a1a;
+}
+
+body.dark-mode .dark-mode-toggle {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .dark-mode-toggle:hover {
+  background: #333;
+  border-color: #444;
+}
+
+/* Button styles in dark mode */
+body.dark-mode .bj-button,
+body.dark-mode .adv-bj-button,
+body.dark-mode .bs-button {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-mode .bj-button-primary,
+body.dark-mode .adv-bj-button-primary,
+body.dark-mode .bs-button-primary {
+  background: #1976d2;
+  color: #fff;
+}
+
+body.dark-mode .bj-button-primary:hover,
+body.dark-mode .adv-bj-button-primary:hover,
+body.dark-mode .bs-button-primary:hover {
+  background: #1565c0;
+}
+
+body.dark-mode .bj-button-secondary,
+body.dark-mode .adv-bj-button-secondary,
+body.dark-mode .bs-button-secondary {
+  background: #388e3c;
+  color: #fff;
+}
+
+body.dark-mode .bj-button-secondary:hover,
+body.dark-mode .adv-bj-button-secondary:hover,
+body.dark-mode .bs-button-secondary:hover {
+  background: #2e7d32;
+}
+
+body.dark-mode .bj-button-outline,
+body.dark-mode .adv-bj-button-outline,
+body.dark-mode .bs-button-outline {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-mode .bj-button-outline:hover,
+body.dark-mode .adv-bj-button-outline:hover,
+body.dark-mode .bs-button-outline:hover {
+  background: #333;
+  border-color: #555;
+}
+
+body.dark-mode .adv-bj-button-orange,
+body.dark-mode .bs-button-special {
+  background: #f57c00;
+  color: #fff;
+}
+
+body.dark-mode .adv-bj-button-orange:hover,
+body.dark-mode .bs-button-special:hover {
+  background: #ef6c00;
+}
+
+body.dark-mode .adv-bj-button-green {
+  background: #0097a7;
+  color: #fff;
+}
+
+body.dark-mode .adv-bj-button-green:hover {
+  background: #00838f;
+}
+
+/* Card and game area styles */
+body.dark-mode .bj-hand,
+body.dark-mode .adv-bj-hand,
+body.dark-mode .bs-hand {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .bj-hand-header h4,
+body.dark-mode .adv-bj-hand-header h4,
+body.dark-mode .bs-hand-header h4 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .bj-hand-value,
+body.dark-mode .adv-bj-hand-value,
+body.dark-mode .bs-hand-value {
+  color: #64b5f6;
+}
+
+body.dark-mode .bj-card,
+body.dark-mode .adv-bj-card,
+body.dark-mode .bs-card {
+  background: #fff;
+}
+
+body.dark-mode .bj-card-hidden,
+body.dark-mode .adv-bj-card-hidden,
+body.dark-mode .bs-card-hidden {
+  background: #fff;
+}
+
+body.dark-mode .bj-status,
+body.dark-mode .adv-bj-hand-status,
+body.dark-mode .bs-status,
+body.dark-mode .bs-feedback {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-mode .bs-feedback.correct {
+  background: #1b5e20;
+  color: #a5d6a7;
+  border-color: #2e7d32;
+}
+
+body.dark-mode .bs-feedback.incorrect {
+  background: #b71c1c;
+  color: #ef9a9a;
+  border-color: #c62828;
+}
+
+body.dark-mode .blackjack-simulation,
+body.dark-mode .advanced-blackjack-simulation,
+body.dark-mode .basic-strategy-simulation {
+  background: #252525;
+}
+
+/* Strategy tables stay light in dark mode */
+
+body.dark-mode .toggle-text {
+  color: #e0e0e0;
+}
+
+body.dark-mode .dark-mode-toggle:hover .toggle-text {
+  color: #64b5f6;
+}
+
+body.dark-mode .inline-navigation {
+  background: #2a2a2a;
+}
+
+body.dark-mode .inline-navigation:hover {
+  background: #333;
+  border-color: #444;
+}
+
+body.dark-mode .nav-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .inline-navigation:hover .nav-title {
+  color: #64b5f6;
+}
+
+body.dark-mode .nav-title::after {
+  color: #666;
+}
+
+body.dark-mode .inline-navigation:hover .nav-title::after {
+  color: #64b5f6;
+}
+
+body.dark-mode .nav-dropdown-item {
+  color: #b0b0b0;
+}
+
+body.dark-mode .nav-dropdown-item:hover {
+  background: #1e3a5f;
+  color: #64b5f6;
+}
+
+body.dark-mode .collapsible-section {
+  background: linear-gradient(145deg, #2a2a2a 0%, #252525 100%);
+}
+
+body.dark-mode .collapsible-header {
+  color: #e0e0e0;
+}
+
+body.dark-mode .collapsible-header:hover .collapsible-title {
+  color: #64b5f6;
+}
+
+body.dark-mode .collapsible-icon {
+  color: #666;
+}
+
+body.dark-mode .collapsible-header:hover .collapsible-icon {
+  color: #64b5f6;
+}
+
+body.dark-mode .collapsible-header.open .collapsible-icon {
+  color: #64b5f6;
+}
+
+body.dark-mode .collapsible-content-inner {
+  color: #b0b0b0;
+}
+
+body.dark-mode .collapsible-content-inner h3 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .collapsible-content-inner p,
+body.dark-mode .collapsible-content-inner li {
+  color: #b0b0b0;
+}
+
+body.dark-mode .collapsible-content-inner strong {
+  color: #e0e0e0;
+}
+
+body.dark-mode .home-subtitle {
+  color: #999;
+}
+

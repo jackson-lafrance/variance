@@ -1,0 +1,22 @@
+.card-counting-basics-page {
+  max-width: 62.5em;
+  padding: 2.5em 1.25em;
+}
+
+.card-counting-basics-header {
+  text-align: left;
+  margin-bottom: 2.5em;
+}
+
+.card-counting-basics-subtitle {
+  font-size: 1.125em;
+  color: #666;
+  font-weight: 400;
+}
+
+.card-counting-basics-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+

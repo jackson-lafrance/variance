@@ -1,0 +1,214 @@
+.basic-strategy-simulation {
+  margin-top: 1.5em;
+  padding: 0.5em 0 0 0;
+  background: #f8f9fa;
+  border-radius: 0.75em;
+  text-align: left;
+}
+
+.bs-controls {
+  margin-bottom: 0.5em;
+  display: flex;
+  gap: 0.75em;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-left: 1.5em;
+}
+
+.bs-button {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+}
+
+.bs-button:hover {
+  box-shadow: 0 0.25em 0.75em rgba(0, 0, 0, 0.15);
+  transform: translateY(-0.0625em);
+}
+
+.bs-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.bs-button-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.bs-button-primary:hover {
+  background-color: #1976d2;
+}
+
+.bs-button-secondary {
+  background-color: #4caf50;
+  color: white;
+}
+
+.bs-button-secondary:hover {
+  background-color: #388e3c;
+}
+
+.bs-button-special {
+  background-color: #ff9800;
+  color: white;
+}
+
+.bs-button-special:hover {
+  background-color: #f57c00;
+}
+
+.bs-button-outline {
+  background-color: white;
+  color: #666;
+  border: 0.125em solid #ddd;
+}
+
+.bs-button-outline:hover {
+  background-color: #f5f5f5;
+  border-color: #999;
+}
+
+.bs-game {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: flex-start;
+  margin-left: 1.5em;
+  padding-bottom: 1em;
+}
+
+.bs-player-hands {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.5em;
+  flex-wrap: wrap;
+}
+
+.bs-player-hands .bs-hand {
+  min-width: 15em;
+  flex: 1;
+  max-width: 20em;
+}
+
+.bs-hand {
+  background: #f8f8f8;
+  border-radius: 0.75em;
+  padding: 1em;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  min-width: 20em;
+  max-width: fit-content;
+}
+
+.bs-hand.active {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  box-shadow: 0 0.25em 1em rgba(76, 175, 80, 0.2);
+  border: 0.125em solid #4caf50;
+}
+
+.bs-hand.complete {
+  opacity: 0.8;
+}
+
+.bs-hand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75em;
+  padding-bottom: 0.5em;
+  border-bottom: 0.0625em solid #eee;
+}
+
+.bs-hand-header h4 {
+  margin: 0;
+  font-size: 1.125em;
+  color: #333;
+}
+
+.bs-hand-value {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #2196f3;
+}
+
+.bs-cards {
+  display: flex;
+  gap: 0.75em;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.bs-card {
+  width: 5em;
+  height: 6.875em;
+  background: white;
+  border: 0.125em solid;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+}
+
+.bs-card-hidden {
+  background: white;
+  border-color: #333;
+}
+
+.bs-card-rank {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.bs-card-suit {
+  font-size: 1.5em;
+}
+
+.bs-feedback {
+  margin-top: 1.5em;
+  padding: 1em 1.5em 1.5em 1.5em;
+  border-radius: 0;
+  font-size: 1.125em;
+  font-weight: 600;
+  animation: feedbackAppear 0.4s ease-out;
+}
+
+.bs-feedback.hidden {
+  opacity: 0;
+  visibility: hidden;
+  background-color: #f5f5f5;
+  color: #999;
+  border: 0.125em solid #ddd;
+}
+
+.bs-feedback.correct {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+  border: 0.125em solid #4caf50;
+}
+
+.bs-feedback.incorrect {
+  background-color: #ffcdd2;
+  color: #c62828;
+  border: 0.125em solid #f44336;
+}
+
+@keyframes feedbackAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-0.625em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

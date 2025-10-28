@@ -1,0 +1,29 @@
+.blackjack-basics-page {
+  max-width: 62.5em;
+  padding: 2.5em 1.25em;
+}
+
+.blackjack-basics-header {
+  text-align: left;
+  margin-bottom: 2.5em;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 0.75em;
+}
+
+.blackjack-basics-subtitle {
+  font-size: 1.125em;
+  color: #666;
+  font-weight: 400;
+}
+
+.blackjack-basics-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}

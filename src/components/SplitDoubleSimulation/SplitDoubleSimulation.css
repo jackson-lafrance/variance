@@ -1,0 +1,196 @@
+.advanced-blackjack-simulation {
+  margin-top: 1.5em;
+  padding: 1.5em 0 0 0;
+  background: #f8f9fa;
+  border-radius: 0.75em;
+  text-align: left;
+}
+
+.adv-bj-controls {
+  margin-bottom: 1em;
+  margin-left: 1.5em;
+  display: flex;
+  gap: 0.75em;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.adv-bj-button {
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+}
+
+.adv-bj-button:hover {
+  box-shadow: 0 0.25em 0.75em rgba(0, 0, 0, 0.15);
+  transform: translateY(-0.0625em);
+}
+
+.adv-bj-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.adv-bj-button-primary {
+  background-color: #2196f3;
+  color: white;
+}
+
+.adv-bj-button-primary:hover {
+  background-color: #1976d2;
+}
+
+.adv-bj-button-secondary {
+  background-color: #4caf50;
+  color: white;
+}
+
+.adv-bj-button-secondary:hover {
+  background-color: #388e3c;
+}
+
+.adv-bj-button-special {
+  background-color: #ff9800;
+  color: white;
+}
+
+.adv-bj-button-special:hover {
+  background-color: #f57c00;
+}
+
+.adv-bj-button-outline {
+  background-color: white;
+  color: #666;
+  border: 0.125em solid #ddd;
+}
+
+.adv-bj-button-outline:hover {
+  background-color: #f5f5f5;
+  border-color: #999;
+}
+
+.adv-bj-game {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  padding-bottom: 1.5em;
+  align-items: flex-start;
+  margin-left: 1.5em;
+}
+
+.adv-bj-hand {
+  background: #f8f8f8;
+  border-radius: 0.75em;
+  padding: 1em;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  min-width: 20em;
+  max-width: fit-content;
+}
+
+.adv-bj-hand.active {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  box-shadow: 0 0.25em 1em rgba(76, 175, 80, 0.2);
+  border: 0.125em solid #4caf50;
+}
+
+.adv-bj-hand.complete {
+  opacity: 0.8;
+}
+
+.adv-bj-player-hands {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.5em;
+  flex-wrap: wrap;
+}
+
+.adv-bj-player-hands .adv-bj-hand {
+  min-width: 15em;
+  flex: 1;
+  max-width: 20em;
+}
+
+.adv-bj-hand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75em;
+  padding-bottom: 0.5em;
+  border-bottom: 0.0625em solid #eee;
+}
+
+.adv-bj-hand-header h4 {
+  margin: 0;
+  font-size: 1.125em;
+  color: #333;
+}
+
+.adv-bj-hand-value {
+  font-size: 1.25em;
+  font-weight: 700;
+  color: #2196f3;
+}
+
+.adv-bj-cards {
+  display: flex;
+  gap: 0.75em;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.adv-bj-card {
+  width: 5em;
+  height: 6.875em;
+  background: white;
+  border: 0.125em solid;
+  border-radius: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+}
+
+.adv-bj-card-hidden {
+  background: white;
+  border-color: #333;
+}
+
+.adv-bj-card-rank {
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.adv-bj-card-suit {
+  font-size: 1.5em;
+}
+
+.adv-bj-hand-status {
+  margin-top: 0.75em;
+  font-size: 1.125em;
+  font-weight: 700;
+  padding: 1em 1.5em 1.5em 1.5em;
+  border-radius: 0;
+  background-color: #fff;
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1);
+  animation: statusAppear 0.4s ease-out;
+}
+
+@keyframes statusAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
