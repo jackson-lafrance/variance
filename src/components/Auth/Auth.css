@@ -1,0 +1,132 @@
+.auth-page {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.auth-page-header {
+  padding: 2.5em 1.25em 1em 1.25em;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  max-width: 62.5em;
+  margin: 0 auto;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 25em;
+  background: #f8f9fa;
+  border-radius: 0.75em;
+  padding: 2.5em;
+  box-shadow: 0 0.125em 0.5em rgba(0,0,0,0.06);
+  border: 0.125em solid #e0e0e0;
+}
+
+.auth-title {
+  margin: 0 0 1.5em 0;
+  font-size: 2em;
+  text-align: center;
+  color: #333;
+}
+
+.auth-error {
+  margin-bottom: 1.5em;
+  padding: 1em;
+  background: #ffebee;
+  color: #c62828;
+  border-radius: 0.5em;
+  text-align: center;
+  font-size: 0.9375em;
+}
+
+.auth-form {
+  margin-bottom: 1.5em;
+}
+
+.auth-field {
+  margin-bottom: 1.25em;
+}
+
+.auth-field label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9375em;
+}
+
+.auth-field input {
+  width: 100%;
+  padding: 0.75em;
+  font-size: 1em;
+  border: 0.125em solid #ddd;
+  border-radius: 0.5em;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  background: white;
+}
+
+.auth-field input:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.auth-field input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.auth-submit {
+  width: 100%;
+  padding: 1em;
+  font-size: 1.0625em;
+  font-weight: 700;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.auth-submit:hover:not(:disabled) {
+  background: #1976d2;
+  transform: translateY(-0.0625em);
+}
+
+.auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-toggle {
+  text-align: center;
+  color: #666;
+  font-size: 0.9375em;
+  margin: 0;
+}
+
+.auth-toggle-button {
+  background: none;
+  border: none;
+  color: #2196f3;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.auth-toggle-button:hover:not(:disabled) {
+  color: #1976d2;
+}
+
+.auth-toggle-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
