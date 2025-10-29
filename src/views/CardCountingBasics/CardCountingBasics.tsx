@@ -1,6 +1,10 @@
 import React from 'react';
 import Header from '../../components/Header';
 import CollapsibleSection from '../../components/CollapsibleSection';
+import BasicHiLoSimulation from '../../components/BasicHiLoSimulation';
+import DeviationsSimulation from '../../components/DeviationsSimulation';
+import CardSpeedDrill from '../../components/CardSpeedDrill';
+import DeviationFlashcards from '../../components/DeviationFlashcards';
 import './CardCountingBasics.css';
 
 export default function CardCountingBasics() {
@@ -44,6 +48,22 @@ export default function CardCountingBasics() {
             For example, if your running count is +6 and there are 3 decks left, your true count is +2. 
             The true count gives you a more accurate picture of your advantage.
           </p>
+
+          <h3>Speed Drill: Build Your Counting Speed</h3>
+          <p>
+            Before jumping into full game situations, practice your counting speed with rapid card flashes.
+            This drill helps you develop the reflexes needed to keep up with a fast dealer.
+          </p>
+
+          <CardSpeedDrill />
+
+          <h3>Practice Counting</h3>
+          <p>
+            Use this simulation to practice maintaining a running count while playing blackjack.
+            Every 5 hands, you'll be asked to enter the current running count. Track your accuracy and aim for 100% correct!
+          </p>
+
+          <BasicHiLoSimulation />
         </CollapsibleSection>
 
         <CollapsibleSection title="Betting Strategy and Bankroll Management">
@@ -175,28 +195,16 @@ export default function CardCountingBasics() {
             <li><strong>Double down at True Count ≥ +1</strong> (basic strategy says hit)</li>
           </ul>
 
-          <h3>The Fabulous 4</h3>
-          <p>
-            The "Fab 4" are four surrender decisions that become correct at certain counts. 
-            These are only relevant if the game you're playing allows late surrender:
-          </p>
-          <ul>
-            <li><strong>16 vs 9:</strong> Surrender at True Count ≥ +1</li>
-            <li><strong>16 vs 10:</strong> Surrender at True Count ≥ 0</li>
-            <li><strong>16 vs A:</strong> Surrender at True Count ≥ -1</li>
-            <li><strong>15 vs 10:</strong> Surrender at True Count ≥ +1</li>
-          </ul>
-
           <h3>Learning Strategy</h3>
           <p>
             Don't try to memorize all 18 deviations at once. Start with the most valuable ones:
           </p>
-          <ol>
+          <ul>
             <li>Insurance (True Count ≥ +3)</li>
             <li>16 vs 10 (Stand at TC ≥ 0)</li>
             <li>15 vs 10 (Stand at TC ≥ +4)</li>
-            <li>The Fab 4 surrender plays (if your game offers surrender)</li>
-          </ol>
+            <li>10 vs 10 (Double at TC ≥ +4)</li>
+          </ul>
           <p>
             Once you're comfortable with these, gradually add the remaining deviations. 
             Practice them alongside your counting until they become second nature.
@@ -208,6 +216,127 @@ export default function CardCountingBasics() {
             <li><strong>Deviating too obviously:</strong> Splitting 10s at high counts is a red flag for casino surveillance</li>
             <li><strong>Forgetting basic strategy:</strong> Deviations only apply at specific counts; use basic strategy at neutral counts</li>
           </ul>
+
+          <h3>Flashcards: Memorize the Illustrious 18</h3>
+          <p>
+            Use these interactive flashcards to drill the key deviations. Each card shows a situation and the correct play.
+            Shuffle the deck and test yourself until you know all 18 deviations by heart.
+          </p>
+
+          <DeviationFlashcards />
+
+          <h3>Practice Deviations</h3>
+          <p>
+            This simulator deals hands specifically from the Illustrious 18 at the appropriate true counts. 
+            You'll need to decide whether to follow basic strategy or make the deviation play. 
+            Track your accuracy and master these crucial deviations!
+          </p>
+
+          <DeviationsSimulation />
+        </CollapsibleSection>
+
+        <CollapsibleSection title="Readiness Test">
+          <h3>Are You Ready for the Casino?</h3>
+          <p>
+            Before risking real money at a casino, you need to be completely confident in your skills. 
+            Counting cards while managing your cover, tracking the count, and making decisions under pressure is challenging. 
+            Use this guide to assess whether you're truly ready.
+          </p>
+
+          <h3>Skill Requirements Checklist</h3>
+          
+          <h4>Basic Strategy Mastery</h4>
+          <ul>
+            <li><strong>100% accuracy:</strong> You should know every basic strategy decision without hesitation</li>
+            <li><strong>Speed test:</strong> Go through 100 random hands in under 5 minutes with zero errors</li>
+            <li><strong>Under pressure:</strong> Can you maintain accuracy while talking, listening to music, or being distracted?</li>
+          </ul>
+
+          <h4>Counting Proficiency</h4>
+          <ul>
+            <li><strong>Deck countdown:</strong> Count down a full deck in under 25 seconds with zero errors</li>
+            <li><strong>Consistency:</strong> Repeat the deck countdown 10 times in a row without a single mistake</li>
+            <li><strong>Paired cards:</strong> Can you count cards in pairs (e.g., 10+6 = 0, 3+K = 0) to increase speed?</li>
+            <li><strong>True count conversion:</strong> Instantly convert running count to true count at any point</li>
+          </ul>
+
+          <h4>Playing Deviations</h4>
+          <ul>
+            <li><strong>Top 4 memorized:</strong> Insurance and the Fab 4 should be automatic</li>
+            <li><strong>Additional deviations:</strong> Know at least 10 of the Illustrious 18</li>
+            <li><strong>No confusion:</strong> Never mix up the index numbers for different plays</li>
+          </ul>
+
+          <h4>Betting Strategy</h4>
+          <ul>
+            <li><strong>Spread memorized:</strong> Know exactly what to bet at each true count</li>
+            <li><strong>Bankroll allocated:</strong> Have 100-200x your max bet set aside</li>
+            <li><strong>Risk tolerance:</strong> Understand that you can lose your entire session bankroll in a bad run</li>
+          </ul>
+
+          <h3>Practice Test Simulation</h3>
+          <p>
+            Before going to a casino, complete this simulation at home:
+          </p>
+          <ul>
+            <li><strong>Deal yourself hands:</strong> Use real cards and simulate 200 hands</li>
+            <li><strong>Count accurately:</strong> Maintain a running count and convert to true count</li>
+            <li><strong>Make decisions:</strong> Play each hand according to basic strategy and deviations</li>
+            <li><strong>Adjust bets:</strong> Properly size your bets based on the true count</li>
+            <li><strong>Add distractions:</strong> Play music, watch TV, have someone talk to you</li>
+          </ul>
+          <p>
+            If you can complete this without any errors in counting or play decisions, you're getting close to ready.
+          </p>
+
+          <h3>Speed Benchmarks</h3>
+          <p>
+            Casino play moves quickly. You need to be able to:
+          </p>
+          <ul>
+            <li><strong>Count 2 cards in under 0.5 seconds:</strong> As they're dealt</li>
+            <li><strong>Make play decisions in under 2 seconds:</strong> Don't slow down the table</li>
+            <li><strong>Calculate true count in under 3 seconds:</strong> While appearing relaxed</li>
+            <li><strong>Remember the count while making small talk:</strong> Act natural</li>
+          </ul>
+
+          <h3>Mental Preparation</h3>
+          <ul>
+            <li><strong>Variance tolerance:</strong> Are you prepared to lose 20+ max bets in a session?</li>
+            <li><strong>Acting skills:</strong> Can you appear like a recreational gambler while counting?</li>
+            <li><strong>Composure under heat:</strong> If pit bosses watch you closely, can you stay calm?</li>
+            <li><strong>Quit discipline:</strong> Will you leave when the count drops or when you hit your session goal?</li>
+          </ul>
+
+          <h3>Financial Readiness</h3>
+          <ul>
+            <li><strong>Dedicated bankroll:</strong> Money you can afford to lose completely</li>
+            <li><strong>No scared money:</strong> Betting small due to fear will waste your time</li>
+            <li><strong>Long-term mindset:</strong> You need 50+ hours of play to see reliable results</li>
+            <li><strong>Record keeping:</strong> Track every session to monitor your actual win rate</li>
+          </ul>
+
+          <h3>Final Checklist</h3>
+          <p>
+            You should honestly be able to check all of these before playing for real money:
+          </p>
+          <ul>
+            <li>I can count down a deck in under 25 seconds with zero errors</li>
+            <li>I know basic strategy perfectly without thinking</li>
+            <li>I have memorized at least the top 10 deviations</li>
+            <li>I can maintain count while having a conversation</li>
+            <li>I have a bankroll of 100+ max bets</li>
+            <li>I understand I can lose money even with perfect play</li>
+            <li>I have practiced at least 20 hours at home</li>
+            <li>I can quickly convert running count to true count</li>
+          </ul>
+
+          <h3>Start Small</h3>
+          <p>
+            Even when you're ready, start with low stakes to get comfortable with the casino environment. 
+            The pressure, noise, and distractions are different from practicing at home. 
+            Once you prove you can maintain accuracy in the real environment, gradually increase your bet sizes.
+          </p>
         </CollapsibleSection>
       </div>
     </div>
