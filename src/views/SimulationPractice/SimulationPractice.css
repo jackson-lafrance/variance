@@ -1,0 +1,204 @@
+.simulation-practice-page {
+  max-width: 100%;
+  padding: 2.5em 1.25em;
+}
+
+.simulation-practice-header {
+  text-align: left;
+  margin-bottom: 2.5em;
+  max-width: 75em;
+}
+
+.simulation-practice-subtitle {
+  font-size: 1.125em;
+  color: #666;
+  font-weight: 400;
+}
+
+.simulation-practice-content {
+  display: flex;
+  gap: 2em;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.settings-panel {
+  background: white;
+  border-radius: 0.75em;
+  padding: 1.5em;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+  min-width: 18.75em;
+  max-width: 25em;
+  flex-shrink: 0;
+}
+
+.settings-title {
+  margin: 0 0 1.5em 0;
+  font-size: 1.5em;
+  color: #333;
+  border-bottom: 0.125em solid #e0e0e0;
+  padding-bottom: 0.5em;
+}
+
+.settings-section {
+  margin-bottom: 2em;
+}
+
+.settings-section h4 {
+  margin: 0 0 1em 0;
+  font-size: 1.125em;
+  color: #555;
+  font-weight: 600;
+}
+
+.settings-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.settings-button {
+  padding: 0.75em 1em;
+  background: #f5f5f5;
+  border: 0.125em solid #e0e0e0;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-size: 0.9375em;
+  font-weight: 500;
+  color: #555;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.settings-button:hover {
+  background: #ebebeb;
+  border-color: #d0d0d0;
+}
+
+.settings-button.active {
+  background: #2196f3;
+  color: white;
+  border-color: #2196f3;
+}
+
+.settings-toggle {
+  margin-bottom: 1em;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.75em;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-slider {
+  width: 3em;
+  height: 1.5em;
+  background: #ccc;
+  border-radius: 1.5em;
+  position: relative;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.toggle-slider::after {
+  content: '';
+  position: absolute;
+  width: 1.125em;
+  height: 1.125em;
+  background: white;
+  border-radius: 50%;
+  top: 0.1875em;
+  left: 0.1875em;
+  transition: transform 0.3s ease;
+}
+
+.toggle-checkbox:checked + .toggle-slider {
+  background: #4caf50;
+}
+
+.toggle-checkbox:checked + .toggle-slider::after {
+  transform: translateX(1.5em);
+}
+
+.toggle-checkbox:disabled + .toggle-slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.toggle-text {
+  font-size: 0.9375em;
+  color: #555;
+  font-weight: 500;
+}
+
+.settings-frequency {
+  margin-top: 1em;
+}
+
+.frequency-label {
+  display: block;
+  font-size: 0.875em;
+  color: #666;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+}
+
+.frequency-select {
+  width: 100%;
+  padding: 0.5em;
+  border: 0.125em solid #e0e0e0;
+  border-radius: 0.5em;
+  font-size: 0.9375em;
+  background: white;
+  color: #555;
+  cursor: pointer;
+}
+
+.frequency-select:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.settings-info {
+  background: #f8f9fa;
+  padding: 1em;
+  border-radius: 0.5em;
+  border-left: 0.25em solid #2196f3;
+}
+
+.settings-info h4 {
+  margin: 0 0 0.5em 0;
+  font-size: 1em;
+  color: #2196f3;
+}
+
+.mode-description {
+  margin: 0 0 0.5em 0;
+  font-size: 0.875em;
+  color: #666;
+  line-height: 1.5;
+}
+
+.counting-note {
+  margin: 0;
+  font-size: 0.8125em;
+  color: #4caf50;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@media (max-width: 68.75em) {
+  .simulation-practice-content {
+    flex-direction: column;
+  }
+  
+  .settings-panel {
+    max-width: 100%;
+  }
+}
