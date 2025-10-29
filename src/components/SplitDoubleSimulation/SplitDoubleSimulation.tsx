@@ -30,7 +30,7 @@ const getCardValue = (rank: string): number => {
   return parseInt(rank);
 };
 
-const calculateHandValue = (cards: Card[]): { value: number; display: string } => {
+const calculateHandValue = (cards: Card[]): { value: number; display: string; isSoft: boolean } => {
   let value = 0;
   let aces = 0;
 
@@ -40,12 +40,14 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string } =
     if (card.rank === 'A') aces++;
   });
 
+  const isSoft = aces > 0 && value <= 21;
+
   while (value > 21 && aces > 0) {
     value -= 10;
     aces--;
   }
 
-  return { value, display: value.toString() };
+  return { value, display: value.toString(), isSoft };
 };
 
 export default function SplitDoubleSimulation() {
@@ -329,14 +331,16 @@ export default function SplitDoubleSimulation() {
     await new Promise(resolve => setTimeout(resolve, 800));
 
     let dealerCards = [...dealerHand];
-    let dealerValue = calculateHandValue(dealerCards).value;
+    let dealerHandCalc = calculateHandValue(dealerCards);
+    let dealerValue = dealerHandCalc.value;
 
-    while (dealerValue < 17) {
+    while (dealerValue < 17 || (dealerValue === 17 && dealerHandCalc.isSoft)) {
       await new Promise(resolve => setTimeout(resolve, 700));
       const newCard = drawCard();
       dealerCards.push(newCard);
       setDealerHand([...dealerCards]);
-      dealerValue = calculateHandValue(dealerCards).value;
+      dealerHandCalc = calculateHandValue(dealerCards);
+      dealerValue = dealerHandCalc.value;
     }
 
     await new Promise(resolve => setTimeout(resolve, 500));

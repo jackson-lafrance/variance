@@ -3,7 +3,7 @@
   border: none;
   border-radius: 0.75em;
   overflow: hidden;
-  background: linear-gradient(145deg, #ffffff 0%, #fafafa 100%);
+  background: #ffffff;
   box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.06);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -37,7 +37,7 @@
   top: 0;
   height: 100%;
   width: 0.25em;
-  background: linear-gradient(180deg, #2196f3 0%, #1976d2 100%);
+  background: #2196f3;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -132,7 +132,7 @@
   transform: translateY(-50%);
   width: 0.25em;
   height: 0.875em;
-  background: linear-gradient(180deg, #2196f3 0%, #1976d2 100%);
+  background: #2196f3;
   border-radius: 0.125em;
 }
 
@@ -147,18 +147,22 @@
   list-style: none;
 }
 
-.collapsible-content-inner li {
+.collapsible-content-inner ul li {
   margin: 0.5em 0;
   position: relative;
   padding-left: 0.5em;
 }
 
-.collapsible-content-inner li::before {
+.collapsible-content-inner ul li::before {
   content: '→';
   position: absolute;
   left: -1em;
   color: #2196f3;
   font-weight: bold;
+}
+
+.collapsible-content-inner ol li {
+  margin: 0.5em 0;
 }
 
 .collapsible-content-inner strong {

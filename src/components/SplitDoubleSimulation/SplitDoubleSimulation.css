@@ -6,6 +6,49 @@
   text-align: left;
 }
 
+.adv-bj-settings {
+  display: flex;
+  gap: 2em;
+  margin-left: 1.5em;
+  margin-bottom: 1.5em;
+  flex-wrap: wrap;
+}
+
+.adv-bj-setting {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.adv-bj-setting-label {
+  font-size: 0.9em;
+  color: #666;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.adv-bj-setting-select {
+  padding: 0.5em;
+  font-size: 1em;
+  border: 0.125em solid #ddd;
+  border-radius: 0.375em;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.adv-bj-setting-select:hover {
+  border-color: #2196f3;
+}
+
+.adv-bj-setting-select:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
 .adv-bj-controls {
   margin-bottom: 1em;
   margin-left: 1.5em;
@@ -96,7 +139,7 @@
 }
 
 .adv-bj-hand.active {
-  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  background: #e8f5e9;
   box-shadow: 0 0.25em 1em rgba(76, 175, 80, 0.2);
   border: 0.125em solid #4caf50;
 }

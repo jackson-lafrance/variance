@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './BasicStrategySimulation.css';
 
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -61,16 +61,33 @@ const getCorrectAction = (playerHand: Card[], dealerUpcard: Card, canDouble: boo
     
     if (pairRank === 'A' || pairRank === '8') return 'split';
     
-    if (['10', 'J', 'Q', 'K'].includes(pairRank) || pairRank === '5' || pairRank === '4') {
-    } else if (pairRank === '9') {
+    if (['10', 'J', 'Q', 'K'].includes(pairRank)) {
+      return 'stand'; // Never split 10s, Js, Qs, Ks
+    }
+    if (pairRank === '5') {
+      // Never split 5s - treat as hard 10
+      if (dealerValue <= 9 && canDouble) return 'double';
+      return 'hit';
+    }
+    if (pairRank === '4') {
+      // Never split 4s - treat as hard 8
+      return 'hit';
+    }
+    if (pairRank === '9') {
       if (dealerValue === 7 || dealerValue >= 10) return 'stand';
       return 'split';
-    } else if (pairRank === '7') {
+    }
+    if (pairRank === '7') {
       if (dealerValue <= 7) return 'split';
-    } else if (pairRank === '6') {
+      return 'hit';
+    }
+    if (pairRank === '6') {
       if (dealerValue >= 2 && dealerValue <= 6) return 'split';
-    } else if (pairRank === '3' || pairRank === '2') {
+      return 'hit';
+    }
+    if (pairRank === '3' || pairRank === '2') {
       if (dealerValue >= 4 && dealerValue <= 7) return 'split';
+      return 'hit';
     }
   }
 
@@ -125,6 +142,8 @@ export default function BasicStrategySimulation() {
   const [feedback, setFeedback] = useState<string>('');
   const [correctAction, setCorrectAction] = useState<string>('');
   const [wasCorrectMove, setWasCorrectMove] = useState<boolean>(true);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   const drawCard = (): Card => {
@@ -204,6 +223,11 @@ export default function BasicStrategySimulation() {
   const handleAction = async (action: string) => {
     const isCorrect = action === correctAction;
     setWasCorrectMove(isCorrect);
+    if (isCorrect) {
+      setCorrectCount(prev => prev + 1);
+    } else {
+      setIncorrectCount(prev => prev + 1);
+    }
     const currentHand = playerHands[activeHandIndex];
     
     if (action === 'hit') {
@@ -347,14 +371,16 @@ export default function BasicStrategySimulation() {
     await new Promise(resolve => setTimeout(resolve, 800));
 
     let dealerCards = [...dealerHand];
-    let dealerValue = calculateHandValue(dealerCards).value;
+    let dealerHandCalc = calculateHandValue(dealerCards);
+    let dealerValue = dealerHandCalc.value;
 
-    while (dealerValue < 17) {
+    while (dealerValue < 17 || (dealerValue === 17 && dealerHandCalc.isSoft)) {
       await new Promise(resolve => setTimeout(resolve, 700));
       const newCard = drawCard();
       dealerCards.push(newCard);
       setDealerHand([...dealerCards]);
-      dealerValue = calculateHandValue(dealerCards).value;
+      dealerHandCalc = calculateHandValue(dealerCards);
+      dealerValue = dealerHandCalc.value;
     }
 
     await new Promise(resolve => setTimeout(resolve, 500));
@@ -402,8 +428,47 @@ export default function BasicStrategySimulation() {
   const canDouble = currentHand.length === 2 && !gameOver && !handComplete[activeHandIndex];
   const canSplit = currentHand.length === 2 && currentHand[0]?.rank === currentHand[1]?.rank && !gameOver && !handComplete[activeHandIndex];
 
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (gameOver || !gameStarted || handComplete[activeHandIndex]) return;
+      
+      const key = e.key.toLowerCase();
+      if (key === 'h' && !gameOver && !handComplete[activeHandIndex]) {
+        handleAction('hit');
+      } else if (key === 's' && !gameOver && !handComplete[activeHandIndex]) {
+        handleAction('stand');
+      } else if (key === 'd' && canDouble && !gameOver && !handComplete[activeHandIndex]) {
+        handleAction('double');
+      } else if (key === 'p' && canSplit && !gameOver && !handComplete[activeHandIndex]) {
+        handleAction('split');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [gameStarted, gameOver, activeHandIndex, handComplete, canDouble, canSplit]);
+
   return (
     <div className="basic-strategy-simulation">
+      <div className="bs-stats">
+        <div className="bs-stat">
+          <span className="bs-stat-label">Correct:</span>
+          <span className="bs-stat-value correct">{correctCount}</span>
+        </div>
+        <div className="bs-stat">
+          <span className="bs-stat-label">Incorrect:</span>
+          <span className="bs-stat-value incorrect">{incorrectCount}</span>
+        </div>
+        <div className="bs-stat">
+          <span className="bs-stat-label">Accuracy:</span>
+          <span className="bs-stat-value">
+            {correctCount + incorrectCount > 0 
+              ? `${Math.round((correctCount / (correctCount + incorrectCount)) * 100)}%` 
+              : 'N/A'}
+          </span>
+        </div>
+      </div>
+
       <div className="bs-controls">
         {!gameStarted ? (
           <button className="bs-button bs-button-primary" onClick={startGame}>
