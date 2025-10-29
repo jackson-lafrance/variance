@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 import './InlineNavigation.css';
 
 interface Page {
@@ -9,18 +10,21 @@ interface Page {
 
 const pages: Page[] = [
   { path: '/', title: 'Blackjack Basics' },
-  { path: '/about', title: 'Card Counting Basics' },
-  { path: '/services', title: 'Services' },
-  { path: '/portfolio', title: 'Portfolio' },
-  { path: '/contact', title: 'Contact' },
+  { path: '/counting', title: 'Card Counting' },
+  { path: '/simulations', title: 'Simulations' },
+  { path: '/bankroll', title: 'Bankroll Management' },
+  { path: '/advanced', title: 'Advanced Techniques' },
 ];
 
 export default function InlineNavigation() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
 
   const currentPage = pages.find(page => page.path === location.pathname);
-  const currentTitle = currentPage ? currentPage.title : 'Blackjack Basics';
+  const isDashboard = location.pathname === '/dashboard';
+  const isAuth = location.pathname === '/auth';
+  const currentTitle = isDashboard ? 'Dashboard' : isAuth ? 'Sign In' : (currentPage ? currentPage.title : 'Blackjack Basics');
 
   const handleNavigate = (path: string) => {
     navigate(path);
@@ -41,6 +45,14 @@ export default function InlineNavigation() {
             {page.title}
           </div>
         ))}
+        {!isDashboard && (
+          <div
+            className="nav-dropdown-item auth-item"
+            onClick={() => handleNavigate(currentUser ? '/dashboard' : '/auth')}
+          >
+            {currentUser ? 'Dashboard' : 'Sign In'}
+          </div>
+        )}
       </div>
     </div>
   );

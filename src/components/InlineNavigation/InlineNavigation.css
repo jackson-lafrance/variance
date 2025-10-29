@@ -82,3 +82,11 @@
   color: #2196f3;
   transform: translateX(0.25em);
 }
+
+.nav-dropdown-item.auth-item {
+  border-top: 0.0625em solid #e0e0e0;
+  margin-top: 0.75em;
+  padding-top: 1.125em;
+  color: #2196f3;
+  font-weight: 700;
+}
