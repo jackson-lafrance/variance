@@ -1,0 +1,263 @@
+.card-speed-drill {
+  margin-top: 1.5em;
+  padding: 1.5em;
+  background: #f8f9fa;
+  border-radius: 0.5em;
+}
+
+.drill-setup {
+  text-align: center;
+}
+
+.drill-setup h4 {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+  color: #333;
+  font-size: 1.125em;
+}
+
+.speed-selector {
+  margin-bottom: 2em;
+}
+
+.speed-selector label {
+  display: block;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 1em;
+}
+
+.speed-options {
+  display: flex;
+  gap: 0.75em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.speed-option {
+  padding: 0.75em 1.5em;
+  font-size: 0.9375em;
+  border: 0.125em solid #ddd;
+  background: white;
+  border-radius: 0.375em;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.speed-option:hover {
+  border-color: #2196f3;
+  background: #e3f2fd;
+}
+
+.speed-option.active {
+  background: #2196f3;
+  color: white;
+  border-color: #2196f3;
+}
+
+.drill-start-button {
+  padding: 1em 3em;
+  font-size: 1.125em;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s;
+}
+
+.drill-start-button:hover {
+  background: #388e3c;
+}
+
+.drill-active {
+  text-align: center;
+}
+
+.drill-stats {
+  display: flex;
+  gap: 2em;
+  justify-content: center;
+  margin-bottom: 2em;
+  flex-wrap: wrap;
+}
+
+.drill-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+}
+
+.drill-stat-label {
+  font-size: 0.875em;
+  color: #666;
+  font-weight: 500;
+}
+
+.drill-stat-value {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #333;
+}
+
+.drill-stat-value.count-value {
+  color: #2196f3;
+}
+
+.drill-stat-value.good {
+  color: #4caf50;
+}
+
+.drill-stat-value.ok {
+  color: #ff9800;
+}
+
+.drill-stat-value.poor {
+  color: #f44336;
+}
+
+.drill-card-display {
+  margin: 2em 0;
+  min-height: 10em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drill-card {
+  width: 7em;
+  height: 10em;
+  background: white;
+  border: 0.25em solid;
+  border-radius: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0.25em 0.5em rgba(0,0,0,0.1);
+  animation: cardFlip 0.3s ease;
+}
+
+@keyframes cardFlip {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.drill-card-content {
+  text-align: center;
+}
+
+.drill-card-rank {
+  font-size: 3em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.drill-card-suit {
+  font-size: 2.5em;
+  line-height: 1;
+}
+
+.drill-guess-section {
+  margin: 2em 0;
+}
+
+.drill-prompt {
+  font-size: 1.0625em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1em;
+}
+
+.drill-keyboard-hint {
+  color: #999;
+  font-size: 0.875em;
+  margin-bottom: 0.5em;
+  font-style: italic;
+}
+
+.drill-guess-input {
+  display: flex;
+  gap: 0.75em;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.drill-input {
+  padding: 0.75em 1em;
+  font-size: 1.125em;
+  border: 0.125em solid #ddd;
+  border-radius: 0.375em;
+  width: 8em;
+  text-align: center;
+  font-weight: 700;
+}
+
+.drill-input:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.drill-input.correct {
+  border-color: #4caf50;
+  background: #e8f5e9;
+}
+
+.drill-input.incorrect {
+  border-color: #f44336;
+  background: #ffebee;
+}
+
+.drill-check-button {
+  padding: 0.75em 2em;
+  font-size: 1.0625em;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 0.375em;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.drill-check-button:hover {
+  background: #1976d2;
+}
+
+.drill-feedback {
+  padding: 0.75em 1.5em;
+  border-radius: 0.375em;
+  font-weight: 700;
+  font-size: 1.0625em;
+}
+
+.drill-feedback.correct {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.drill-feedback.incorrect {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.drill-stop-button {
+  padding: 0.75em 2em;
+  font-size: 1.0625em;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 0.375em;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+  margin-top: 1em;
+}
+
+.drill-stop-button:hover {
+  background: #d32f2f;
+}
+
+

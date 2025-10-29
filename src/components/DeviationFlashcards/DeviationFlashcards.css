@@ -1,0 +1,243 @@
+.deviation-flashcards {
+  margin-top: 1.5em;
+  padding: 1.5em;
+  background: #f8f9fa;
+  border-radius: 0.5em;
+}
+
+.flashcards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5em;
+}
+
+.flashcard-progress {
+  font-size: 1.0625em;
+  font-weight: 600;
+  color: #333;
+}
+
+.studied-count {
+  margin-left: 0.5em;
+  color: #4caf50;
+  font-size: 0.9375em;
+}
+
+.shuffle-button {
+  padding: 0.5em 1em;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 0.375em;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9375em;
+  transition: background 0.2s;
+}
+
+.shuffle-button:hover {
+  background: #1976d2;
+}
+
+.flashcard-container {
+  perspective: 62.5em;
+  margin-bottom: 1.5em;
+}
+
+.flashcard {
+  width: 100%;
+  max-width: 37.5em;
+  min-height: 25em;
+  margin: 0 auto;
+  background: white;
+  border-radius: 0.75em;
+  padding: 2em;
+  box-shadow: 0 0.25em 0.75em rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.flashcard:hover {
+  box-shadow: 0 0.375em 1em rgba(0,0,0,0.15);
+}
+
+.flashcard-front,
+.flashcard-back {
+  text-align: center;
+}
+
+.flashcard-label {
+  font-size: 0.875em;
+  text-transform: uppercase;
+  letter-spacing: 0.0625em;
+  color: #999;
+  margin-bottom: 1.5em;
+  font-weight: 600;
+}
+
+.flashcard-situation {
+  margin: 2em 0;
+}
+
+.situation-hand,
+.situation-dealer,
+.situation-count {
+  margin: 1.5em 0;
+}
+
+.situation-label {
+  display: block;
+  font-size: 0.9375em;
+  color: #666;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+}
+
+.situation-value {
+  display: block;
+  font-size: 2em;
+  font-weight: 700;
+  color: #333;
+}
+
+.count-badge {
+  display: inline-block;
+  padding: 0.25em 0.75em;
+  background: #2196f3;
+  color: white;
+  border-radius: 0.375em;
+  font-size: 1.75em;
+}
+
+.flashcard-prompt {
+  font-size: 1.25em;
+  color: #333;
+  font-weight: 600;
+  margin: 2em 0;
+}
+
+.tap-hint {
+  position: absolute;
+  bottom: 1em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.875em;
+  color: #999;
+  font-style: italic;
+}
+
+.flashcard-action {
+  font-size: 2.5em;
+  font-weight: 700;
+  color: #4caf50;
+  margin: 1.5em 0;
+  text-transform: uppercase;
+}
+
+.flashcard-comparison {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+  margin: 2em 0;
+  flex-wrap: wrap;
+}
+
+.comparison-item {
+  padding: 1em;
+  border-radius: 0.5em;
+  min-width: 10em;
+}
+
+.comparison-item.basic {
+  background: #ffebee;
+}
+
+.comparison-item.deviation {
+  background: #e8f5e9;
+}
+
+.comparison-label {
+  display: block;
+  font-size: 0.875em;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  color: #666;
+}
+
+.comparison-value {
+  display: block;
+  font-size: 1.125em;
+  font-weight: 700;
+  color: #333;
+}
+
+.comparison-arrow {
+  font-size: 2em;
+  color: #2196f3;
+  font-weight: 700;
+}
+
+.flashcard-explanation {
+  margin: 2em 0;
+  padding: 1em;
+  background: #e3f2fd;
+  border-radius: 0.5em;
+  color: #1565c0;
+  font-size: 0.9375em;
+  line-height: 1.5;
+}
+
+.flashcard-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 1.5em;
+  flex-wrap: wrap;
+}
+
+.flashcard-nav-button,
+.flashcard-flip-button {
+  padding: 0.75em 2em;
+  font-size: 1.0625em;
+  border: none;
+  border-radius: 0.375em;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.flashcard-nav-button {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.flashcard-nav-button:hover {
+  background: #bdbdbd;
+}
+
+.flashcard-flip-button {
+  background: #2196f3;
+  color: white;
+}
+
+.flashcard-flip-button:hover {
+  background: #1976d2;
+}
+
+.flashcard-tips {
+  text-align: center;
+  padding: 1em;
+  background: #fff3e0;
+  border-radius: 0.5em;
+  color: #e65100;
+  font-size: 0.9375em;
+}
+
+.flashcard-tips strong {
+  color: #bf360c;
+}
+
+
