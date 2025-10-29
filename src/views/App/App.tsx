@@ -2,9 +2,11 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import BlackjackBasics from '../BlackjackBasics';
 import CardCountingBasics from '../CardCountingBasics';
-import Services from '../Services';
-import Portfolio from '../Portfolio';
-import Contact from '../Contact';
+import SimulationPractice from '../SimulationPractice';
+import BankrollManagement from '../BankrollManagement';
+import AdvancedTechniques from '../AdvancedTechniques';
+import Dashboard from '../Dashboard';
+import Auth from '../../components/Auth';
 import './App.css';
 
 export default function App() {
@@ -12,10 +14,12 @@ export default function App() {
     <div className="app">
       <Routes>
         <Route path="/" element={<BlackjackBasics />} />
-        <Route path="/about" element={<CardCountingBasics />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/portfolio" element={<Portfolio />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/counting" element={<CardCountingBasics />} />
+        <Route path="/simulations" element={<SimulationPractice />} />
+        <Route path="/bankroll" element={<BankrollManagement />} />
+        <Route path="/advanced" element={<AdvancedTechniques />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </div>
   );
