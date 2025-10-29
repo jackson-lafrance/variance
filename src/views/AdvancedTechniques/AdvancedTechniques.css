@@ -1,0 +1,256 @@
+.advanced-techniques-page {
+  min-height: 100vh;
+  padding: 2em 4em;
+  text-align: left;
+}
+
+.advanced-techniques-header {
+  margin-bottom: 3em;
+}
+
+.advanced-techniques-subtitle {
+  font-size: 1.125em;
+  color: #666;
+  margin-top: 1em;
+  line-height: 1.6;
+  max-width: 50em;
+}
+
+.advanced-techniques-content {
+  max-width: 75em;
+}
+
+.technique-tool {
+  margin-top: 1.5em;
+  padding: 1.5em;
+  background: white;
+  border-radius: 0.5em;
+  border: 0.0625em solid #e0e0e0;
+}
+
+.tool-input-group {
+  margin-bottom: 1.5em;
+}
+
+.tool-input-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.75em;
+}
+
+.slider {
+  width: 100%;
+  height: 0.5em;
+  border-radius: 0.25em;
+  background: #ddd;
+  outline: none;
+  margin: 0.5em 0;
+}
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: #2196f3;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: #2196f3;
+  cursor: pointer;
+  border: none;
+}
+
+.slider-value {
+  display: block;
+  margin-top: 0.5em;
+  font-size: 1.125em;
+  font-weight: 700;
+  color: #2196f3;
+}
+
+.tool-result {
+  border-top: 0.0625em solid #e0e0e0;
+  padding-top: 1.5em;
+  margin-top: 1.5em;
+}
+
+.result-large {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.result-large .result-label {
+  font-size: 1.125em;
+  font-weight: 600;
+  color: #333;
+}
+
+.result-large .result-value {
+  font-size: 2em;
+  font-weight: 700;
+  color: #2196f3;
+}
+
+.sequence-input {
+  display: flex;
+  gap: 0.75em;
+  margin-bottom: 1.5em;
+}
+
+.card-input {
+  flex: 1;
+  padding: 0.75em;
+  font-size: 1em;
+  border: 0.125em solid #ddd;
+  border-radius: 0.375em;
+  text-transform: uppercase;
+}
+
+.card-input:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.card-input.error {
+  border-color: #f44336;
+}
+
+.card-error {
+  color: #f44336;
+  font-size: 0.875em;
+  margin-top: 0.5em;
+  font-weight: 500;
+}
+
+.add-button,
+.clear-button {
+  padding: 0.75em 1.5em;
+  font-size: 0.9375em;
+  border: none;
+  border-radius: 0.375em;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.add-button {
+  background: #2196f3;
+  color: white;
+}
+
+.add-button:hover {
+  background: #1976d2;
+}
+
+.clear-button {
+  background: #f44336;
+  color: white;
+}
+
+.clear-button:hover {
+  background: #d32f2f;
+}
+
+.sequence-display {
+  display: flex;
+  gap: 0.75em;
+  flex-wrap: wrap;
+  padding: 1.5em;
+  background: #f8f9fa;
+  border-radius: 0.375em;
+  min-height: 4em;
+  margin-bottom: 1.5em;
+}
+
+.sequence-empty {
+  color: #999;
+  font-style: italic;
+  margin: 0;
+}
+
+.sequence-card {
+  padding: 0.75em 1.25em;
+  background: white;
+  border: 0.125em solid #ddd;
+  border-radius: 0.375em;
+  font-weight: 700;
+  font-size: 1.125em;
+  color: #333;
+}
+
+.sequence-analysis {
+  border-top: 0.0625em solid #e0e0e0;
+  padding-top: 1.5em;
+}
+
+.analysis-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0;
+  font-size: 0.9375em;
+  color: #666;
+}
+
+.analysis-item span:last-child {
+  font-weight: 700;
+  color: #333;
+}
+
+.analysis-result {
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 0.375em;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.0625em;
+}
+
+.analysis-result.favorable {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.analysis-result.unfavorable {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.systems-comparison {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+  gap: 1.5em;
+  margin-top: 1.5em;
+}
+
+.system-card {
+  padding: 1.5em;
+  background: white;
+  border: 0.0625em solid #e0e0e0;
+  border-radius: 0.5em;
+}
+
+.system-card h4 {
+  margin-top: 0;
+  margin-bottom: 1em;
+  color: #2196f3;
+  font-size: 1.125em;
+}
+
+.system-card p {
+  margin: 0.5em 0;
+  font-size: 0.875em;
+  line-height: 1.5;
+}
+
+.system-card p strong {
+  color: #333;
+}
+
