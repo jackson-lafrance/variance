@@ -3,14 +3,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../screens/Home';
 import StartCardCounting from '../screens/StartCardCounting';
-
-// Placeholder screens - to be implemented
-const BlackjackBasics = () => null;
-const CardCounting = () => null;
-const Simulations = () => null;
-const BankrollManagement = () => null;
-const AdvancedTechniques = () => null;
-const Dashboard = () => null;
+import BlackjackBasics from '../screens/BlackjackBasics';
+import CardCountingBasics from '../screens/CardCountingBasics';
+import SimulationPractice from '../screens/SimulationPractice';
+import BankrollManagement from '../screens/BankrollManagement';
+import AdvancedTechniques from '../screens/AdvancedTechniques';
+import Dashboard from '../screens/Dashboard';
 
 const Stack = createStackNavigator();
 
@@ -46,12 +44,12 @@ export default function AppNavigator() {
         />
         <Stack.Screen
           name="CardCounting"
-          component={CardCounting}
+          component={CardCountingBasics}
           options={{ title: 'Card Counting' }}
         />
         <Stack.Screen
           name="Simulations"
-          component={Simulations}
+          component={SimulationPractice}
           options={{ title: 'Simulations' }}
         />
         <Stack.Screen
@@ -73,4 +71,3 @@ export default function AppNavigator() {
     </NavigationContainer>
   );
 }
-
