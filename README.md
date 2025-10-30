@@ -1,206 +1,94 @@
-# Variance - Professional Blackjack Training Platform
+# Variance - Blackjack Trainer
 
-A comprehensive web application for aspiring card counters and blackjack enthusiasts. Master basic strategy, learn the Hi-Lo counting system, practice deviations, and track your real-world casino performance.
+A comprehensive blackjack training application for web and mobile, designed to help aspiring card counters master the game.
 
-![Variance Blackjack Trainer](fed-portfolio.png)
+## Features
 
-## 🎯 Features
+### Web Application
+- Blackjack Basics - Learn fundamental rules with interactive simulations
+- Card Counting - Master the Hi-Lo counting system with practice drills
+- Advanced Simulations - Practice basic strategy, deviations, and full gameplay
+- Bankroll Management - Tools and guides for managing your bankroll
+- Advanced Techniques - Ace sequencing and advanced counting systems
+- Dashboard - Track your casino sessions, bankroll, and statistics with Firebase integration
 
-### 📚 Learning Modules
-- **Blackjack Basics** - Complete guide to blackjack rules and basic strategy
-- **Card Counting Guide** - Learn the Hi-Lo system with interactive tutorials
-- **Advanced Techniques** - Shuffle tracking, ace sequencing, wonging, and more
-- **Bankroll Management** - Calculators and guidelines for proper bankroll sizing
+### Mobile Application (React Native)
+- All web app sections accessible on mobile
+- Start Card Counting - Real-time card counting tracker:
+  - Customizable deck count (1-8 decks)
+  - Adjustable penetration (50-90%)
+  - Running count and true count display
+  - Large touch-friendly buttons for card input (+1, 0, -1)
+  - Card history tracking
 
-### 🎮 Interactive Simulations
-- **Basic Blackjack Simulation** - Practice basic strategy with instant feedback
-- **Hi-Lo Counting Practice** - Real-time counting with accuracy tracking
-- **Split & Double Simulation** - Master advanced plays
-- **Basic Strategy Simulation** - Full game with correctness checking
-- **Deviations Practice** - Focus on the Illustrious 18
-- **Unified Simulation** - Complete training with customizable settings:
-  - Practice modes (Full game, Basic strategy, Deviations, Soft/Hard hands, Pairs, Doubling)
-  - Adjustable deck count (1-8 decks)
-  - Configurable penetration (50%-90%)
-  - Animation speed controls
-  - Card counting with running/true count
-  - Count accuracy tracking
+## Getting Started
 
-### 🚀 Training Tools
-- **Card Speed Drill** - Build counting speed with rapid card flashes
-- **Deviation Flashcards** - Interactive study cards for the Illustrious 18
-- **Strategy Tables** - Reference guides for perfect play
+### Web Application
 
-### 📊 Dashboard & Tracking (Firebase-powered)
-- **User Authentication** - Secure sign-in/sign-up system
-- **Casino Session Tracking** - Log real casino sessions with:
-  - Date, casino name, hours played
-  - Starting/ending bankroll
-  - Profit/loss calculation
-  - Hands played
-  - Session notes
-- **Performance Analytics** - Visual graphs of bankroll over time
-- **Bankroll Management** - Track your card counting investment
-- **Session History** - View all past casino sessions
-
-### 🎨 User Experience
-- **Dark Mode** - Easy on the eyes during long practice sessions
-- **Responsive Design** - Works on desktop, tablet, and mobile
-- **Modern UI** - Clean, intuitive interface
-- **Smooth Animations** - Professional transitions and effects
-
-## 🚀 Setup
-
-### Prerequisites
-- Node.js (v14 or higher)
-- Yarn package manager
-- Firebase account (for authentication and session tracking)
-
-### Installation
-
-1. **Clone the repository**
-```bash
-git clone <your-repo-url>
-cd variance
-```
-
-2. **Install dependencies**
 ```bash
 yarn install
-```
-
-3. **Configure Firebase**
-   - Follow the detailed instructions in [FIREBASE_SETUP.md](FIREBASE_SETUP.md)
-   - Create a Firebase project
-   - Enable Email/Password authentication
-   - Set up Firestore database
-   - Update `src/firebase/config.ts` with your Firebase credentials
-
-4. **Start the development server**
-```bash
 yarn start
 ```
 
-The application will open in your browser at `http://localhost:3000`
+### Mobile Application
 
-5. **Build for production**
 ```bash
-yarn build
+cd mobile
+npm install
+npm run ios    # or npm run android
 ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 variance/
-├── src/
-│   ├── components/          # Reusable React components
-│   │   ├── Auth/           # Authentication forms
-│   │   ├── Header/         # Navigation header
-│   │   ├── CollapsibleSection/
-│   │   ├── BlackjackSimulation/
-│   │   ├── BasicStrategySimulation/
-│   │   ├── SplitDoubleSimulation/
-│   │   ├── DeviationsSimulation/
-│   │   ├── UnifiedSimulation/
-│   │   ├── CardSpeedDrill/
-│   │   ├── DeviationFlashcards/
-│   │   └── ...
-│   ├── views/              # Page components
-│   │   ├── BlackjackBasics/
-│   │   ├── CardCountingBasics/
-│   │   ├── SimulationPractice/
-│   │   ├── BankrollManagement/
-│   │   ├── AdvancedTechniques/
-│   │   ├── Dashboard/
-│   │   └── App/
-│   ├── contexts/           # React contexts
-│   │   └── AuthContext.tsx
-│   ├── firebase/           # Firebase configuration
-│   │   └── config.ts
-│   └── index.tsx           # Application entry point
-├── public/                 # Static assets
-├── FIREBASE_SETUP.md      # Firebase setup instructions
-└── package.json
+├── src/                    # Web application source
+│   ├── components/        # React components
+│   ├── views/             # Page components
+│   ├── contexts/          # React contexts (Auth)
+│   ├── firebase/          # Firebase configuration
+│   └── data/              # Static data (strategy tables)
+├── mobile/                # React Native mobile app
+│   ├── src/
+│   │   ├── screens/       # Screen components
+│   │   ├── navigation/    # Navigation setup
+│   │   ├── services/      # Firebase & services
+│   │   └── utils/         # Shared utilities
+│   ├── ios/               # iOS native code
+│   └── android/           # Android native code
+└── public/                # Static web assets
 ```
 
-## 🔥 Firebase Integration
+## Firebase Integration
 
-The application uses Firebase for:
-- **Authentication** - Email/password user accounts
-- **Firestore** - NoSQL database for:
-  - User statistics (total bankroll, profit, sessions, hours)
-  - Casino session history
-  - High scores (future feature)
+The app uses Firebase for:
+- User authentication (Email/Password)
+- Firestore database for session tracking
+- Real-time statistics and bankroll management
 
-See [FIREBASE_SETUP.md](FIREBASE_SETUP.md) for complete setup instructions.
+See FIREBASE_SETUP.md for configuration instructions.
 
-## 🎓 Learning Path
+## Learning Path
 
-### Beginner
-1. Start with **Blackjack Basics** to understand the game
-2. Study the **Strategy Tables** until you can make decisions without thinking
-3. Practice with **Basic Strategy Simulation** until you reach 95%+ accuracy
+1. Start with Blackjack Basics - Learn the rules and basic strategy
+2. Practice Basic Strategy - Use the interactive simulations
+3. Learn Card Counting - Master the Hi-Lo system
+4. Practice Counting - Use the speed drills and simulations
+5. Study Deviations - Learn the Illustrious 18
+6. Track Your Progress - Use the Dashboard to monitor sessions
 
-### Intermediate
-4. Learn **Card Counting** with the Hi-Lo system
-5. Use the **Card Speed Drill** to build counting speed
-6. Practice **Hi-Lo Counting** simulation to maintain count while playing
+## Technologies
 
-### Advanced
-7. Memorize the **Illustrious 18** using the flashcards
-8. Practice **Deviations Simulation** to apply count-based plays
-9. Use **Unified Simulation** with all features enabled
-10. Study **Advanced Techniques** for additional edges
+### Web
+- React 18
+- TypeScript
+- React Router DOM
+- Firebase (Auth & Firestore)
+- Recharts (Data visualization)
+- Webpack
 
-### Professional
-11. Track real casino sessions in the **Dashboard**
-12. Monitor your performance and bankroll over time
-13. Adjust your betting strategy based on variance and results
-
-## 🎮 Simulation Features
-
-All simulations include:
-- ✅ Accurate blackjack rules (dealer hits soft 17, etc.)
-- ✅ Realistic shoe mechanics (1-8 decks, configurable penetration)
-- ✅ Running count and true count tracking (multi-deck games)
-- ✅ Accuracy statistics
-- ✅ Adjustable animation speeds
-- ✅ Dark mode support
-
-## 🛠️ Technologies Used
-
-- **React** - UI framework
-- **TypeScript** - Type-safe JavaScript
-- **React Router** - Navigation
-- **Firebase** - Authentication & database
-- **Recharts** - Data visualization
-- **Webpack** - Module bundler
-
-## ⚠️ Disclaimer
-
-This application is for **educational purposes only**. Card counting is a legal strategy but casinos reserve the right to refuse service to players they suspect of counting cards. 
-
-- Practice responsibly
-- Understand the risks
-- Never bet more than you can afford to lose
-- Gambling should be entertainment, not income
-- This tool does not guarantee profits
-
-## 📜 License
-
-This project is for educational use.
-
-## 🤝 Contributing
-
-Feel free to submit issues or pull requests to improve the platform!
-
-## 📞 Support
-
-If you encounter any issues or have questions:
-1. Check [FIREBASE_SETUP.md](FIREBASE_SETUP.md) for Firebase configuration help
-2. Review the troubleshooting section
-3. Open an issue on GitHub
-
----
-
-**Good luck at the tables! 🃏**
+### Mobile
+- React Native 0.73
+- React Navigation
+- Firebase (shared with web)
+- TypeScript
