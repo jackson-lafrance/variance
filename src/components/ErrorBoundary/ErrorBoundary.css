@@ -1,0 +1,113 @@
+.error-boundary {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+  background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+}
+
+.error-boundary-content {
+  background: var(--color-background-white);
+  padding: 3em;
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--shadow-card);
+  max-width: 600px;
+  text-align: center;
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.error-boundary-title {
+  font-size: 2em;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-red);
+  margin-bottom: 1em;
+}
+
+.error-boundary-message {
+  font-size: 1.125em;
+  color: var(--color-text-secondary);
+  margin-bottom: 2em;
+  line-height: 1.6;
+}
+
+.error-boundary-details {
+  text-align: left;
+  margin: 2em 0;
+  padding: 1em;
+  background: var(--color-light-lavender);
+  border-radius: var(--border-radius-button);
+  border: 1px solid rgba(255, 0, 77, 0.15);
+}
+
+.error-boundary-summary {
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: 0.5em;
+}
+
+.error-boundary-stack {
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.875em;
+  color: var(--color-text-secondary);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.error-boundary-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.error-boundary-button {
+  padding: 0.875em 2em;
+  background: var(--color-primary-red);
+  color: var(--color-background-white);
+  border: none;
+  border-radius: var(--border-radius-button);
+  font-size: 1em;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-family: var(--font-family);
+  box-shadow: var(--shadow-button);
+}
+
+.error-boundary-button:hover {
+  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
+  box-shadow: var(--shadow-button-hover);
+  transform: translateY(-2px);
+}
+
+.error-boundary-button:active {
+  transform: scale(0.95) translateY(0);
+}
+
+.error-boundary-link {
+  padding: 0.875em 2em;
+  background: var(--color-background-white);
+  color: var(--color-primary-red);
+  border: 2px solid var(--color-primary-red);
+  border-radius: var(--border-radius-button);
+  font-size: 1em;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  font-family: var(--font-family);
+  display: inline-block;
+}
+
+.error-boundary-link:hover {
+  background: rgba(255, 0, 77, 0.05);
+  box-shadow: var(--shadow-button-hover);
+  transform: translateY(-2px);
+}
+
+.error-boundary-link:active {
+  transform: scale(0.95) translateY(0);
+}
+
