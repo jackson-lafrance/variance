@@ -17,6 +17,7 @@ const pages: Page[] = [
   { path: '/progress', title: 'Progress Tracking' },
   { path: '/betting', title: 'Betting Calculator' },
   { path: '/risk', title: 'Risk Calculator' },
+  { path: '/settings', title: 'Settings' },
 ];
 
 export default function InlineNavigation() {
@@ -58,12 +59,28 @@ export default function InlineNavigation() {
             {page.title}
           </div>
         ))}
-        {!isDashboard && (
+        {!isDashboard && currentUser && (
           <div
             className="nav-dropdown-item auth-item"
-            onClick={() => handleNavigate(currentUser ? '/dashboard' : '/auth')}
+            onClick={() => handleNavigate('/dashboard')}
           >
-            {currentUser ? 'Dashboard' : 'Sign In'}
+            Dashboard
+          </div>
+        )}
+        {!isAuth && !currentUser && (
+          <div
+            className="nav-dropdown-item auth-item"
+            onClick={() => handleNavigate('/auth')}
+          >
+            Sign In
+          </div>
+        )}
+        {currentUser && !isSettings && (
+          <div
+            className="nav-dropdown-item auth-item"
+            onClick={() => handleNavigate('/settings')}
+          >
+            Settings
           </div>
         )}
       </div>
