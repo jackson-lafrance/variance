@@ -109,7 +109,6 @@ export default function ProgressTracking() {
   if (loading) {
     return (
       <div className="progress-tracking-page">
-        <Header />
         <div className="progress-loading">Loading progress data...</div>
       </div>
     );
@@ -117,9 +116,9 @@ export default function ProgressTracking() {
 
   return (
     <div className="progress-tracking-page">
-      <Header />
-      
       <div className="progress-content">
+        <Header />
+        
         <div className="progress-header">
           <h1 className="progress-title">Progress Tracking</h1>
           <p className="progress-subtitle">Track your improvement over time</p>

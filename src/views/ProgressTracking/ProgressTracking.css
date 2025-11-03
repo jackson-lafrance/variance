@@ -1,6 +1,7 @@
 .progress-tracking-page {
   min-height: 100vh;
   background: transparent;
+  padding: 2.5em 1.25em;
 }
 
 .progress-loading {
@@ -9,16 +10,21 @@
   font-size: 18px;
   color: var(--color-text-secondary);
   animation: fadeIn var(--transition-slow) ease-out;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .progress-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .progress-header {
   margin-bottom: 30px;
+  margin-top: 2em;
   animation: fadeIn var(--transition-slow) ease-out;
 }
 
