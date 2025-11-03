@@ -32,7 +32,7 @@
   justify-content: center;
   background: var(--color-background);
   border-radius: var(--border-radius-card);
-  padding: 1.5em 1.75em;
+  padding: 1.5em 2em;
   cursor: pointer;
   transition: all var(--transition-slow);
   box-shadow: var(--shadow-card);
@@ -41,6 +41,8 @@
   font-family: var(--font-family);
   font-size: 1em;
   font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  height: fit-content;
 }
 
 .header-action-button:hover {

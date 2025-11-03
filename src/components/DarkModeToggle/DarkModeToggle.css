@@ -4,7 +4,7 @@
   justify-content: center;
   background: var(--color-background);
   border-radius: var(--border-radius-card);
-  padding: 1.5em 1.75em;
+  padding: 1.5em 2em;
   cursor: pointer;
   transition: all var(--transition-slow);
   box-shadow: var(--shadow-card);
@@ -12,6 +12,7 @@
   color: var(--color-text-primary);
   align-self: flex-start;
   animation: fadeIn var(--transition-slow) ease-out;
+  height: fit-content;
 }
 
 .dark-mode-toggle:hover {
