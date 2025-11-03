@@ -176,8 +176,8 @@ export default function Dashboard() {
       startingBankroll: starting,
       endingBankroll: ending,
       profit,
-      handsPlayed: handsPlayed ? parseInt(handsPlayed) : undefined,
-      notes: notes.trim() || undefined,
+      ...(handsPlayed && parseInt(handsPlayed) > 0 && { handsPlayed: parseInt(handsPlayed) }),
+      ...(notes.trim() && { notes: notes.trim() }),
       userId: currentUser.uid,
       timestamp: sessionDateObj.getTime()
     };
@@ -272,17 +272,25 @@ export default function Dashboard() {
     const profit = ending - starting;
 
     try {
-      await updateDoc(doc(db, 'casinoSessions', editingSession.id!), {
+      const updateData: any = {
         date: sessionDate,
         casino: casino.trim(),
         hoursPlayed: hours,
         startingBankroll: starting,
         endingBankroll: ending,
         profit,
-        handsPlayed: handsPlayed ? parseInt(handsPlayed) : undefined,
-        notes: notes.trim() || undefined,
         timestamp: new Date(sessionDate).getTime(),
-      });
+      };
+      
+      if (handsPlayed && parseInt(handsPlayed) > 0) {
+        updateData.handsPlayed = parseInt(handsPlayed);
+      }
+      
+      if (notes.trim()) {
+        updateData.notes = notes.trim();
+      }
+      
+      await updateDoc(doc(db, 'casinoSessions', editingSession.id!), updateData);
 
       // Update user stats
       const profitDiff = profit - oldProfit;
@@ -406,9 +414,6 @@ export default function Dashboard() {
         <Header />
         <div className="dashboard-user-info">
           <span className="dashboard-welcome">Welcome, {currentUser?.displayName}!</span>
-          <button onClick={handleLogout} className="dashboard-logout-button">
-            Logout
-          </button>
         </div>
       </div>
 
