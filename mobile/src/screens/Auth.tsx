@@ -255,6 +255,26 @@ const styles = StyleSheet.create({
   switchButtonText: {
     color: '#2196f3',
     fontSize: 14,
+    textAlign: 'center',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 24,
+    paddingTop: 20,
+    borderTopWidth: 1,
+    borderTopColor: '#e0e0e0',
+    gap: 12,
+  },
+  footerLink: {
+    fontSize: 12,
+    color: '#FF004D',
+    fontWeight: '600',
+  },
+  footerSeparator: {
+    fontSize: 12,
+    color: '#999',
   },
 });
 
