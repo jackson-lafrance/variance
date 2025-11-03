@@ -63,10 +63,7 @@
 }
 
 .collapsible-header:hover .collapsible-title {
-  background: var(--color-primary);
-  
-  
-  
+  color: var(--color-primary);
 }
 
 .collapsible-icon {

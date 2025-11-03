@@ -41,10 +41,7 @@
 }
 
 .inline-navigation:hover .nav-title {
-  background: var(--color-primary);
-  
-  
-  
+  color: var(--color-primary);
 }
 
 .inline-navigation:hover .nav-title::after {
