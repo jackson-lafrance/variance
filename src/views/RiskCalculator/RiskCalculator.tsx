@@ -76,9 +76,9 @@ export default function RiskCalculator() {
 
   return (
     <div className="risk-calculator-page">
-      <Header />
-      
       <div className="risk-calculator-content">
+        <Header />
+        
         <div className="risk-header">
           <h1 className="risk-title">Risk of Ruin Calculator</h1>
           <p className="risk-subtitle">Calculate the probability of losing your entire bankroll</p>

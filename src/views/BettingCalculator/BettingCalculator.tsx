@@ -53,9 +53,9 @@ export default function BettingCalculator() {
 
   return (
     <div className="betting-calculator-page">
-      <Header />
-      
       <div className="betting-calculator-content">
+        <Header />
+        
         <div className="betting-header">
           <h1 className="betting-title">Betting Strategy Calculator</h1>
           <p className="betting-subtitle">Calculate optimal bet sizing using Kelly Criterion</p>
