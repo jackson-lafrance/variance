@@ -290,7 +290,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     textAlign: 'center',
   },
   saveButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: '#FF004D',
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',

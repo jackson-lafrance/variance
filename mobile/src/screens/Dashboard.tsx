@@ -460,7 +460,7 @@ const styles = StyleSheet.create({
     color: '#f44336',
   },
   addButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: '#FF004D',
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',
@@ -518,7 +518,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#757575',
   },
   submitButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: '#FF004D',
   },
   formButtonText: {
     color: '#fff',
