@@ -1,6 +1,7 @@
 .simulation-practice-page {
   max-width: 100%;
   padding: 2.5em 1.25em;
+  animation: fadeIn var(--transition-slow) ease-out;
 }
 
 .simulation-practice-header {
@@ -11,8 +12,8 @@
 
 .simulation-practice-subtitle {
   font-size: 1.125em;
-  color: #666;
-  font-weight: 400;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
 }
 
 .simulation-practice-content {
@@ -23,21 +24,28 @@
 }
 
 .settings-panel {
-  background: white;
-  border-radius: 0.75em;
+  background: var(--color-background-white);
+  border-radius: var(--border-radius-card);
   padding: 1.5em;
-  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-card);
   min-width: 18.75em;
   max-width: 25em;
   flex-shrink: 0;
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.settings-panel:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
 .settings-title {
   margin: 0 0 1.5em 0;
   font-size: 1.5em;
-  color: #333;
-  border-bottom: 0.125em solid #e0e0e0;
+  color: var(--color-text-primary);
+  border-bottom: 2px solid rgba(255, 0, 77, 0.15);
   padding-bottom: 0.5em;
+  font-weight: var(--font-weight-bold);
 }
 
 .settings-section {
@@ -47,8 +55,8 @@
 .settings-section h4 {
   margin: 0 0 1em 0;
   font-size: 1.125em;
-  color: #555;
-  font-weight: 600;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
 }
 
 .settings-options {
@@ -58,27 +66,30 @@
 }
 
 .settings-button {
-  padding: 0.75em 1em;
-  background: #f5f5f5;
-  border: 0.125em solid #e0e0e0;
-  border-radius: 0.5em;
+  padding: 0.875em 1em;
+  background: var(--color-background-white);
+  border: 2px solid #E0E0E0;
+  border-radius: var(--border-radius-button);
   cursor: pointer;
   font-size: 0.9375em;
-  font-weight: 500;
-  color: #555;
-  transition: all 0.2s ease;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  transition: all var(--transition-normal);
   text-align: left;
+  font-family: var(--font-family);
 }
 
 .settings-button:hover {
-  background: #ebebeb;
-  border-color: #d0d0d0;
+  background: var(--color-light-lavender);
+  border-color: var(--color-primary-red);
+  color: var(--color-primary-red);
 }
 
 .settings-button.active {
-  background: #2196f3;
-  color: white;
-  border-color: #2196f3;
+  background: var(--color-primary-red);
+  color: var(--color-background-white);
+  border-color: var(--color-primary-red);
+  box-shadow: var(--shadow-button);
 }
 
 .settings-toggle {
@@ -102,7 +113,7 @@
   background: #ccc;
   border-radius: 1.5em;
   position: relative;
-  transition: background 0.3s ease;
+  transition: background var(--transition-normal);
   flex-shrink: 0;
 }
 
@@ -111,15 +122,16 @@
   position: absolute;
   width: 1.125em;
   height: 1.125em;
-  background: white;
+  background: var(--color-background-white);
   border-radius: 50%;
   top: 0.1875em;
   left: 0.1875em;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .toggle-checkbox:checked + .toggle-slider {
-  background: #4caf50;
+  background: var(--color-primary-red);
 }
 
 .toggle-checkbox:checked + .toggle-slider::after {
@@ -133,8 +145,8 @@
 
 .toggle-text {
   font-size: 0.9375em;
-  color: #555;
-  font-weight: 500;
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
 }
 
 .settings-frequency {
@@ -144,44 +156,48 @@
 .frequency-label {
   display: block;
   font-size: 0.875em;
-  color: #666;
+  color: var(--color-text-secondary);
   margin-bottom: 0.5em;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
 }
 
 .frequency-select {
   width: 100%;
-  padding: 0.5em;
-  border: 0.125em solid #e0e0e0;
-  border-radius: 0.5em;
+  padding: 0.625em 1em;
+  border: 2px solid #E0E0E0;
+  border-radius: var(--border-radius-button);
   font-size: 0.9375em;
-  background: white;
-  color: #555;
+  background: var(--color-background-white);
+  color: var(--color-text-primary);
   cursor: pointer;
+  font-family: var(--font-family);
+  transition: all var(--transition-fast);
 }
 
 .frequency-select:focus {
   outline: none;
-  border-color: #2196f3;
+  border-color: var(--color-primary-red);
+  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
 }
 
 .settings-info {
-  background: #f8f9fa;
+  background: var(--color-light-lavender);
   padding: 1em;
-  border-radius: 0.5em;
-  border-left: 0.25em solid #2196f3;
+  border-radius: var(--border-radius-button);
+  border-left: 4px solid var(--color-primary-red);
 }
 
 .settings-info h4 {
   margin: 0 0 0.5em 0;
   font-size: 1em;
-  color: #2196f3;
+  color: var(--color-primary-red);
+  font-weight: var(--font-weight-semibold);
 }
 
 .mode-description {
   margin: 0 0 0.5em 0;
   font-size: 0.875em;
-  color: #666;
+  color: var(--color-text-secondary);
   line-height: 1.5;
 }
 
@@ -189,7 +205,7 @@
   margin: 0;
   font-size: 0.8125em;
   color: #4caf50;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   line-height: 1.5;
 }
 
