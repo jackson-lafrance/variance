@@ -50,6 +50,18 @@
   animation: slideIn var(--transition-fast) ease-out;
 }
 
+.auth-success {
+  margin-bottom: 1.5em;
+  padding: 1em;
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+  border-radius: var(--border-radius-button);
+  text-align: center;
+  font-size: 0.9375em;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  animation: slideIn var(--transition-fast) ease-out;
+}
+
 .auth-form {
   margin-bottom: 1.5em;
 }
@@ -145,6 +157,31 @@
 }
 
 .auth-toggle-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-forgot-password {
+  background: none;
+  border: none;
+  color: var(--color-primary-red);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  padding: 0.5em 0;
+  text-align: right;
+  font-size: 0.875em;
+  transition: color var(--transition-fast);
+  font-family: var(--font-family);
+  margin-bottom: 1em;
+  margin-top: -0.5em;
+}
+
+.auth-forgot-password:hover:not(:disabled) {
+  color: #FF3366;
+  text-decoration: underline;
+}
+
+.auth-forgot-password:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }

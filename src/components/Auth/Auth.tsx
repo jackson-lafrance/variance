@@ -11,12 +11,14 @@ interface AuthProps {
 export default function Auth({ onClose }: AuthProps) {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signup, login } = useAuth();
+  const { signup, login, resetPassword } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,6 +72,38 @@ export default function Auth({ onClose }: AuthProps) {
     }
   };
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      setError('Please enter your email address');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    try {
+      setError('');
+      setSuccess('');
+      setLoading(true);
+      
+      await resetPassword(email);
+      setSuccess('Password reset email sent! Check your inbox.');
+    } catch (err: any) {
+      const errorMessage = err.message || 'Failed to send reset email';
+      if (errorMessage.includes('user-not-found')) {
+        setError('No account found with this email address');
+      } else {
+        setError(errorMessage);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-page-header">
@@ -80,8 +114,40 @@ export default function Auth({ onClose }: AuthProps) {
           <h2 className="auth-title">{isLogin ? 'Sign In' : 'Create Account'}</h2>
           
           {error && <div className="auth-error">{error}</div>}
+          {success && <div className="auth-success">{success}</div>}
           
-          <form onSubmit={handleSubmit} className="auth-form">
+          {showForgotPassword ? (
+            <form onSubmit={handleForgotPassword} className="auth-form">
+              <div className="auth-field">
+                <label>Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  disabled={loading}
+                />
+              </div>
+              
+              <button type="submit" className="auth-submit" disabled={loading}>
+                {loading ? 'Sending...' : 'Send Reset Email'}
+              </button>
+              
+              <button
+                type="button"
+                onClick={() => {
+                  setShowForgotPassword(false);
+                  setError('');
+                  setSuccess('');
+                }}
+                className="auth-toggle-button"
+                disabled={loading}
+              >
+                ← Back to Sign In
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleSubmit} className="auth-form">
             {!isLogin && (
               <div className="auth-field">
                 <label>Name</label>
@@ -106,36 +172,55 @@ export default function Auth({ onClose }: AuthProps) {
               />
             </div>
             
-            <div className="auth-field">
-              <label>Password</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                disabled={loading}
-              />
-            </div>
-            
-            <button type="submit" className="auth-submit" disabled={loading}>
-              {loading ? 'Loading...' : isLogin ? 'Sign In' : 'Sign Up'}
-            </button>
-          </form>
+              <div className="auth-field">
+                <label>Password</label>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  disabled={loading}
+                />
+              </div>
+              
+              {isLogin && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowForgotPassword(true);
+                    setError('');
+                    setSuccess('');
+                  }}
+                  className="auth-forgot-password"
+                  disabled={loading}
+                >
+                  Forgot Password?
+                </button>
+              )}
+              
+              <button type="submit" className="auth-submit" disabled={loading}>
+                {loading ? 'Loading...' : isLogin ? 'Sign In' : 'Sign Up'}
+              </button>
+            </form>
+          )}
           
-          <p className="auth-toggle">
-            {isLogin ? "Don't have an account? " : "Already have an account? "}
-            <button
-              type="button"
-              onClick={() => {
-                setIsLogin(!isLogin);
-                setError('');
-              }}
-              className="auth-toggle-button"
-              disabled={loading}
-            >
-              {isLogin ? 'Sign Up' : 'Sign In'}
-            </button>
-          </p>
+          {!showForgotPassword && (
+            <p className="auth-toggle">
+              {isLogin ? "Don't have an account? " : "Already have an account? "}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsLogin(!isLogin);
+                  setError('');
+                  setSuccess('');
+                }}
+                className="auth-toggle-button"
+                disabled={loading}
+              >
+                {isLogin ? 'Sign Up' : 'Sign In'}
+              </button>
+            </p>
+          )}
 
           <div className="auth-footer">
             <Link to="/privacy" className="auth-footer-link">Privacy Policy</Link>

@@ -12,12 +12,14 @@ import {
 import { useAuth } from '../services/AuthContext';
 
 export default function Auth() {
-  const { signup, login } = useAuth();
+  const { signup, login, resetPassword } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
@@ -67,6 +69,36 @@ export default function Auth() {
     }
   };
 
+  const handleForgotPassword = async () => {
+    if (!email) {
+      setError('Please enter your email address');
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    try {
+      setError('');
+      setSuccess('');
+      setLoading(true);
+      
+      await resetPassword(email);
+      setSuccess('Password reset email sent! Check your inbox.');
+    } catch (err: any) {
+      const errorMessage = err.message || 'Failed to send reset email';
+      if (errorMessage.includes('user-not-found')) {
+        setError('No account found with this email address');
+      } else {
+        setError(errorMessage);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.content}>
@@ -82,7 +114,54 @@ export default function Auth() {
             </View>
           ) : null}
 
-          {!isLogin && (
+          {success ? (
+            <View style={styles.successContainer}>
+              <Text style={styles.successText}>{success}</Text>
+            </View>
+          ) : null}
+
+          {showForgotPassword ? (
+            <>
+              <View style={styles.field}>
+                <Text style={styles.label}>Email</Text>
+                <TextInput
+                  style={styles.input}
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="your@email.com"
+                  placeholderTextColor="#999"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  editable={!loading}
+                />
+              </View>
+
+              <TouchableOpacity
+                style={[styles.submitButton, loading && styles.submitButtonDisabled]}
+                onPress={handleForgotPassword}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text style={styles.submitButtonText}>Send Reset Email</Text>
+                )}
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.switchButton}
+                onPress={() => {
+                  setShowForgotPassword(false);
+                  setError('');
+                  setSuccess('');
+                }}
+                disabled={loading}
+              >
+                <Text style={styles.switchButtonText}>← Back to Sign In</Text>
+              </TouchableOpacity>
+            </>
+          ) : (
+            <>
             <View style={styles.field}>
               <Text style={styles.label}>Name</Text>
               <TextInput
@@ -111,43 +190,60 @@ export default function Auth() {
             />
           </View>
 
-          <View style={styles.field}>
-            <Text style={styles.label}>Password</Text>
-            <TextInput
-              style={styles.input}
-              value={password}
-              onChangeText={setPassword}
-              placeholder="Password"
-              placeholderTextColor="#999"
-              secureTextEntry
-              editable={!loading}
-            />
-          </View>
+              <View style={styles.field}>
+                <Text style={styles.label}>Password</Text>
+                <TextInput
+                  style={styles.input}
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder="Password"
+                  placeholderTextColor="#999"
+                  secureTextEntry
+                  editable={!loading}
+                />
+              </View>
 
-          <TouchableOpacity
-            style={[styles.submitButton, loading && styles.submitButtonDisabled]}
-            onPress={handleSubmit}
-            disabled={loading}
-          >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.submitButtonText}>{isLogin ? 'Sign In' : 'Sign Up'}</Text>
-            )}
-          </TouchableOpacity>
+              {isLogin && (
+                <TouchableOpacity
+                  style={styles.forgotPasswordButton}
+                  onPress={() => {
+                    setShowForgotPassword(true);
+                    setError('');
+                    setSuccess('');
+                  }}
+                  disabled={loading}
+                >
+                  <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+                </TouchableOpacity>
+              )}
 
-          <TouchableOpacity
-            style={styles.switchButton}
-            onPress={() => {
-              setIsLogin(!isLogin);
-              setError('');
-            }}
-            disabled={loading}
-          >
-            <Text style={styles.switchButtonText}>
-              {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Sign In'}
-            </Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.submitButton, loading && styles.submitButtonDisabled]}
+                onPress={handleSubmit}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator color="#fff" />
+                ) : (
+                  <Text style={styles.submitButtonText}>{isLogin ? 'Sign In' : 'Sign Up'}</Text>
+                )}
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.switchButton}
+                onPress={() => {
+                  setIsLogin(!isLogin);
+                  setError('');
+                  setSuccess('');
+                }}
+                disabled={loading}
+              >
+                <Text style={styles.switchButtonText}>
+                  {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Sign In'}
+                </Text>
+              </TouchableOpacity>
+            </>
+          )}
 
           <View style={styles.footer}>
             <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy' as never)}>
@@ -256,6 +352,16 @@ const styles = StyleSheet.create({
     color: '#2196f3',
     fontSize: 14,
     textAlign: 'center',
+  },
+  forgotPasswordButton: {
+    marginTop: -8,
+    marginBottom: 16,
+    alignSelf: 'flex-end',
+  },
+  forgotPasswordText: {
+    color: '#FF004D',
+    fontSize: 14,
+    fontWeight: '600',
   },
   footer: {
     flexDirection: 'row',
