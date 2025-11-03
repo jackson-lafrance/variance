@@ -119,7 +119,6 @@
 .auth-submit:hover:not(:disabled) {
   background: var(--color-primary-dark);
   box-shadow: var(--shadow-card);
-  
 }
 
 .auth-submit:active:not(:disabled) {

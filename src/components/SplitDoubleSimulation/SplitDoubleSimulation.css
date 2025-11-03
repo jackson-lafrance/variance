@@ -117,7 +117,7 @@
 }
 
 .adv-bj-button-special:hover:not(:disabled) {
-  background: var(--color-primary) 0%, #B388FF 100%);
+  background: var(--color-primary);
 }
 
 .adv-bj-button-outline {
@@ -153,7 +153,7 @@
 }
 
 .adv-bj-hand.active {
-  background: var(--color-primary) 0%, var(--color-background-light) 100%);
+  background: var(--color-background-light);
   box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
   border: 2px solid var(--color-primary);
   

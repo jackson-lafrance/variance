@@ -149,7 +149,7 @@
 }
 
 .betting-result-card.recommended {
-  background: var(--color-primary) 0%, rgba(37, 99, 235, 0.1) 100%);
+  background: var(--color-background-light);
   border-color: var(--color-primary);
   box-shadow: var(--shadow-button);
 }
