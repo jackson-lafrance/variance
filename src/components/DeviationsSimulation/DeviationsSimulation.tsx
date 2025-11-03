@@ -1,4 +1,7 @@
 import React, { useState, useRef } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { saveHighScore, SimulationTypes } from '../../utils/highScores';
+import { savePracticeSession } from '../../utils/practiceSessions';
 import './DeviationsSimulation.css';
 
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -99,6 +102,7 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string } =
 };
 
 export default function DeviationsSimulation() {
+  const { currentUser } = useAuth();
   const [deckCount, setDeckCount] = useState(6);
   const [penetration, setPenetration] = useState(75);
   const [shoe, setShoe] = useState<Card[]>(() => createShoe(6));
@@ -112,6 +116,8 @@ export default function DeviationsSimulation() {
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [awaitingAction, setAwaitingAction] = useState(false);
+  const [handsPlayed, setHandsPlayed] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   const drawSpecificCard = (rank: string): Card => {
@@ -150,6 +156,9 @@ export default function DeviationsSimulation() {
   };
 
   const startGame = async () => {
+    if (!sessionStartTime) {
+      setSessionStartTime(Date.now());
+    }
     setGameStarted(true);
     await dealScenario();
   };
@@ -168,10 +177,59 @@ export default function DeviationsSimulation() {
     }
     
     setAwaitingAction(false);
+    setHandsPlayed(prev => prev + 1);
   };
 
   const nextHand = async () => {
     await dealScenario();
+  };
+
+  const handleSaveSession = async () => {
+    if (!currentUser || (correctCount + incorrectCount === 0)) return;
+    
+    const accuracy = Math.round((correctCount / (correctCount + incorrectCount)) * 100);
+    const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
+    const score = correctCount * 100 - incorrectCount * 50;
+
+    try {
+      await saveHighScore(
+        currentUser.uid,
+        SimulationTypes.DEVIATIONS,
+        score,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed
+      );
+
+      await savePracticeSession(
+        currentUser.uid,
+        SimulationTypes.DEVIATIONS,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed,
+        duration
+      );
+
+      alert('Session saved successfully!');
+    } catch (error) {
+      console.error('Error saving session:', error);
+      alert('Failed to save session. Please try again.');
+    }
+  };
+
+  const handleReset = () => {
+    setGameStarted(false);
+    setPlayerHand([]);
+    setDealerHand([]);
+    setCurrentScenario(null);
+    setFeedback('');
+    setCorrectCount(0);
+    setIncorrectCount(0);
+    setAwaitingAction(false);
+    setHandsPlayed(0);
+    setSessionStartTime(null);
   };
 
   const renderCard = (card: Card, index: number) => (
@@ -304,6 +362,16 @@ export default function DeviationsSimulation() {
               <button className="dev-button dev-button-primary" onClick={nextHand}>
                 Next Hand
               </button>
+            )}
+            {(correctCount + incorrectCount > 0) && (
+              <>
+                <button className="dev-button dev-button-outline" onClick={handleSaveSession}>
+                  Save Session
+                </button>
+                <button className="dev-button dev-button-outline" onClick={handleReset}>
+                  Reset Stats
+                </button>
+              </>
             )}
           </>
         )}

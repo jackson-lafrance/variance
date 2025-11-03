@@ -1,4 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { saveHighScore, SimulationTypes } from '../../utils/highScores';
+import { savePracticeSession } from '../../utils/practiceSessions';
 import './UnifiedSimulation.css';
 
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -182,6 +185,7 @@ interface UnifiedSimulationProps {
 }
 
 export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) {
+  const { currentUser } = useAuth();
   const [shoe, setShoe] = useState<Card[]>(() => createShoe(settings.deckCount));
   const [cardsDealt, setCardsDealt] = useState(0);
   const [playerHands, setPlayerHands] = useState<Card[][]>([]);
@@ -205,6 +209,7 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
   const [countFeedback, setCountFeedback] = useState('');
   const [countCorrectCount, setCountCorrectCount] = useState(0);
   const [countIncorrectCount, setCountIncorrectCount] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -317,6 +322,9 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
   };
 
   const startGame = async () => {
+    if (!sessionStartTime) {
+      setSessionStartTime(Date.now());
+    }
     setGameStarted(true);
     setGameOver(false);
     setFeedback('');
@@ -597,6 +605,58 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
     setUserCountInput('');
   };
 
+  const handleSaveSession = async () => {
+    if (!currentUser || (correctCount + incorrectCount === 0)) return;
+    
+    const accuracy = Math.round((correctCount / (correctCount + incorrectCount)) * 100);
+    const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
+    const score = correctCount * 100 - incorrectCount * 50;
+
+    try {
+      await saveHighScore(
+        currentUser.uid,
+        SimulationTypes.UNIFIED,
+        score,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed
+      );
+
+      await savePracticeSession(
+        currentUser.uid,
+        SimulationTypes.UNIFIED,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed,
+        duration
+      );
+
+      alert('Session saved successfully!');
+    } catch (error) {
+      console.error('Error saving session:', error);
+      alert('Failed to save session. Please try again.');
+    }
+  };
+
+  const handleReset = () => {
+    setCorrectCount(0);
+    setIncorrectCount(0);
+    setHandsPlayed(0);
+    setSessionStartTime(null);
+    setRunningCount(0);
+    setCardsDealt(0);
+    const newShoe = createShoe(settings.deckCount);
+    setShoe(newShoe);
+    setGameStarted(false);
+    setGameOver(false);
+    setFeedback('');
+    setCountFeedback('');
+    setCountCorrectCount(0);
+    setCountIncorrectCount(0);
+  };
+
   const renderCard = (card: Card, index: number) => (
     <div key={`${card.code}-${index}`} className="unified-card" style={{ borderColor: suitColors[card.suit] }}>
       <div className="unified-card-content" style={{ color: suitColors[card.suit] }}>
@@ -715,6 +775,16 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
               <button className="unified-button unified-button-primary" onClick={startGame}>
                 New Hand
               </button>
+            )}
+            {(correctCount + incorrectCount > 0) && (
+              <>
+                <button className="unified-button unified-button-outline" onClick={handleSaveSession}>
+                  Save Session
+                </button>
+                <button className="unified-button unified-button-outline" onClick={handleReset}>
+                  Reset Stats
+                </button>
+              </>
             )}
           </>
         )}

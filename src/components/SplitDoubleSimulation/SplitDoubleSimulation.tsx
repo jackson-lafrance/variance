@@ -1,4 +1,7 @@
 import React, { useState, useRef } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { saveHighScore, SimulationTypes } from '../../utils/highScores';
+import { savePracticeSession } from '../../utils/practiceSessions';
 import './SplitDoubleSimulation.css';
 
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -51,6 +54,7 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string; is
 };
 
 export default function SplitDoubleSimulation() {
+  const { currentUser } = useAuth();
   const [playerHands, setPlayerHands] = useState<Card[][]>([]);
   const [activeHandIndex, setActiveHandIndex] = useState(0);
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
@@ -60,6 +64,10 @@ export default function SplitDoubleSimulation() {
   const [canDoubleDown, setCanDoubleDown] = useState(false);
   const [canSplit, setCanSplit] = useState(false);
   const [handComplete, setHandComplete] = useState<boolean[]>([]);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [incorrectCount, setIncorrectCount] = useState(0);
+  const [handsPlayed, setHandsPlayed] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   const drawCard = (): Card => {
@@ -178,6 +186,9 @@ export default function SplitDoubleSimulation() {
   };
 
   const startGame = async () => {
+    if (!sessionStartTime) {
+      setSessionStartTime(Date.now());
+    }
     setGameStarted(true);
     setGameStatus([]);
     setDealerRevealing(false);
@@ -364,6 +375,58 @@ export default function SplitDoubleSimulation() {
     });
 
     setGameStatus(finalStatuses);
+    setHandsPlayed(prev => prev + 1);
+  };
+
+  const handleSaveSession = async () => {
+    if (!currentUser || handsPlayed === 0) return;
+    
+    const accuracy = correctCount + incorrectCount > 0 
+      ? Math.round((correctCount / (correctCount + incorrectCount)) * 100) 
+      : 0;
+    const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
+    const score = correctCount * 100 - incorrectCount * 50;
+
+    try {
+      await saveHighScore(
+        currentUser.uid,
+        SimulationTypes.UNIFIED,
+        score,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed
+      );
+
+      await savePracticeSession(
+        currentUser.uid,
+        SimulationTypes.UNIFIED,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed,
+        duration
+      );
+
+      alert('Session saved successfully!');
+    } catch (error) {
+      console.error('Error saving session:', error);
+      alert('Failed to save session. Please try again.');
+    }
+  };
+
+  const handleReset = () => {
+    setPlayerHands([]);
+    setDealerHand([]);
+    setGameStatus([]);
+    setGameStarted(false);
+    setDealerRevealing(false);
+    setHandComplete([]);
+    setActiveHandIndex(0);
+    setCorrectCount(0);
+    setIncorrectCount(0);
+    setHandsPlayed(0);
+    setSessionStartTime(null);
   };
 
   const newGame = async () => {
@@ -420,9 +483,46 @@ export default function SplitDoubleSimulation() {
             <button className="adv-bj-button adv-bj-button-outline" onClick={newGame}>
               New Hand
             </button>
+            {handsPlayed > 0 && (
+              <>
+                <button className="adv-bj-button adv-bj-button-outline" onClick={handleSaveSession}>
+                  Save Session
+                </button>
+                <button className="adv-bj-button adv-bj-button-outline" onClick={handleReset}>
+                  Reset Stats
+                </button>
+              </>
+            )}
           </>
         )}
       </div>
+      
+      {handsPlayed > 0 && (
+        <div className="adv-bj-stats">
+          <div className="adv-bj-stat">
+            <span className="adv-bj-stat-label">Hands Played:</span>
+            <span className="adv-bj-stat-value">{handsPlayed}</span>
+          </div>
+          {(correctCount + incorrectCount > 0) && (
+            <>
+              <div className="adv-bj-stat">
+                <span className="adv-bj-stat-label">Correct:</span>
+                <span className="adv-bj-stat-value correct">{correctCount}</span>
+              </div>
+              <div className="adv-bj-stat">
+                <span className="adv-bj-stat-label">Incorrect:</span>
+                <span className="adv-bj-stat-value incorrect">{incorrectCount}</span>
+              </div>
+              <div className="adv-bj-stat">
+                <span className="adv-bj-stat-label">Accuracy:</span>
+                <span className="adv-bj-stat-value">
+                  {Math.round((correctCount / (correctCount + incorrectCount)) * 100)}%
+                </span>
+              </div>
+            </>
+          )}
+        </div>
+      )}
 
       {gameStarted && (
         <div className="adv-bj-game" ref={gameAreaRef}>

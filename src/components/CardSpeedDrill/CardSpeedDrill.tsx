@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { saveHighScore, SimulationTypes } from '../../utils/highScores';
+import { savePracticeSession } from '../../utils/practiceSessions';
 import './CardSpeedDrill.css';
 
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -24,6 +27,7 @@ const getHiLoValue = (rank: string): number => {
 };
 
 export default function CardSpeedDrill() {
+  const { currentUser } = useAuth();
   const [isActive, setIsActive] = useState(false);
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
   const [runningCount, setRunningCount] = useState(0);
@@ -34,6 +38,7 @@ export default function CardSpeedDrill() {
   const [accuracy, setAccuracy] = useState(100);
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [totalGuesses, setTotalGuesses] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const drawRandomCard = () => {
@@ -51,6 +56,9 @@ export default function CardSpeedDrill() {
   };
 
   const startDrill = () => {
+    if (!sessionStartTime) {
+      setSessionStartTime(Date.now());
+    }
     setIsActive(true);
     setCurrentCard(null);
     setRunningCount(0);
@@ -69,6 +77,57 @@ export default function CardSpeedDrill() {
   };
 
   const stopDrill = () => {
+    setIsActive(false);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
+  const handleSaveSession = async () => {
+    if (!currentUser || totalGuesses === 0) return;
+    
+    const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
+    const score = correctGuesses * 100 - (totalGuesses - correctGuesses) * 50;
+
+    try {
+      await saveHighScore(
+        currentUser.uid,
+        SimulationTypes.CARD_SPEED,
+        score,
+        accuracy,
+        correctGuesses,
+        totalGuesses - correctGuesses,
+        cardsShown
+      );
+
+      await savePracticeSession(
+        currentUser.uid,
+        SimulationTypes.CARD_SPEED,
+        accuracy,
+        correctGuesses,
+        totalGuesses - correctGuesses,
+        cardsShown,
+        duration
+      );
+
+      alert('Session saved successfully!');
+    } catch (error) {
+      console.error('Error saving session:', error);
+      alert('Failed to save session. Please try again.');
+    }
+  };
+
+  const handleReset = () => {
+    setCorrectGuesses(0);
+    setTotalGuesses(0);
+    setAccuracy(100);
+    setCardsShown(0);
+    setRunningCount(0);
+    setSessionStartTime(null);
+    setCurrentCard(null);
+    setIsCorrect(null);
+    setUserGuess('');
     setIsActive(false);
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -223,6 +282,17 @@ export default function CardSpeedDrill() {
           <button className="drill-stop-button" onClick={stopDrill}>
             Stop Drill
           </button>
+
+          {totalGuesses > 0 && (
+            <div className="drill-actions">
+              <button className="drill-action-button" onClick={handleSaveSession}>
+                Save Session
+              </button>
+              <button className="drill-action-button" onClick={handleReset}>
+                Reset Stats
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>

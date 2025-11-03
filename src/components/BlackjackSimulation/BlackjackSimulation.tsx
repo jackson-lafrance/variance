@@ -1,4 +1,7 @@
 import React, { useState, useRef } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { saveHighScore, SimulationTypes } from '../../utils/highScores';
+import { savePracticeSession } from '../../utils/practiceSessions';
 import './BlackjackSimulation.css';
 
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -51,11 +54,14 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string; is
 };
 
 export default function BlackjackSimulation() {
+  const { currentUser } = useAuth();
   const [playerHand, setPlayerHand] = useState<Card[]>([]);
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
   const [gameStatus, setGameStatus] = useState<string>('');
   const [gameStarted, setGameStarted] = useState(false);
   const [dealerRevealing, setDealerRevealing] = useState(false);
+  const [handsPlayed, setHandsPlayed] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   const drawCard = (): Card => {
@@ -75,6 +81,9 @@ export default function BlackjackSimulation() {
   };
 
   const startGame = async () => {
+    if (!sessionStartTime) {
+      setSessionStartTime(Date.now());
+    }
     setGameStarted(true);
     setGameStatus('');
     setDealerRevealing(false);
@@ -160,6 +169,51 @@ export default function BlackjackSimulation() {
     } else {
       setGameStatus('Push! It\'s a tie');
     }
+    setHandsPlayed(prev => prev + 1);
+  };
+
+  const handleSaveSession = async () => {
+    if (!currentUser || handsPlayed === 0) return;
+    
+    const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
+    const score = handsPlayed * 100; // Simple scoring for basic game
+
+    try {
+      await saveHighScore(
+        currentUser.uid,
+        SimulationTypes.UNIFIED,
+        score,
+        0,
+        0,
+        0,
+        handsPlayed
+      );
+
+      await savePracticeSession(
+        currentUser.uid,
+        SimulationTypes.UNIFIED,
+        0,
+        0,
+        0,
+        handsPlayed,
+        duration
+      );
+
+      alert('Session saved successfully!');
+    } catch (error) {
+      console.error('Error saving session:', error);
+      alert('Failed to save session. Please try again.');
+    }
+  };
+
+  const handleReset = () => {
+    setHandsPlayed(0);
+    setSessionStartTime(null);
+    setPlayerHand([]);
+    setDealerHand([]);
+    setGameStatus('');
+    setGameStarted(false);
+    setDealerRevealing(false);
   };
 
   const newGame = async () => {
@@ -219,7 +273,14 @@ export default function BlackjackSimulation() {
   const dealerValue = calculateHandValue(dealerHand);
 
   return (
-    <div className="blackjack-simulation">
+      <div className="blackjack-simulation">
+      <div className="bj-stats">
+        <div className="bj-stat">
+          <span className="bj-stat-label">Hands Played:</span>
+          <span className="bj-stat-value">{handsPlayed}</span>
+        </div>
+      </div>
+
       <div className="bj-controls">
         {!gameStarted ? (
           <button className="bj-button bj-button-primary" onClick={startGame}>
@@ -240,6 +301,16 @@ export default function BlackjackSimulation() {
             <button className="bj-button bj-button-outline" onClick={newGame}>
               New Game
             </button>
+            {handsPlayed > 0 && (
+              <>
+                <button className="bj-button bj-button-outline" onClick={handleSaveSession}>
+                  Save Session
+                </button>
+                <button className="bj-button bj-button-outline" onClick={handleReset}>
+                  Reset Stats
+                </button>
+              </>
+            )}
           </>
         )}
       </div>

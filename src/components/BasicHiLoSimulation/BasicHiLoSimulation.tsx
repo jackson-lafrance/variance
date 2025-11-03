@@ -1,4 +1,7 @@
 import React, { useState, useRef } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { saveHighScore, SimulationTypes } from '../../utils/highScores';
+import { savePracticeSession } from '../../utils/practiceSessions';
 import './BasicHiLoSimulation.css';
 
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -73,6 +76,7 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string; is
 };
 
 export default function BasicHiLoSimulation() {
+  const { currentUser } = useAuth();
   const [deckCount, setDeckCount] = useState(6);
   const [penetration, setPenetration] = useState(75);
   const [shoe, setShoe] = useState<Card[]>(() => createShoe(6));
@@ -89,6 +93,7 @@ export default function BasicHiLoSimulation() {
   const [countFeedback, setCountFeedback] = useState('');
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   const drawCard = (): Card => {
@@ -122,6 +127,9 @@ export default function BasicHiLoSimulation() {
   };
 
   const startGame = async () => {
+    if (!sessionStartTime) {
+      setSessionStartTime(Date.now());
+    }
     setGameStarted(true);
     setGameStatus('');
     setDealerRevealing(false);
@@ -300,6 +308,41 @@ export default function BasicHiLoSimulation() {
     }
   };
 
+  const handleSaveSession = async () => {
+    if (!currentUser || (correctCount + incorrectCount === 0)) return;
+    
+    const accuracy = Math.round((correctCount / (correctCount + incorrectCount)) * 100);
+    const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
+    const score = correctCount * 100 - incorrectCount * 50;
+
+    try {
+      await saveHighScore(
+        currentUser.uid,
+        SimulationTypes.COUNTING,
+        score,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed
+      );
+
+      await savePracticeSession(
+        currentUser.uid,
+        SimulationTypes.COUNTING,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed,
+        duration
+      );
+
+      alert('Session saved successfully!');
+    } catch (error) {
+      console.error('Error saving session:', error);
+      alert('Failed to save session. Please try again.');
+    }
+  };
+
   const resetSimulation = () => {
     setPlayerHand([]);
     setDealerHand([]);
@@ -313,6 +356,7 @@ export default function BasicHiLoSimulation() {
     setCountFeedback('');
     setCorrectCount(0);
     setIncorrectCount(0);
+    setSessionStartTime(null);
   };
 
   const renderCard = (card: Card, index: number) => (
@@ -452,6 +496,16 @@ export default function BasicHiLoSimulation() {
             <button className="hilo-button hilo-button-outline" onClick={resetSimulation}>
               Reset Simulation
             </button>
+            {(correctCount + incorrectCount > 0) && (
+              <>
+                <button className="hilo-button hilo-button-outline" onClick={handleSaveSession}>
+                  Save Session
+                </button>
+                <button className="hilo-button hilo-button-outline" onClick={resetSimulation}>
+                  Reset Stats
+                </button>
+              </>
+            )}
           </>
         )}
       </div>
