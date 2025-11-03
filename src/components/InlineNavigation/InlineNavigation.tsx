@@ -14,6 +14,9 @@ const pages: Page[] = [
   { path: '/simulations', title: 'Simulations' },
   { path: '/bankroll', title: 'Bankroll Management' },
   { path: '/advanced', title: 'Advanced Techniques' },
+  { path: '/progress', title: 'Progress Tracking' },
+  { path: '/betting', title: 'Betting Calculator' },
+  { path: '/risk', title: 'Risk Calculator' },
 ];
 
 export default function InlineNavigation() {
@@ -24,7 +27,17 @@ export default function InlineNavigation() {
   const currentPage = pages.find(page => page.path === location.pathname);
   const isDashboard = location.pathname === '/dashboard';
   const isAuth = location.pathname === '/auth';
-  const currentTitle = isDashboard ? 'Dashboard' : isAuth ? 'Sign In' : (currentPage ? currentPage.title : 'Blackjack Basics');
+  const isSettings = location.pathname === '/settings';
+  const isProgress = location.pathname === '/progress';
+  const isBetting = location.pathname === '/betting';
+  const isRisk = location.pathname === '/risk';
+  const currentTitle = isDashboard ? 'Dashboard' 
+    : isAuth ? 'Sign In' 
+    : isSettings ? 'Settings'
+    : isProgress ? 'Progress Tracking'
+    : isBetting ? 'Betting Calculator'
+    : isRisk ? 'Risk Calculator'
+    : (currentPage ? currentPage.title : 'Blackjack Basics');
 
   const handleNavigate = (path: string) => {
     navigate(path);
