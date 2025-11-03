@@ -1,6 +1,7 @@
-import { initializeApp, FirebaseApp } from 'firebase/app';
-import { getAuth, Auth } from 'firebase/auth';
+import { initializeApp, FirebaseApp, getApps } from 'firebase/app';
+import { initializeAuth, getAuth, getReactNativePersistence, Auth } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Same Firebase config as web app
 const firebaseConfig = {
@@ -18,8 +19,28 @@ let auth: Auth;
 let db: Firestore;
 
 try {
-  app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
+  // Initialize app only if it hasn't been initialized
+  const existingApps = getApps();
+  if (existingApps.length === 0) {
+    app = initializeApp(firebaseConfig);
+  } else {
+    app = existingApps[0];
+  }
+
+  // Initialize auth with persistence, or get existing auth instance
+  try {
+    auth = initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage)
+    });
+  } catch (error: any) {
+    // If auth is already initialized, just get the existing instance
+    if (error.code === 'auth/already-initialized') {
+      auth = getAuth(app);
+    } else {
+      throw error;
+    }
+  }
+
   db = getFirestore(app);
 } catch (error) {
   console.error('Firebase initialization error:', error);
