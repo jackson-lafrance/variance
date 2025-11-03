@@ -12,7 +12,8 @@
   color: var(--color-text-primary);
   align-self: flex-start;
   animation: fadeIn var(--transition-slow) ease-out;
-  height: fit-content;
+  min-height: 5.625em;
+  box-sizing: border-box;
 }
 
 .dark-mode-toggle:hover {

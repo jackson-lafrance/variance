@@ -43,6 +43,8 @@
   font-weight: var(--font-weight-semibold);
   white-space: nowrap;
   align-self: flex-start;
+  min-height: 5.625em;
+  box-sizing: border-box;
 }
 
 .header-action-button:hover {
