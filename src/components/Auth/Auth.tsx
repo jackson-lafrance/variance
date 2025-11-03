@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import Header from '../Header';
 import './Auth.css';
@@ -136,6 +136,12 @@ export default function Auth({ onClose }: AuthProps) {
               {isLogin ? 'Sign Up' : 'Sign In'}
             </button>
           </p>
+
+          <div className="auth-footer">
+            <Link to="/privacy" className="auth-footer-link">Privacy Policy</Link>
+            <span className="auth-footer-separator">•</span>
+            <Link to="/terms" className="auth-footer-link">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </div>

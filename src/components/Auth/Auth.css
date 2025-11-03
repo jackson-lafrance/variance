@@ -149,4 +149,31 @@
   cursor: not-allowed;
 }
 
+.auth-footer {
+  margin-top: 2em;
+  padding-top: 1.5em;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  font-size: 0.875em;
+}
+
+.auth-footer-link {
+  color: var(--color-primary-red);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-fast);
+}
+
+.auth-footer-link:hover {
+  text-decoration: underline;
+}
+
+.auth-footer-separator {
+  color: var(--color-text-secondary);
+}
+
 

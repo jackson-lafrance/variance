@@ -148,6 +148,16 @@ export default function Auth() {
               {isLogin ? "Don't have an account? Sign Up" : 'Already have an account? Sign In'}
             </Text>
           </TouchableOpacity>
+
+          <View style={styles.footer}>
+            <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy' as never)}>
+              <Text style={styles.footerLink}>Privacy Policy</Text>
+            </TouchableOpacity>
+            <Text style={styles.footerSeparator}>•</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('TermsOfService' as never)}>
+              <Text style={styles.footerLink}>Terms of Service</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
