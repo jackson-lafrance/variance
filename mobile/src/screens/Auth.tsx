@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   switchButtonText: {
-    color: '#2196f3',
+    color: '#FF004D',
     fontSize: 14,
     textAlign: 'center',
   },

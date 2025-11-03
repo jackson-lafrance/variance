@@ -294,7 +294,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: '#2196f3',
+    color: '#FF004D',
     fontWeight: '600',
   },
   title: {

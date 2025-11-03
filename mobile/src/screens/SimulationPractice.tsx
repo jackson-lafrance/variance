@@ -129,7 +129,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     padding: 20,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#2196f3',
+    borderColor: '#FF004D',
   },
   comingSoonCard: {
     borderColor: isDark ? '#444' : '#e0e0e0',

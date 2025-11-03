@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   addButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: '#FF004D',
     padding: 12,
     borderRadius: 8,
     alignItems: 'center',
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   clearText: {
-    color: '#2196f3',
+    color: '#FF004D',
     fontSize: 14,
     fontWeight: '600',
   },
