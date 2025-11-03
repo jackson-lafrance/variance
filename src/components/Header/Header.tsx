@@ -5,9 +5,11 @@ import './Header.css';
 
 export default function Header() {
   return (
-    <div className="header">
-      <InlineNavigation />
-      <DarkModeToggle />
+    <div className="page-header-wrapper">
+      <div className="header">
+        <InlineNavigation />
+        <DarkModeToggle />
+      </div>
     </div>
   );
 }

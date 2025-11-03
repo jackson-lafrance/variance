@@ -1,6 +1,6 @@
 .bankroll-management-page {
   min-height: 100vh;
-  padding: 2em 4em;
+  padding: 0 4em 2em 4em;
   text-align: left;
   background: transparent;
   animation: fadeIn var(--transition-slow) ease-out;
@@ -9,6 +9,10 @@
 .bankroll-management-header {
   margin-bottom: 3em;
   width: 100%;
+}
+
+.bankroll-management-header .page-header-wrapper {
+  padding-bottom: 1em;
 }
 
 .bankroll-management-subtitle {
