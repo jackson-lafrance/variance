@@ -4,9 +4,21 @@
   gap: 1.5em;
   margin-bottom: 1em;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .header > * {
   display: flex;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .header > * {
+    width: 100%;
+  }
 }

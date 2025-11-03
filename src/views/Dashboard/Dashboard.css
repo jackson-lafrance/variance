@@ -18,6 +18,14 @@
   padding: 1.5em 3em;
   box-shadow: var(--shadow-card);
   border-bottom: 1px solid var(--color-border);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .dashboard-header-section {
+    padding: 1.5em 1.25em;
+  }
 }
 
 .dashboard-user-info {

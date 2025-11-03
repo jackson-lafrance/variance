@@ -7,7 +7,8 @@
 .simulation-practice-header {
   text-align: left;
   margin-bottom: 2.5em;
-  max-width: 75em;
+  max-width: 100%;
+  width: 100%;
 }
 
 .simulation-practice-subtitle {
