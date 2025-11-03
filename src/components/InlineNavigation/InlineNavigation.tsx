@@ -83,6 +83,14 @@ export default function InlineNavigation() {
             Settings
           </div>
         )}
+        {!currentUser && !isAuth && (
+          <div
+            className="nav-dropdown-item auth-item"
+            onClick={() => handleNavigate('/auth')}
+          >
+            Sign In
+          </div>
+        )}
       </div>
     </div>
   );
