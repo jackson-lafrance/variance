@@ -1,6 +1,7 @@
 .card-counting-basics-page {
   max-width: 62.5em;
   padding: 2.5em 1.25em;
+  animation: fadeIn var(--transition-slow) ease-out;
 }
 
 .card-counting-basics-header {
@@ -10,8 +11,8 @@
 
 .card-counting-basics-subtitle {
   font-size: 1.125em;
-  color: #666;
-  font-weight: 400;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
 }
 
 .card-counting-basics-content {

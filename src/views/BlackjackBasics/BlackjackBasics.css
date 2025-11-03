@@ -1,6 +1,7 @@
 .blackjack-basics-page {
   max-width: 62.5em;
   padding: 2.5em 1.25em;
+  animation: fadeIn var(--transition-slow) ease-out;
 }
 
 .blackjack-basics-header {
@@ -18,8 +19,8 @@
 
 .blackjack-basics-subtitle {
   font-size: 1.125em;
-  color: #666;
-  font-weight: 400;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
 }
 
 .blackjack-basics-content {
