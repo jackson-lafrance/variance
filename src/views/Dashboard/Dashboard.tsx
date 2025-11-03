@@ -102,29 +102,46 @@ export default function Dashboard() {
         setStats({ totalBankroll: 0, totalProfit: 0, totalSessions: 0, totalHours: 0 });
       }
 
-      // Load sessions
-      const sessionsQuery = query(
-        collection(db, 'casinoSessions'),
-        where('userId', '==', currentUser.uid),
-        orderBy('timestamp', 'desc')
-      );
-      const sessionsSnapshot = await getDocs(sessionsQuery);
+      // Load sessions - try with orderBy first, fallback to without if index missing
+      let sessionsSnapshot;
+      try {
+        const sessionsQuery = query(
+          collection(db, 'casinoSessions'),
+          where('userId', '==', currentUser.uid),
+          orderBy('timestamp', 'desc')
+        );
+        sessionsSnapshot = await getDocs(sessionsQuery);
+      } catch (queryError: any) {
+        // If orderBy fails (missing index), try without orderBy and sort in memory
+        if (queryError.code === 'failed-precondition') {
+          console.log('Firestore index needed - loading without orderBy');
+          const sessionsQuery = query(
+            collection(db, 'casinoSessions'),
+            where('userId', '==', currentUser.uid)
+          );
+          sessionsSnapshot = await getDocs(sessionsQuery);
+        } else {
+          throw queryError;
+        }
+      }
+      
       const loadedSessions: CasinoSession[] = [];
       sessionsSnapshot.forEach((doc) => {
         loadedSessions.push({ id: doc.id, ...doc.data() } as CasinoSession);
       });
+      
+      // Sort by timestamp descending if we don't have orderBy
+      loadedSessions.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+      
       setSessions(loadedSessions);
     } catch (error: any) {
-      // Only show error if it's not a missing index error (which is expected initially)
-      if (error.code === 'failed-precondition') {
-        // This is expected - Firestore needs an index for the query
-        // User can create it via the error link, or we can continue without it
-        console.log('Firestore index needed - this is normal');
-        setSessions([]);
-      } else if (error.code !== 'permission-denied') {
-        console.error('Dashboard load error:', error);
-        // Don't show alert for expected errors
+      console.error('Dashboard load error:', error);
+      if (error.code === 'permission-denied') {
+        alert('Permission denied. Please check your Firebase security rules.');
+      } else {
+        alert('Failed to load dashboard data. Please refresh the page.');
       }
+      setSessions([]);
     } finally {
       setLoading(false);
     }

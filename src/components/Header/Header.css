@@ -7,7 +7,7 @@
 
 .header {
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
   gap: 1.5em;
   margin-bottom: 1em;
   flex-wrap: wrap;
@@ -16,12 +16,12 @@
 
 .header > * {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .header-actions {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1em;
   flex-wrap: wrap;
 }
@@ -42,7 +42,7 @@
   font-size: 1em;
   font-weight: var(--font-weight-semibold);
   white-space: nowrap;
-  height: fit-content;
+  align-self: flex-start;
 }
 
 .header-action-button:hover {

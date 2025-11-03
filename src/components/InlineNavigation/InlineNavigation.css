@@ -12,6 +12,8 @@
   border: 1px solid var(--color-border);
   flex: 0 1 auto;
   animation: fadeIn var(--transition-slow) ease-out;
+  min-height: fit-content;
+  align-self: flex-start;
 }
 
 .inline-navigation:hover {
