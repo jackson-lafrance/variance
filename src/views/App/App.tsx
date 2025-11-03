@@ -10,6 +10,8 @@ import Settings from '../Settings';
 import ProgressTracking from '../ProgressTracking';
 import BettingCalculator from '../BettingCalculator';
 import RiskCalculator from '../RiskCalculator';
+import PrivacyPolicy from '../PrivacyPolicy';
+import TermsOfService from '../TermsOfService';
 import Auth from '../../components/Auth';
 import './App.css';
 
@@ -27,6 +29,8 @@ export default function App() {
         <Route path="/progress" element={<ProgressTracking />} />
         <Route path="/betting" element={<BettingCalculator />} />
         <Route path="/risk" element={<RiskCalculator />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
         <Route path="/auth" element={<Auth />} />
       </Routes>
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import Header from '../../components/Header';
@@ -179,6 +179,12 @@ export default function Settings() {
           <button className="settings-save-button" onClick={saveSettings} disabled={saving}>
             {saving ? 'Saving...' : 'Save Settings'}
           </button>
+        </div>
+
+        <div className="settings-footer">
+          <Link to="/privacy" className="footer-link">Privacy Policy</Link>
+          <span className="footer-separator">•</span>
+          <Link to="/terms" className="footer-link">Terms of Service</Link>
         </div>
       </div>
     </div>

@@ -127,6 +127,34 @@
   cursor: not-allowed;
 }
 
+.settings-footer {
+  margin-top: 3em;
+  padding-top: 2em;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.footer-link {
+  color: var(--color-primary-red);
+  text-decoration: none;
+  font-size: 0.9375em;
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-fast);
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer-separator {
+  color: var(--color-text-secondary);
+  font-size: 0.9375em;
+}
+
 .dark-mode .settings-page {
   background: #1a1a1a;
 }

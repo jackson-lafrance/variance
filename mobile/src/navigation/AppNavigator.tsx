@@ -15,6 +15,8 @@ import Settings from '../screens/Settings';
 import ProgressTracking from '../screens/ProgressTracking';
 import BettingCalculator from '../screens/BettingCalculator';
 import RiskCalculator from '../screens/RiskCalculator';
+import PrivacyPolicy from '../screens/PrivacyPolicy';
+import TermsOfService from '../screens/TermsOfService';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 
 const AuthStack = createStackNavigator();
@@ -100,6 +102,16 @@ function AppNavigator() {
         name="RiskCalculator"
         component={RiskCalculator}
         options={{ title: 'Risk Calculator' }}
+      />
+      <AppStack.Screen
+        name="PrivacyPolicy"
+        component={PrivacyPolicy}
+        options={{ title: 'Privacy Policy' }}
+      />
+      <AppStack.Screen
+        name="TermsOfService"
+        component={TermsOfService}
+        options={{ title: 'Terms of Service' }}
       />
     </AppStack.Navigator>
   );

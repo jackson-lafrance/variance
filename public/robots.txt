@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private routes
+Disallow: /dashboard
+Disallow: /auth
+Disallow: /settings
+
+# Sitemap
+Sitemap: https://variance.app/sitemap.xml
+

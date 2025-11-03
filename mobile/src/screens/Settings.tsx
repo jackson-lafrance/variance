@@ -188,6 +188,16 @@ export default function Settings() {
             {saving ? 'Saving...' : 'Save Settings'}
           </Text>
         </TouchableOpacity>
+
+        <View style={styles.footer}>
+          <TouchableOpacity onPress={() => navigation.navigate('PrivacyPolicy' as never)}>
+            <Text style={styles.footerLink}>Privacy Policy</Text>
+          </TouchableOpacity>
+          <Text style={styles.footerSeparator}>•</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('TermsOfService' as never)}>
+            <Text style={styles.footerLink}>Terms of Service</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -293,6 +303,25 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: '600',
+  },
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 32,
+    paddingTop: 24,
+    borderTopWidth: 1,
+    borderTopColor: isDark ? '#444' : '#e0e0e0',
+    gap: 12,
+  },
+  footerLink: {
+    fontSize: 14,
+    color: '#FF004D',
+    fontWeight: '600',
+  },
+  footerSeparator: {
+    fontSize: 14,
+    color: isDark ? '#666' : '#999',
   },
 });
 
