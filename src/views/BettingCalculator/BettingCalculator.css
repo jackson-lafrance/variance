@@ -1,0 +1,208 @@
+.betting-calculator-page {
+  min-height: 100vh;
+  background: transparent;
+}
+
+.betting-calculator-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.betting-header {
+  margin-bottom: 30px;
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.betting-title {
+  font-size: 32px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+.betting-subtitle {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+}
+
+.betting-mode-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.betting-mode-button {
+  flex: 1;
+  padding: 12px 24px;
+  border: 2px solid var(--color-primary-red);
+  background-color: var(--color-background-white);
+  color: var(--color-primary-red);
+  border-radius: var(--border-radius-button);
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-family: var(--font-family);
+}
+
+.betting-mode-button:hover {
+  background-color: var(--color-light-lavender);
+  transform: translateY(-2px);
+}
+
+.betting-mode-button.active {
+  background-color: var(--color-primary-red);
+  color: var(--color-background-white);
+  box-shadow: var(--shadow-button);
+}
+
+.betting-mode-button.active:hover {
+  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
+}
+
+.betting-inputs {
+  background-color: var(--color-background-white);
+  padding: 30px;
+  border-radius: var(--border-radius-card);
+  border: 2px solid rgba(255, 0, 77, 0.2);
+  margin-bottom: 30px;
+  display: grid;
+  gap: 20px;
+  box-shadow: var(--shadow-card);
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.betting-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.betting-input-group label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-size: 14px;
+}
+
+.betting-input-group input,
+.betting-input-group select {
+  padding: 12px 16px;
+  border: 2px solid #E0E0E0;
+  border-radius: var(--border-radius-button);
+  font-size: 16px;
+  transition: all var(--transition-fast);
+  font-family: var(--font-family);
+  background: var(--color-background-white);
+  color: var(--color-text-primary);
+}
+
+.betting-input-group input:focus,
+.betting-input-group select:focus {
+  outline: none;
+  border-color: var(--color-primary-red);
+  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+}
+
+.betting-input-group small {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: -4px;
+}
+
+.betting-results {
+  background-color: var(--color-background-white);
+  padding: 30px;
+  border-radius: var(--border-radius-card);
+  border: 2px solid rgba(255, 0, 77, 0.2);
+  margin-bottom: 30px;
+  box-shadow: var(--shadow-card);
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.betting-results-title {
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 20px;
+}
+
+.betting-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.betting-result-card {
+  background-color: var(--color-light-lavender);
+  padding: 20px;
+  border-radius: var(--border-radius-card);
+  border: 2px solid rgba(164, 139, 255, 0.3);
+  text-align: center;
+  transition: all var(--transition-normal);
+}
+
+.betting-result-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+}
+
+.betting-result-card.recommended {
+  background: linear-gradient(135deg, var(--color-light-lavender) 0%, rgba(255, 0, 77, 0.1) 100%);
+  border-color: var(--color-primary-red);
+  box-shadow: var(--shadow-button);
+}
+
+.betting-result-label {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+  font-weight: var(--font-weight-medium);
+}
+
+.betting-result-value {
+  font-size: 28px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+.betting-result-subtext {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+}
+
+.betting-info {
+  background-color: var(--color-background-white);
+  padding: 30px;
+  border-radius: var(--border-radius-card);
+  border: 2px solid rgba(255, 0, 77, 0.2);
+  box-shadow: var(--shadow-card);
+}
+
+.betting-info h3 {
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+}
+
+.betting-info p {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.betting-info strong {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+@media (max-width: 768px) {
+  .betting-results-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
