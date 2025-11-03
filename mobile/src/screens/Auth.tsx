@@ -9,9 +9,11 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../services/AuthContext';
 
 export default function Auth() {
+  const navigation = useNavigation();
   const { signup, login, resetPassword } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -162,33 +164,34 @@ export default function Auth() {
             </>
           ) : (
             <>
-            <View style={styles.field}>
-              <Text style={styles.label}>Name</Text>
-              <TextInput
-                style={styles.input}
-                value={displayName}
-                onChangeText={setDisplayName}
-                placeholder="Your name"
-                placeholderTextColor="#999"
-                editable={!loading}
-                autoCapitalize="words"
-              />
-            </View>
-          )}
+              {!isLogin && (
+                <View style={styles.field}>
+                  <Text style={styles.label}>Name</Text>
+                  <TextInput
+                    style={styles.input}
+                    value={displayName}
+                    onChangeText={setDisplayName}
+                    placeholder="Your name"
+                    placeholderTextColor="#999"
+                    editable={!loading}
+                    autoCapitalize="words"
+                  />
+                </View>
+              )}
 
-          <View style={styles.field}>
-            <Text style={styles.label}>Email</Text>
-            <TextInput
-              style={styles.input}
-              value={email}
-              onChangeText={setEmail}
-              placeholder="your@email.com"
-              placeholderTextColor="#999"
-              keyboardType="email-address"
-              autoCapitalize="none"
-              editable={!loading}
-            />
-          </View>
+              <View style={styles.field}>
+                <Text style={styles.label}>Email</Text>
+                <TextInput
+                  style={styles.input}
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="your@email.com"
+                  placeholderTextColor="#999"
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  editable={!loading}
+                />
+              </View>
 
               <View style={styles.field}>
                 <Text style={styles.label}>Password</Text>
@@ -324,7 +327,20 @@ const styles = StyleSheet.create({
     borderColor: '#f44336',
   },
   errorText: {
-    color: '#f44336',
+    color: '#d32f2f',
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  successContainer: {
+    backgroundColor: '#e8f5e9',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#4caf50',
+  },
+  successText: {
+    color: '#388e3c',
     fontSize: 14,
     textAlign: 'center',
   },
