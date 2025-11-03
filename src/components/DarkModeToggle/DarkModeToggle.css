@@ -2,26 +2,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #e8e8e8;
-  border-radius: 0.75em;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: var(--border-radius-card);
   padding: 1.5em 1.75em;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.05);
-  border: 0.125em solid transparent;
-  color: #1a1a1a;
+  transition: all var(--transition-slow);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-text-primary);
   align-self: flex-start;
+  animation: fadeIn var(--transition-slow) ease-out;
 }
 
 .dark-mode-toggle:hover {
-  background: #ffffff;
-  box-shadow: 0 0.375em 1.25em rgba(0, 0, 0, 0.1);
-  border-color: #d8d8d8;
-  transform: translateY(-0.0625em);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 0, 77, 0.2);
+  transform: translateY(-2px);
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.95) translateY(0);
 }
 
 .dark-mode-toggle svg {
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-normal);
 }
 
 .dark-mode-toggle:hover svg {
@@ -1097,6 +1104,56 @@ body.dark-mode .session-delete-button {
 
 body.dark-mode .session-delete-button:hover {
   background: #b71c1c;
+}
+
+body.dark-mode .sessions-header h2 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .sessions-controls {
+  background: transparent;
+}
+
+body.dark-mode .session-search,
+body.dark-mode .session-filter,
+body.dark-mode .session-sort,
+body.dark-mode .date-filter {
+  background: #1a1a1a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-mode .session-search:focus,
+body.dark-mode .session-filter:focus,
+body.dark-mode .session-sort:focus,
+body.dark-mode .date-filter:focus {
+  border-color: #2196f3;
+}
+
+body.dark-mode .clear-filter {
+  background: #555;
+}
+
+body.dark-mode .clear-filter:hover {
+  background: #666;
+}
+
+body.dark-mode .session-edit-button {
+  background: #1976d2;
+}
+
+body.dark-mode .session-edit-button:hover {
+  background: #1565c0;
+}
+
+body.dark-mode .dashboard-action-button.outline {
+  background: #2a2a2a;
+  color: #64b5f6;
+  border-color: #2196f3;
+}
+
+body.dark-mode .dashboard-action-button.outline:hover {
+  background: #333;
 }
 
 body.dark-mode .auth-page {
