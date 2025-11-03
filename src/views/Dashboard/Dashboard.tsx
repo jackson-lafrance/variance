@@ -206,8 +206,12 @@ export default function Dashboard() {
 
       // Reload data
       await loadData();
-    } catch (error) {
-      alert('Failed to add session. Please check your connection and try again.');
+    } catch (error: any) {
+      console.error('Error adding session:', error);
+      const errorMessage = error.code === 'permission-denied' 
+        ? 'Permission denied. Please check your Firebase security rules.'
+        : error.message || 'Failed to add session. Please check your connection and try again.';
+      alert(errorMessage);
     }
   };
 

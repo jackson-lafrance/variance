@@ -27,26 +27,30 @@
 }
 
 .header-action-button {
-  padding: 0.75em 1.5em;
-  background: var(--color-primary);
-  color: var(--color-background);
-  border: none;
-  border-radius: var(--border-radius-button);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background);
+  border-radius: var(--border-radius-card);
+  padding: 1.5em 1.75em;
   cursor: pointer;
-  font-weight: var(--font-weight-semibold);
-  transition: all var(--transition-normal);
-  box-shadow: var(--shadow-button);
+  transition: all var(--transition-slow);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
   font-family: var(--font-family);
   font-size: 1em;
+  font-weight: var(--font-weight-semibold);
 }
 
 .header-action-button:hover {
-  background: var(--color-primary-dark);
+  background: var(--color-background-light);
   box-shadow: var(--shadow-card);
+  border-color: var(--color-primary);
 }
 
 .header-action-button:active {
-  transform: scale(0.95);
+  transform: scale(0.95) translateY(0);
 }
 
 @media (max-width: 768px) {
@@ -70,5 +74,18 @@
   
   .header-action-button {
     flex: 1 1 auto;
+    min-width: 120px;
   }
+}
+
+/* Dark mode styles for header buttons */
+body.dark-mode .header-action-button {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-mode .header-action-button:hover {
+  background: #333;
+  border-color: #444;
 }
