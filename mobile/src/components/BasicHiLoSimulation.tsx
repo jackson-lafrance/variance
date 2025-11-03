@@ -292,13 +292,11 @@ export default function BasicHiLoSimulation({ onBack }: { onBack?: () => void })
       await savePracticeSession(
         currentUser.uid,
         SimulationTypes.COUNTING,
-        {
-          accuracy,
-          correctCount,
-          incorrectCount,
-          handsPlayed,
-          duration,
-        }
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed,
+        duration
       );
 
       Alert.alert('Success', 'Session saved successfully!');

@@ -127,13 +127,11 @@ export default function CardSpeedDrill({ onBack }: { onBack?: () => void }) {
       await savePracticeSession(
         currentUser.uid,
         SimulationTypes.CARD_SPEED,
-        {
-          accuracy,
-          correctCount: correctGuesses,
-          incorrectCount: totalGuesses - correctGuesses,
-          handsPlayed: cardsShown,
-          duration,
-        }
+        accuracy,
+        correctGuesses,
+        totalGuesses - correctGuesses,
+        cardsShown,
+        duration
       );
 
       Alert.alert('Success', 'Session saved successfully!');

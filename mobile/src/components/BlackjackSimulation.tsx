@@ -212,13 +212,11 @@ export default function BlackjackSimulation({ onBack }: { onBack?: () => void })
       await savePracticeSession(
         currentUser.uid,
         SimulationTypes.UNIFIED,
-        {
-          accuracy: 0,
-          correctCount: 0,
-          incorrectCount: 0,
-          handsPlayed,
-          duration,
-        }
+        0,
+        0,
+        0,
+        handsPlayed,
+        duration
       );
 
       Alert.alert('Success', 'Session saved successfully!');
