@@ -27,7 +27,6 @@
 
 .dashboard-user-info {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 0 1.25em 1.5em 1.25em;
   display: flex;
   justify-content: space-between;
@@ -66,7 +65,6 @@
 
 .dashboard-content {
   max-width: 75em;
-  margin: 0 auto;
   padding: 2em 1.5em;
 }
 

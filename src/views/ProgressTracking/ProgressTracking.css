@@ -5,18 +5,15 @@
 }
 
 .progress-loading {
-  text-align: center;
   padding: 40px;
   font-size: 18px;
   color: var(--color-text-secondary);
   animation: fadeIn var(--transition-slow) ease-out;
   max-width: 1200px;
-  margin: 0 auto;
 }
 
 .progress-content {
   max-width: 1200px;
-  margin: 0 auto;
   padding: 0;
   width: 100%;
 }

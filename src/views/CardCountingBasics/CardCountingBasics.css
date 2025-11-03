@@ -21,7 +21,6 @@
 
 .card-counting-basics-content {
   max-width: 62.5em;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1.5em;
