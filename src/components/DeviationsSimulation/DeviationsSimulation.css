@@ -1,7 +1,7 @@
 .deviations-simulation {
   margin-top: 1.5em;
   padding: 1.5em 0 0 0;
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-radius: var(--border-radius-card);
   text-align: left;
   animation: fadeIn var(--transition-slow) ease-out;
@@ -35,7 +35,7 @@
   font-size: 1em;
   border: 2px solid #E0E0E0;
   border-radius: var(--border-radius-button);
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-primary);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -43,13 +43,13 @@
 }
 
 .dev-setting-select:hover {
-  border-color: var(--color-primary-red);
+  border-color: var(--color-primary);
 }
 
 .dev-setting-select:focus {
   outline: none;
-  border-color: var(--color-primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .dev-stats {
@@ -77,7 +77,7 @@
 .dev-stat-value {
   font-size: 1.5em;
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .dev-stat-value.correct {
@@ -85,13 +85,13 @@
 }
 
 .dev-stat-value.incorrect {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .dev-count-display {
   margin: 0 1.5em 1em 1.5em;
   padding: 1em;
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, var(--color-primary-red) 100%);
+  background: var(--color-primary);
   border-radius: var(--border-radius-card);
   display: flex;
   align-items: center;
@@ -134,14 +134,14 @@
 }
 
 .dev-button-primary {
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
 }
 
 .dev-button-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .dev-button-primary:active:not(:disabled) {
@@ -150,13 +150,13 @@
 
 .dev-button-secondary {
   background: #4caf50;
-  color: var(--color-background-white);
+  color: var(--color-background);
 }
 
 .dev-button-secondary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .dev-button-secondary:active:not(:disabled) {
@@ -164,14 +164,14 @@
 }
 
 .dev-button-special {
-  background: var(--color-secondary-violet);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
 }
 
 .dev-button-special:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, #B388FF 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary) 0%, #B388FF 100%);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .dev-button-special:active:not(:disabled) {
@@ -179,15 +179,15 @@
 }
 
 .dev-button-outline {
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-secondary);
   border: 2px solid #E0E0E0;
 }
 
 .dev-button-outline:hover:not(:disabled) {
-  background: var(--color-light-lavender);
-  border-color: var(--color-primary-red);
-  color: var(--color-primary-red);
+  background: var(--color-background-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .dev-game {
@@ -200,7 +200,7 @@
 }
 
 .dev-hand {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 1.25em;
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-card);
@@ -211,10 +211,10 @@
 }
 
 .dev-hand.active {
-  background: linear-gradient(135deg, var(--color-light-lavender) 0%, rgba(255, 255, 255, 0.8) 100%);
-  box-shadow: 0 8px 24px rgba(164, 139, 255, 0.3);
-  border: 2px solid var(--color-secondary-violet);
-  transform: translateY(-2px);
+  background: var(--color-primary) 0%, var(--color-background-light) 100%);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  border: 2px solid var(--color-primary);
+  
 }
 
 .dev-hand.complete {
@@ -238,7 +238,7 @@
 .dev-hand-value {
   font-size: 1.25em;
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .dev-cards {
@@ -251,7 +251,7 @@
 .dev-card {
   width: 5em;
   height: 6.875em;
-  background: var(--color-background-white);
+  background: var(--color-background);
   border: 2px solid #E0E0E0;
   border-radius: var(--border-radius-button);
   display: flex;
@@ -263,12 +263,12 @@
 }
 
 .dev-card:hover {
-  transform: translateY(-2px);
+  
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .dev-card-hidden {
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-color: var(--color-text-secondary);
 }
 
@@ -284,7 +284,7 @@
 .dev-feedback {
   margin-top: 1.25em;
   padding: 1em 1.5em 1.5em 1.5em;
-  background: var(--color-background-white);
+  background: var(--color-background);
   border-radius: var(--border-radius-card);
   text-align: left;
   font-size: 1.125em;

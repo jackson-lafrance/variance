@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   submitButton: {
-    backgroundColor: '#FF004D',
+    backgroundColor: '#2563EB',
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   switchButtonText: {
-    color: '#FF004D',
+    color: '#2563EB',
     fontSize: 14,
     textAlign: 'center',
   },
@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   forgotPasswordText: {
-    color: '#FF004D',
+    color: '#2563EB',
     fontSize: 14,
     fontWeight: '600',
   },
@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
   },
   footerLink: {
     fontSize: 12,
-    color: '#FF004D',
+    color: '#2563EB',
     fontWeight: '600',
   },
   footerSeparator: {

@@ -28,7 +28,7 @@
 }
 
 .settings-section {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 2em;
   border-radius: var(--border-radius-card);
   margin-bottom: 1.5em;
@@ -38,14 +38,14 @@
 
 .settings-section:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+  
 }
 
 .settings-section h2 {
   font-size: 1.5em;
   margin-bottom: 1.5em;
   color: var(--color-text-primary);
-  border-bottom: 2px solid rgba(255, 0, 77, 0.15);
+  border-bottom: 2px solid rgba(37, 99, 235, 0.1);
   padding-bottom: 0.5em;
   font-weight: var(--font-weight-bold);
 }
@@ -71,7 +71,7 @@
   width: 1.5em;
   height: 1.5em;
   cursor: pointer;
-  accent-color: var(--color-primary-red);
+  accent-color: var(--color-primary);
 }
 
 .setting-item input[type="number"] {
@@ -88,8 +88,8 @@
 
 .setting-item input[type="number"]:focus {
   outline: none;
-  border-color: var(--color-primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .settings-actions {
@@ -100,8 +100,8 @@
 
 .settings-save-button {
   padding: 1em 2em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   font-size: 1.125em;
@@ -113,9 +113,9 @@
 }
 
 .settings-save-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .settings-save-button:active:not(:disabled) {
@@ -139,7 +139,7 @@
 }
 
 .footer-link {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   text-decoration: none;
   font-size: 0.9375em;
   font-weight: var(--font-weight-semibold);

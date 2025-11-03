@@ -14,12 +14,12 @@
 }
 
 .dashboard-header-section {
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--color-background);
+  
+  -webkit-
   padding: 1.5em 3em;
   box-shadow: var(--shadow-card);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .dashboard-user-info {
@@ -39,8 +39,8 @@
 
 .dashboard-logout-button {
   padding: 0.75em 1.5em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   cursor: pointer;
@@ -51,9 +51,9 @@
 }
 
 .dashboard-logout-button:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .dashboard-logout-button:active {
@@ -74,7 +74,7 @@
 }
 
 .stat-card {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 1.5em;
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-card);
@@ -84,7 +84,7 @@
 
 .stat-card:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+  
 }
 
 .stat-label {
@@ -107,7 +107,7 @@
 }
 
 .stat-value.loss {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .dashboard-actions {
@@ -129,15 +129,15 @@
 }
 
 .dashboard-action-button.primary {
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   box-shadow: var(--shadow-button);
 }
 
 .dashboard-action-button.primary:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .dashboard-action-button.primary:active {
@@ -146,14 +146,14 @@
 
 .dashboard-action-button.secondary {
   background: #4caf50;
-  color: var(--color-background-white);
+  color: var(--color-background);
   box-shadow: var(--shadow-button);
 }
 
 .dashboard-action-button.secondary:hover {
-  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .dashboard-action-button.secondary:active {
@@ -161,7 +161,7 @@
 }
 
 .dashboard-chart-section {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 2em;
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-card);
@@ -177,7 +177,7 @@
 }
 
 .dashboard-sessions-section {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 2em;
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-card);
@@ -205,17 +205,17 @@
 }
 
 .session-card {
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   padding: 1.5em;
   border-radius: var(--border-radius-card);
-  border: 1px solid rgba(255, 0, 77, 0.15);
+  border: 1px solid rgba(37, 99, 235, 0.1);
   box-shadow: var(--shadow-card);
   transition: all var(--transition-normal);
 }
 
 .session-card:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+  
 }
 
 .session-header {
@@ -243,7 +243,7 @@
 }
 
 .session-profit.loss {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .session-details {
@@ -271,20 +271,20 @@
 
 .session-notes {
   padding: 0.75em;
-  background: var(--color-background-white);
+  background: var(--color-background);
   border-radius: var(--border-radius-button);
   font-size: 0.9375em;
   color: var(--color-text-secondary);
   line-height: 1.5;
   margin-top: 1em;
-  border: 1px solid rgba(164, 139, 255, 0.2);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .session-delete-button {
   margin-top: 1em;
   padding: 0.5em 1em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   cursor: pointer;
@@ -296,9 +296,9 @@
 }
 
 .session-delete-button:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .session-delete-button:active {
@@ -322,7 +322,7 @@
 }
 
 .modal-content {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 2em;
   border-radius: var(--border-radius-card);
   width: 100%;
@@ -373,15 +373,15 @@
   transition: all var(--transition-fast);
   box-sizing: border-box;
   font-family: var(--font-family);
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-primary);
 }
 
 .form-field input:focus,
 .form-field textarea:focus {
   outline: none;
-  border-color: var(--color-primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .modal-help-text {
@@ -412,15 +412,15 @@
 }
 
 .modal-cancel {
-  background: var(--color-background-white);
-  color: var(--color-primary-red);
-  border: 2px solid var(--color-primary-red);
+  background: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .modal-cancel:hover {
-  background: rgba(255, 0, 77, 0.05);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: rgba(37, 99, 235, 0.1);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .modal-cancel:active {
@@ -428,14 +428,14 @@
 }
 
 .modal-submit {
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
 }
 
 .modal-submit:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .modal-submit:active {
@@ -465,15 +465,15 @@
   font-size: 1em;
   min-width: 200px;
   font-family: var(--font-family);
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-primary);
   transition: all var(--transition-fast);
 }
 
 .session-search:focus {
   outline: none;
-  border-color: var(--color-primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .session-filter,
@@ -482,7 +482,7 @@
   border: 2px solid #E0E0E0;
   border-radius: var(--border-radius-button);
   font-size: 1em;
-  background: var(--color-background-white);
+  background: var(--color-background);
   cursor: pointer;
   font-family: var(--font-family);
   color: var(--color-text-primary);
@@ -492,8 +492,8 @@
 .session-filter:focus,
 .session-sort:focus {
   outline: none;
-  border-color: var(--color-primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .date-range-filters {
@@ -508,21 +508,21 @@
   border-radius: var(--border-radius-button);
   font-size: 1em;
   font-family: var(--font-family);
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-primary);
   transition: all var(--transition-fast);
 }
 
 .date-filter:focus {
   outline: none;
-  border-color: var(--color-primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .clear-filter {
   padding: 0.75em 1.5em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   cursor: pointer;
@@ -534,9 +534,9 @@
 }
 
 .clear-filter:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .clear-filter:active {
@@ -551,8 +551,8 @@
 
 .session-edit-button {
   padding: 0.5em 1em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   cursor: pointer;
@@ -564,9 +564,9 @@
 }
 
 .session-edit-button:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .session-edit-button:active {
@@ -574,15 +574,15 @@
 }
 
 .dashboard-action-button.outline {
-  background: var(--color-background-white);
-  color: var(--color-primary-red);
-  border: 2px solid var(--color-primary-red);
+  background: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .dashboard-action-button.outline:hover {
-  background: rgba(255, 0, 77, 0.05);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: rgba(37, 99, 235, 0.1);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .dashboard-action-button.outline:active {

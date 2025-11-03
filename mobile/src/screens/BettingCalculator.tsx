@@ -294,7 +294,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: '#FF004D',
+    color: '#2563EB',
     fontWeight: '600',
   },
   title: {
@@ -318,8 +318,8 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     alignItems: 'center',
   },
   modeButtonActive: {
-    borderColor: '#2196f3',
-    backgroundColor: '#2196f3',
+    borderColor: '#2563EB',
+    backgroundColor: '#2563EB',
   },
   modeButtonText: {
     fontSize: 14,
@@ -372,8 +372,8 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     alignItems: 'center',
   },
   kellyButtonActive: {
-    borderColor: '#2196f3',
-    backgroundColor: '#2196f3',
+    borderColor: '#2563EB',
+    backgroundColor: '#2563EB',
   },
   kellyButtonText: {
     fontSize: 14,
@@ -410,7 +410,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   resultCardRecommended: {
     borderWidth: 2,
-    borderColor: '#2196f3',
+    borderColor: '#2563EB',
   },
   resultLabel: {
     fontSize: 12,

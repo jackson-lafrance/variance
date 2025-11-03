@@ -1,7 +1,7 @@
 .unified-simulation {
   flex: 1;
   padding: 1.5em;
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-radius: var(--border-radius-card);
   text-align: left;
   animation: fadeIn var(--transition-slow) ease-out;
@@ -31,7 +31,7 @@
 .unified-stat-value {
   font-size: 1.5em;
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .unified-stat-value.correct {
@@ -39,7 +39,7 @@
 }
 
 .unified-stat-value.incorrect {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .unified-controls {
@@ -63,14 +63,14 @@
 }
 
 .unified-button-primary {
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
 }
 
 .unified-button-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .unified-button-primary:active:not(:disabled) {
@@ -79,13 +79,13 @@
 
 .unified-button-secondary {
   background: #4caf50;
-  color: var(--color-background-white);
+  color: var(--color-background);
 }
 
 .unified-button-secondary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .unified-button-secondary:active:not(:disabled) {
@@ -93,14 +93,14 @@
 }
 
 .unified-button-special {
-  background: var(--color-secondary-violet);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
 }
 
 .unified-button-special:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, #B388FF 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary) 0%, #B388FF 100%);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .unified-button-special:active:not(:disabled) {
@@ -116,7 +116,7 @@
 }
 
 .unified-hand {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 1.25em;
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-card);
@@ -127,10 +127,10 @@
 }
 
 .unified-hand.active {
-  background: linear-gradient(135deg, var(--color-light-lavender) 0%, rgba(255, 255, 255, 0.8) 100%);
-  box-shadow: 0 8px 24px rgba(164, 139, 255, 0.3);
-  border: 2px solid var(--color-secondary-violet);
-  transform: translateY(-2px);
+  background: var(--color-primary) 0%, var(--color-background-light) 100%);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  border: 2px solid var(--color-primary);
+  
 }
 
 .unified-hand.complete {
@@ -154,7 +154,7 @@
 .unified-hand-value {
   font-size: 1.25em;
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .unified-cards {
@@ -167,7 +167,7 @@
 .unified-card {
   width: 5em;
   height: 6.875em;
-  background: var(--color-background-white);
+  background: var(--color-background);
   border: 2px solid #E0E0E0;
   border-radius: var(--border-radius-button);
   display: flex;
@@ -179,7 +179,7 @@
 }
 
 .unified-card:hover {
-  transform: translateY(-2px);
+  
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 

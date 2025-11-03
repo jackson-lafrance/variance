@@ -35,7 +35,7 @@ function AppNavigator() {
     <AppStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#FF004D',
+          backgroundColor: '#2563EB',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -123,7 +123,7 @@ export default function RootNavigator() {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#FF004D" />
+        <ActivityIndicator size="large" color="#2563EB" />
       </View>
     );
   }

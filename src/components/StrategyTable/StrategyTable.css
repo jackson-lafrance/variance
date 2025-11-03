@@ -14,9 +14,9 @@
 .strategy-legend {
   margin-bottom: 1.5em;
   padding: 1em;
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-radius: var(--border-radius-button);
-  border: 1px solid rgba(164, 139, 255, 0.3);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .strategy-legend h4 {
@@ -47,7 +47,7 @@
   border: 2px solid #E0E0E0;
   min-width: 2em;
   text-align: center;
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-primary);
 }
 
@@ -60,13 +60,13 @@
   overflow-x: auto;
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-card);
-  background: var(--color-background-white);
+  background: var(--color-background);
 }
 
 .strategy-grid {
   width: 100%;
   border-collapse: collapse;
-  background: var(--color-background-white);
+  background: var(--color-background);
   font-size: 0.9375em;
   font-family: var(--font-family);
 }
@@ -79,8 +79,8 @@
 }
 
 .strategy-grid thead th {
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, var(--color-primary-red) 100%);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   font-weight: var(--font-weight-bold);
   position: sticky;
   top: 0;
@@ -88,7 +88,7 @@
 }
 
 .corner-cell {
-  background: linear-gradient(135deg, var(--color-primary-red) 0%, #FF3366 100%) !important;
+  background: var(--color-primary-dark) !important;
   font-size: 0.875em;
 }
 
@@ -98,13 +98,13 @@
 }
 
 .player-hand {
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
   position: sticky;
   left: 0;
   z-index: 5;
-  border-right: 2px solid rgba(255, 0, 77, 0.2);
+  border-right: 2px solid rgba(37, 99, 235, 0.1);
 }
 
 .action-cell {
@@ -116,8 +116,8 @@
 
 .action-cell:hover {
   transform: scale(1.05);
-  background: var(--color-light-lavender);
-  box-shadow: inset 0 0 0 2px var(--color-primary-red);
+  background: var(--color-background-light);
+  box-shadow: inset 0 0 0 2px var(--color-primary);
 }
 
 @media (max-width: 48em) {

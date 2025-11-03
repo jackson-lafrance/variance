@@ -245,7 +245,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: '#FF004D',
+    color: '#2563EB',
     fontWeight: '600',
   },
   title: {
@@ -286,8 +286,8 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     borderColor: isDark ? '#444' : '#e0e0e0',
   },
   filterButtonActive: {
-    backgroundColor: '#2196f3',
-    borderColor: '#2196f3',
+    backgroundColor: '#2563EB',
+    borderColor: '#2563EB',
   },
   filterButtonText: {
     fontSize: 14,
@@ -368,7 +368,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   scoreValue: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2196f3',
+    color: '#2563EB',
     marginBottom: 4,
   },
   scoreAccuracy: {
@@ -401,7 +401,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   sessionAccuracy: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2196f3',
+    color: '#2563EB',
     marginBottom: 4,
   },
   sessionHands: {

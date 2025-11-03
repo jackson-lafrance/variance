@@ -3,15 +3,15 @@
   border: none;
   border-radius: var(--border-radius-card);
   overflow: hidden;
-  background: var(--color-background-white);
+  background: var(--color-background);
   box-shadow: var(--shadow-card);
   transition: all var(--transition-slow);
   animation: fadeIn var(--transition-slow) ease-out;
 }
 
 .collapsible-section:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .collapsible-header {
@@ -39,7 +39,7 @@
   top: 0;
   height: 100%;
   width: 4px;
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, var(--color-primary-red) 100%);
+  background: var(--color-primary);
   opacity: 0;
   transition: opacity var(--transition-normal);
   border-radius: 0 var(--border-radius-button) var(--border-radius-button) 0;
@@ -63,10 +63,10 @@
 }
 
 .collapsible-header:hover .collapsible-title {
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, var(--color-primary-red) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: var(--color-primary);
+  
+  
+  
 }
 
 .collapsible-icon {
@@ -80,13 +80,13 @@
 }
 
 .collapsible-header:hover .collapsible-icon {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   transform: scale(1.2);
 }
 
 .collapsible-header.open .collapsible-icon {
   transform: rotate(90deg);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .collapsible-content {

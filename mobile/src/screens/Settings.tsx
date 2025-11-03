@@ -222,7 +222,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: '#FF004D',
+    color: '#2563EB',
     fontWeight: '600',
   },
   title: {
@@ -290,7 +290,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     textAlign: 'center',
   },
   saveButton: {
-    backgroundColor: '#FF004D',
+    backgroundColor: '#2563EB',
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',
@@ -316,7 +316,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   footerLink: {
     fontSize: 14,
-    color: '#FF004D',
+    color: '#2563EB',
     fontWeight: '600',
   },
   footerSeparator: {

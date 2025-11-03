@@ -1,7 +1,7 @@
 .card-speed-drill {
   margin-top: 1.5em;
   padding: 1.5em;
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-radius: var(--border-radius-card);
   animation: fadeIn var(--transition-slow) ease-out;
 }
@@ -40,7 +40,7 @@
   padding: 0.75em 1.5em;
   font-size: 0.9375em;
   border: 2px solid #E0E0E0;
-  background: var(--color-background-white);
+  background: var(--color-background);
   border-radius: var(--border-radius-button);
   cursor: pointer;
   font-weight: var(--font-weight-semibold);
@@ -49,14 +49,14 @@
 }
 
 .speed-option:hover {
-  border-color: var(--color-primary-red);
-  background: var(--color-light-lavender);
+  border-color: var(--color-primary);
+  background: var(--color-background-light);
 }
 
 .speed-option.active {
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
-  border-color: var(--color-primary-red);
+  background: var(--color-primary);
+  color: var(--color-background);
+  border-color: var(--color-primary);
   box-shadow: var(--shadow-button);
 }
 
@@ -64,7 +64,7 @@
   padding: 1em 3em;
   font-size: 1.125em;
   background: #4caf50;
-  color: var(--color-background-white);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   cursor: pointer;
@@ -75,9 +75,9 @@
 }
 
 .drill-start-button:hover {
-  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .drill-start-button:active {
@@ -117,7 +117,7 @@
 }
 
 .drill-stat-value.count-value {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .drill-stat-value.good {
@@ -125,11 +125,11 @@
 }
 
 .drill-stat-value.ok {
-  color: var(--color-secondary-violet);
+  color: var(--color-primary);
 }
 
 .drill-stat-value.poor {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .drill-card-display {
@@ -143,7 +143,7 @@
 .drill-card {
   width: 7em;
   height: 10em;
-  background: var(--color-background-white);
+  background: var(--color-background);
   border: 3px solid #E0E0E0;
   border-radius: var(--border-radius-card);
   display: flex;
@@ -155,8 +155,8 @@
 }
 
 .drill-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  
+  box-shadow: var(--shadow-card);
 }
 
 @keyframes cardFlip {
@@ -220,8 +220,8 @@
 
 .drill-input:focus {
   outline: none;
-  border-color: var(--color-primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .drill-input.correct {
@@ -230,15 +230,15 @@
 }
 
 .drill-input.incorrect {
-  border-color: var(--color-primary-red);
-  background: rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  background: rgba(37, 99, 235, 0.1);
 }
 
 .drill-check-button {
   padding: 0.75em 2em;
   font-size: 1.0625em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   cursor: pointer;
@@ -249,9 +249,9 @@
 }
 
 .drill-check-button:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .drill-check-button:active {
@@ -273,16 +273,16 @@
 }
 
 .drill-feedback.incorrect {
-  background: rgba(255, 0, 77, 0.1);
-  color: var(--color-primary-red);
-  border: 1px solid var(--color-primary-red);
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
 }
 
 .drill-stop-button {
   padding: 0.75em 2em;
   font-size: 1.0625em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   cursor: pointer;
@@ -294,9 +294,9 @@
 }
 
 .drill-stop-button:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .drill-stop-button:active {
@@ -313,7 +313,7 @@
 .drill-action-button {
   padding: 0.75em 2em;
   font-size: 1em;
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-secondary);
   border: 2px solid #E0E0E0;
   border-radius: var(--border-radius-button);
@@ -324,9 +324,9 @@
 }
 
 .drill-action-button:hover {
-  background: var(--color-light-lavender);
-  border-color: var(--color-primary-red);
-  color: var(--color-primary-red);
+  background: var(--color-background-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .drill-action-button:active {

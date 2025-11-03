@@ -615,7 +615,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: '#FF004D',
+    color: '#2563EB',
     fontWeight: '600',
   },
   screenTitle: {
@@ -669,7 +669,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     borderColor: isDark ? '#444' : '#e0e0e0',
   },
   activeHand: {
-    borderColor: '#2196f3',
+    borderColor: '#2563EB',
     backgroundColor: isDark ? '#1e3a5f' : '#e3f2fd',
   },
   handLabel: {
@@ -734,7 +734,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     gap: 12,
   },
   primaryButton: {
-    backgroundColor: '#2196f3',
+    backgroundColor: '#2563EB',
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',
@@ -761,10 +761,10 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#2196f3',
+    borderColor: '#2563EB',
   },
   secondaryButtonText: {
-    color: '#2196f3',
+    color: '#2563EB',
     fontSize: 16,
     fontWeight: '600',
   },

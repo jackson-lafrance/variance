@@ -4,7 +4,7 @@
 .advanced-blackjack-simulation {
   margin-top: 1.5em;
   padding: 1.5em 0 0 0;
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-radius: var(--border-radius-card);
   text-align: left;
   animation: fadeIn var(--transition-slow) ease-out;
@@ -38,7 +38,7 @@
   font-size: 1em;
   border: 2px solid #E0E0E0;
   border-radius: var(--border-radius-button);
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-primary);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -46,13 +46,13 @@
 }
 
 .adv-bj-setting-select:hover {
-  border-color: var(--color-primary-red);
+  border-color: var(--color-primary);
 }
 
 .adv-bj-setting-select:focus {
   outline: none;
-  border-color: var(--color-primary-red);
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .adv-bj-controls {
@@ -77,8 +77,8 @@
 }
 
 .adv-bj-button:hover:not(:disabled) {
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .adv-bj-button:active:not(:disabled) {
@@ -94,42 +94,42 @@
 }
 
 .adv-bj-button-primary {
-  background-color: var(--color-primary-red);
-  color: var(--color-background-white);
+  background-color: var(--color-primary);
+  color: var(--color-background);
 }
 
 .adv-bj-button-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
+  background: var(--color-primary-dark);
 }
 
 .adv-bj-button-secondary {
   background-color: #4caf50;
-  color: var(--color-background-white);
+  color: var(--color-background);
 }
 
 .adv-bj-button-secondary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+  background: var(--color-primary);
 }
 
 .adv-bj-button-special {
-  background-color: var(--color-secondary-violet);
-  color: var(--color-background-white);
+  background-color: var(--color-primary);
+  color: var(--color-background);
 }
 
 .adv-bj-button-special:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, #B388FF 100%);
+  background: var(--color-primary) 0%, #B388FF 100%);
 }
 
 .adv-bj-button-outline {
-  background-color: var(--color-background-white);
+  background-color: var(--color-background);
   color: var(--color-text-secondary);
   border: 2px solid #E0E0E0;
 }
 
 .adv-bj-button-outline:hover:not(:disabled) {
-  background-color: var(--color-light-lavender);
-  border-color: var(--color-primary-red);
-  color: var(--color-primary-red);
+  background-color: var(--color-background-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .adv-bj-game {
@@ -142,7 +142,7 @@
 }
 
 .adv-bj-hand {
-  background: var(--color-background-white);
+  background: var(--color-background);
   border-radius: var(--border-radius-card);
   padding: 1.25em;
   box-shadow: var(--shadow-card);
@@ -153,10 +153,10 @@
 }
 
 .adv-bj-hand.active {
-  background: linear-gradient(135deg, var(--color-light-lavender) 0%, rgba(255, 255, 255, 0.8) 100%);
-  box-shadow: 0 8px 24px rgba(164, 139, 255, 0.3);
-  border: 2px solid var(--color-secondary-violet);
-  transform: translateY(-2px);
+  background: var(--color-primary) 0%, var(--color-background-light) 100%);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
+  border: 2px solid var(--color-primary);
+  
 }
 
 .adv-bj-hand.complete {
@@ -195,7 +195,7 @@
 .adv-bj-hand-value {
   font-size: 1.25em;
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .adv-bj-cards {
@@ -208,7 +208,7 @@
 .adv-bj-card {
   width: 5em;
   height: 6.875em;
-  background: var(--color-background-white);
+  background: var(--color-background);
   border: 2px solid #E0E0E0;
   border-radius: var(--border-radius-button);
   display: flex;
@@ -220,12 +220,12 @@
 }
 
 .adv-bj-card:hover {
-  transform: translateY(-2px);
+  
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .adv-bj-card-hidden {
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-color: var(--color-text-secondary);
 }
 
@@ -244,7 +244,7 @@
   font-weight: var(--font-weight-bold);
   padding: 1em 1.5em 1.5em 1.5em;
   border-radius: var(--border-radius-card);
-  background-color: var(--color-background-white);
+  background-color: var(--color-background);
   box-shadow: var(--shadow-card);
   color: var(--color-text-primary);
   animation: scaleIn var(--transition-normal) ease-out;
@@ -276,7 +276,7 @@
 .adv-bj-stat-value {
   font-size: 1.5em;
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .adv-bj-stat-value.correct {
@@ -284,7 +284,7 @@
 }
 
 .adv-bj-stat-value.incorrect {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 @keyframes statusAppear {

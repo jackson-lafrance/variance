@@ -49,10 +49,10 @@
 
 .progress-select {
   padding: 10px 14px;
-  border: 2px solid var(--color-primary-red);
+  border: 2px solid var(--color-primary);
   border-radius: var(--border-radius-button);
   font-size: 14px;
-  background-color: var(--color-background-white);
+  background-color: var(--color-background);
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: var(--font-family);
@@ -61,7 +61,7 @@
 
 .progress-select:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(255, 0, 77, 0.1);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .progress-stats-grid {
@@ -72,10 +72,10 @@
 }
 
 .progress-stat-card {
-  background-color: var(--color-background-white);
+  background-color: var(--color-background);
   padding: 20px;
   border-radius: var(--border-radius-card);
-  border: 2px solid rgba(255, 0, 77, 0.2);
+  border: 2px solid rgba(37, 99, 235, 0.1);
   text-align: center;
   box-shadow: var(--shadow-card);
   transition: all var(--transition-normal);
@@ -83,7 +83,7 @@
 }
 
 .progress-stat-card:hover {
-  transform: translateY(-2px);
+  
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
@@ -105,15 +105,15 @@
 }
 
 .progress-stat-value.negative {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
 }
 
 .progress-chart-section {
-  background-color: var(--color-background-white);
+  background-color: var(--color-background);
   padding: 30px;
   border-radius: var(--border-radius-card);
   margin-bottom: 30px;
-  border: 2px solid rgba(255, 0, 77, 0.2);
+  border: 2px solid rgba(37, 99, 235, 0.1);
   box-shadow: var(--shadow-card);
   animation: fadeIn var(--transition-slow) ease-out;
 }
@@ -133,10 +133,10 @@
 }
 
 .progress-sessions-list {
-  background-color: var(--color-background-white);
+  background-color: var(--color-background);
   padding: 30px;
   border-radius: var(--border-radius-card);
-  border: 2px solid rgba(255, 0, 77, 0.2);
+  border: 2px solid rgba(37, 99, 235, 0.1);
   box-shadow: var(--shadow-card);
   animation: fadeIn var(--transition-slow) ease-out;
 }
@@ -150,8 +150,8 @@
   grid-template-columns: 120px 150px 100px 100px 100px 100px 120px;
   gap: 10px;
   padding: 12px;
-  background-color: var(--color-light-lavender);
-  border-bottom: 2px solid var(--color-primary-red);
+  background-color: var(--color-background-light);
+  border-bottom: 2px solid var(--color-primary);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-primary);
 }
@@ -166,7 +166,7 @@
 }
 
 .progress-table-row:hover {
-  background-color: var(--color-light-lavender);
+  background-color: var(--color-background-light);
 }
 
 .progress-table-cell {
@@ -180,7 +180,7 @@
 }
 
 .progress-table-cell.incorrect {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   font-weight: var(--font-weight-semibold);
 }
 

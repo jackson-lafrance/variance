@@ -1,25 +1,22 @@
 .inline-navigation {
   display: flex;
   flex-direction: column;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: var(--color-background);
   border-radius: var(--border-radius-card);
   padding: 1.5em 2em;
   width: 35em;
   cursor: pointer;
   transition: all var(--transition-slow);
   box-shadow: var(--shadow-card);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--color-border);
   align-self: stretch;
   animation: fadeIn var(--transition-slow) ease-out;
 }
 
 .inline-navigation:hover {
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  border-color: rgba(255, 0, 77, 0.2);
-  transform: translateY(-2px);
+  background: var(--color-background-light);
+  box-shadow: var(--shadow-card);
+  border-color: var(--color-primary);
 }
 
 .nav-title {
@@ -44,14 +41,14 @@
 }
 
 .inline-navigation:hover .nav-title {
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, var(--color-primary-red) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: var(--color-primary);
+  
+  
+  
 }
 
 .inline-navigation:hover .nav-title::after {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   transform: translateY(2px);
 }
 
@@ -85,15 +82,15 @@
 }
 
 .nav-dropdown-item:hover {
-  background: var(--color-light-lavender);
-  color: var(--color-primary-red);
+  background: var(--color-background-light);
+  color: var(--color-primary);
   transform: translateX(4px);
 }
 
 .nav-dropdown-item.auth-item {
-  border-top: 1px solid rgba(255, 0, 77, 0.15);
+  border-top: 1px solid var(--color-border);
   margin-top: 0.75em;
   padding-top: 1.25em;
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   font-weight: var(--font-weight-bold);
 }

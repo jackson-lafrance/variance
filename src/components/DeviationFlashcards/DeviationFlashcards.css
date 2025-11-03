@@ -1,7 +1,7 @@
 .deviation-flashcards {
   margin-top: 1.5em;
   padding: 1.5em;
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-radius: var(--border-radius-card);
   animation: fadeIn var(--transition-slow) ease-out;
 }
@@ -28,8 +28,8 @@
 
 .shuffle-button {
   padding: 0.75em 1.5em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   cursor: pointer;
@@ -41,9 +41,9 @@
 }
 
 .shuffle-button:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .shuffle-button:active {
@@ -60,7 +60,7 @@
   max-width: 37.5em;
   min-height: 25em;
   margin: 0 auto;
-  background: var(--color-background-white);
+  background: var(--color-background);
   border-radius: var(--border-radius-card);
   padding: 2em;
   box-shadow: var(--shadow-card);
@@ -72,7 +72,7 @@
 
 .flashcard:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+  
 }
 
 .flashcard-front,
@@ -117,8 +117,8 @@
 .count-badge {
   display: inline-block;
   padding: 0.375em 0.875em;
-  background: linear-gradient(135deg, var(--color-secondary-violet) 0%, var(--color-primary-red) 100%);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border-radius: var(--border-radius-button);
   font-size: 1.75em;
   font-weight: var(--font-weight-bold);
@@ -166,8 +166,8 @@
 }
 
 .comparison-item.basic {
-  background: rgba(255, 0, 77, 0.1);
-  border: 1px solid rgba(255, 0, 77, 0.3);
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .comparison-item.deviation {
@@ -192,19 +192,19 @@
 
 .comparison-arrow {
   font-size: 2em;
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   font-weight: var(--font-weight-bold);
 }
 
 .flashcard-explanation {
   margin: 2em 0;
   padding: 1em;
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-radius: var(--border-radius-button);
   color: var(--color-text-primary);
   font-size: 0.9375em;
   line-height: 1.5;
-  border: 1px solid rgba(164, 139, 255, 0.3);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .flashcard-controls {
@@ -228,27 +228,27 @@
 }
 
 .flashcard-nav-button {
-  background: var(--color-background-white);
+  background: var(--color-background);
   color: var(--color-text-secondary);
   border: 2px solid #E0E0E0;
 }
 
 .flashcard-nav-button:hover {
-  background: var(--color-light-lavender);
-  border-color: var(--color-primary-red);
-  color: var(--color-primary-red);
+  background: var(--color-background-light);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .flashcard-flip-button {
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   box-shadow: var(--shadow-button);
 }
 
 .flashcard-flip-button:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .flashcard-flip-button:active {

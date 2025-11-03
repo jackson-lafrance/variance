@@ -113,7 +113,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   backButtonText: {
     fontSize: 16,
-    color: '#FF004D',
+    color: '#2563EB',
     fontWeight: '600',
   },
   title: {
@@ -134,7 +134,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   heading: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#FF004D',
+    color: '#2563EB',
     marginBottom: 12,
   },
   subHeading: {
@@ -159,7 +159,7 @@ const getStyles = (isDark: boolean) => StyleSheet.create({
   },
   link: {
     fontSize: 16,
-    color: '#FF004D',
+    color: '#2563EB',
     fontWeight: '600',
     marginTop: 8,
   },

@@ -10,7 +10,7 @@
 }
 
 .terms-content {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 3em;
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-card);
@@ -38,7 +38,7 @@
 .terms-content h2 {
   font-size: 1.5em;
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   margin-bottom: 1em;
   margin-top: 1.5em;
 }
@@ -76,7 +76,7 @@
 }
 
 .terms-content a {
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   text-decoration: none;
   transition: all var(--transition-fast);
 }
@@ -94,8 +94,8 @@
 .back-link {
   display: inline-block;
   padding: 0.875em 2em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border-radius: var(--border-radius-button);
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
@@ -104,9 +104,9 @@
 }
 
 .back-link:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
   text-decoration: none;
 }
 

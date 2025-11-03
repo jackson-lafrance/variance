@@ -4,11 +4,11 @@
   align-items: center;
   justify-content: center;
   padding: 2em;
-  background: linear-gradient(135deg, var(--color-gradient-start) 0%, var(--color-gradient-end) 100%);
+  background: var(--color-primary) 0%, var(--color-gradient-end) 100%);
 }
 
 .error-boundary-content {
-  background: var(--color-background-white);
+  background: var(--color-background);
   padding: 3em;
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-card);
@@ -20,7 +20,7 @@
 .error-boundary-title {
   font-size: 2em;
   font-weight: var(--font-weight-bold);
-  color: var(--color-primary-red);
+  color: var(--color-primary);
   margin-bottom: 1em;
 }
 
@@ -35,9 +35,9 @@
   text-align: left;
   margin: 2em 0;
   padding: 1em;
-  background: var(--color-light-lavender);
+  background: var(--color-background-light);
   border-radius: var(--border-radius-button);
-  border: 1px solid rgba(255, 0, 77, 0.15);
+  border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .error-boundary-summary {
@@ -65,8 +65,8 @@
 
 .error-boundary-button {
   padding: 0.875em 2em;
-  background: var(--color-primary-red);
-  color: var(--color-background-white);
+  background: var(--color-primary);
+  color: var(--color-background);
   border: none;
   border-radius: var(--border-radius-button);
   font-size: 1em;
@@ -78,9 +78,9 @@
 }
 
 .error-boundary-button:hover {
-  background: linear-gradient(135deg, #FF004D 0%, #FF3366 100%);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .error-boundary-button:active {
@@ -89,9 +89,9 @@
 
 .error-boundary-link {
   padding: 0.875em 2em;
-  background: var(--color-background-white);
-  color: var(--color-primary-red);
-  border: 2px solid var(--color-primary-red);
+  background: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
   border-radius: var(--border-radius-button);
   font-size: 1em;
   font-weight: var(--font-weight-semibold);
@@ -102,9 +102,9 @@
 }
 
 .error-boundary-link:hover {
-  background: rgba(255, 0, 77, 0.05);
-  box-shadow: var(--shadow-button-hover);
-  transform: translateY(-2px);
+  background: rgba(37, 99, 235, 0.1);
+  box-shadow: var(--shadow-card);
+  
 }
 
 .error-boundary-link:active {
