@@ -232,21 +232,21 @@ export default function Dashboard() {
     }
   };
 
-  const handleAddBankroll = async (e: React.FormEvent) => {
+  const handleSetBankroll = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!currentUser || !bankrollToAdd) return;
 
     const amount = parseFloat(bankrollToAdd);
 
-    if (isNaN(amount) || amount <= 0) {
-      alert('Please enter a valid positive amount');
+    if (isNaN(amount) || amount < 0) {
+      alert('Please enter a valid non-negative amount');
       return;
     }
 
     try {
       const newStats = {
         ...stats,
-        totalBankroll: stats.totalBankroll + amount
+        totalBankroll: amount
       };
 
       await setDoc(doc(db, 'userStats', currentUser.uid), newStats);
@@ -254,7 +254,7 @@ export default function Dashboard() {
       setBankrollToAdd('');
       setShowAddBankroll(false);
     } catch (error) {
-      alert('Failed to add bankroll. Please check your connection and try again.');
+      alert('Failed to set bankroll. Please check your connection and try again.');
     }
   };
 
@@ -495,7 +495,7 @@ export default function Dashboard() {
             + Add Casino Session
           </button>
           <button onClick={() => setShowAddBankroll(true)} className="dashboard-action-button secondary">
-            💰 Add to Bankroll
+            💰 Set Bankroll
           </button>
           {sessions.length > 0 && (
             <>
@@ -764,28 +764,28 @@ export default function Dashboard() {
       {showAddBankroll && (
         <div className="modal-overlay" onClick={() => setShowAddBankroll(false)}>
           <div className="modal-content small" onClick={(e) => e.stopPropagation()}>
-            <h2>Add to Bankroll</h2>
-            <form onSubmit={handleAddBankroll}>
+            <h2>Set Bankroll</h2>
+            <form onSubmit={handleSetBankroll}>
               <div className="form-field">
-                <label>Amount to Add ($)</label>
+                <label>Bankroll Amount ($)</label>
                 <input
                   type="number"
                   step="0.01"
                   value={bankrollToAdd}
                   onChange={(e) => setBankrollToAdd(e.target.value)}
-                  placeholder="500.00"
+                  placeholder="10000.00"
                   required
                 />
               </div>
               <p className="modal-help-text">
-                This increases your total bankroll investment. Use this when you add more money to your card counting fund.
+                Set your total bankroll to this amount. This will replace your current bankroll value.
               </p>
               <div className="modal-actions">
                 <button type="button" onClick={() => setShowAddBankroll(false)} className="modal-cancel">
                   Cancel
                 </button>
                 <button type="submit" className="modal-submit">
-                  Add Bankroll
+                  Set Bankroll
                 </button>
               </div>
             </form>
