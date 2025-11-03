@@ -1,4 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import { saveHighScore, SimulationTypes } from '../../utils/highScores';
+import { savePracticeSession } from '../../utils/practiceSessions';
 import './BasicStrategySimulation.css';
 
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -132,6 +135,7 @@ const getCorrectAction = (playerHand: Card[], dealerUpcard: Card, canDouble: boo
 };
 
 export default function BasicStrategySimulation() {
+  const { currentUser } = useAuth();
   const [playerHands, setPlayerHands] = useState<Card[][]>([]);
   const [activeHandIndex, setActiveHandIndex] = useState(0);
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
@@ -144,6 +148,8 @@ export default function BasicStrategySimulation() {
   const [wasCorrectMove, setWasCorrectMove] = useState<boolean>(true);
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
+  const [handsPlayed, setHandsPlayed] = useState(0);
+  const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   const drawCard = (): Card => {
@@ -163,6 +169,9 @@ export default function BasicStrategySimulation() {
   };
 
   const startGame = async () => {
+    if (!sessionStartTime) {
+      setSessionStartTime(Date.now());
+    }
     setGameStarted(true);
     setGameOver(false);
     setFeedback('');
@@ -365,8 +374,7 @@ export default function BasicStrategySimulation() {
   };
 
   const finishAllHands = async () => {
-    setGameOver(true);
-    
+    setHandsPlayed(prev => prev + 1);
     setDealerRevealing(true);
     await new Promise(resolve => setTimeout(resolve, 800));
 
@@ -411,6 +419,7 @@ export default function BasicStrategySimulation() {
 
     const correctnessPrefix = wasCorrectMove ? '✓ Correct! ' : `✗ Wrong! Should ${correctAction}. `;
     setFeedback(correctnessPrefix + overallFeedback);
+    setGameOver(true);
   };
 
   const renderCard = (card: Card, index: number) => (
@@ -448,6 +457,55 @@ export default function BasicStrategySimulation() {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [gameStarted, gameOver, activeHandIndex, handComplete, canDouble, canSplit]);
 
+  const handleSaveSession = async () => {
+    if (!currentUser || (correctCount + incorrectCount === 0)) return;
+    
+    const accuracy = Math.round((correctCount / (correctCount + incorrectCount)) * 100);
+    const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
+    const score = correctCount * 100 - incorrectCount * 50; // Simple scoring system
+
+    try {
+      await saveHighScore(
+        currentUser.uid,
+        SimulationTypes.BASIC_STRATEGY,
+        score,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed
+      );
+
+      await savePracticeSession(
+        currentUser.uid,
+        SimulationTypes.BASIC_STRATEGY,
+        accuracy,
+        correctCount,
+        incorrectCount,
+        handsPlayed,
+        duration
+      );
+
+      alert('Session saved successfully!');
+    } catch (error) {
+      console.error('Error saving session:', error);
+      alert('Failed to save session. Please try again.');
+    }
+  };
+
+  const handleReset = () => {
+    setCorrectCount(0);
+    setIncorrectCount(0);
+    setHandsPlayed(0);
+    setSessionStartTime(null);
+    setGameStarted(false);
+    setGameOver(false);
+    setFeedback('');
+  };
+
+  const accuracy = correctCount + incorrectCount > 0 
+    ? Math.round((correctCount / (correctCount + incorrectCount)) * 100) 
+    : 0;
+
   return (
     <div className="basic-strategy-simulation">
       <div className="bs-stats">
@@ -462,10 +520,12 @@ export default function BasicStrategySimulation() {
         <div className="bs-stat">
           <span className="bs-stat-label">Accuracy:</span>
           <span className="bs-stat-value">
-            {correctCount + incorrectCount > 0 
-              ? `${Math.round((correctCount / (correctCount + incorrectCount)) * 100)}%` 
-              : 'N/A'}
+            {accuracy}%
           </span>
+        </div>
+        <div className="bs-stat">
+          <span className="bs-stat-label">Hands Played:</span>
+          <span className="bs-stat-value">{handsPlayed}</span>
         </div>
       </div>
 
@@ -499,6 +559,16 @@ export default function BasicStrategySimulation() {
             <button className="bs-button bs-button-outline" onClick={startGame}>
               New Hand
             </button>
+            {(correctCount + incorrectCount > 0) && (
+              <>
+                <button className="bs-button bs-button-outline" onClick={handleSaveSession}>
+                  Save Session
+                </button>
+                <button className="bs-button bs-button-outline" onClick={handleReset}>
+                  Reset Stats
+                </button>
+              </>
+            )}
           </>
         )}
       </div>
