@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { CollapsibleSection } from '../components/CollapsibleSection';
+import { StrategyTable } from '../components/StrategyTable';
+import { strategyTables } from '../data/strategyTables';
 
 export default function BlackjackBasics() {
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>({});
@@ -87,13 +89,48 @@ export default function BlackjackBasics() {
             It is not a guarantee of winning, but it will help you maximize your odds and minimize the house edge.
           </Text>
           <Text style={styles.paragraph}>
-            Study the basic strategy tables and practice them using the simulation. Once you are comfortable
+            Study the basic strategy tables below. Once you are comfortable
             with the basic strategy, you can navigate to other sections to start taking the advantage from the casino!
           </Text>
 
-          <Text style={styles.noteText}>
-            Note: Full strategy tables and practice simulations are available in the web version.
-          </Text>
+          <CollapsibleSection
+            title="Hard Totals (No Aces or Aces counted as 1)"
+            expanded={expandedSections.hardTotals}
+            onToggle={() => toggleSection('hardTotals')}
+          >
+            <StrategyTable
+              title=""
+              legend={strategyTables.hard_totals.legend}
+              table={strategyTables.hard_totals.table}
+              rowLabel="total"
+            />
+          </CollapsibleSection>
+
+          <CollapsibleSection
+            title="Soft Totals (Hands with an Ace counted as 11)"
+            expanded={expandedSections.softTotals}
+            onToggle={() => toggleSection('softTotals')}
+          >
+            <StrategyTable
+              title=""
+              legend={strategyTables.soft_totals.legend}
+              table={strategyTables.soft_totals.table}
+              rowLabel="hand"
+            />
+          </CollapsibleSection>
+
+          <CollapsibleSection
+            title="Pair Splitting"
+            expanded={expandedSections.pairs}
+            onToggle={() => toggleSection('pairs')}
+          >
+            <StrategyTable
+              title=""
+              legend={strategyTables.pair_splitting.legend}
+              table={strategyTables.pair_splitting.table}
+              rowLabel="hand"
+            />
+          </CollapsibleSection>
         </CollapsibleSection>
       </ScrollView>
     </SafeAreaView>
