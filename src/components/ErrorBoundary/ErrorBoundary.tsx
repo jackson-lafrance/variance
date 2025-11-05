@@ -34,7 +34,7 @@ export default class ErrorBoundary extends Component<Props, State> {
       errorInfo,
     });
 
-    // TODO: Send error to error tracking service (e.g., Sentry)
+    // Future: Integrate error tracking service (e.g., Sentry)
     // Sentry.captureException(error, { contexts: { react: { componentStack: errorInfo.componentStack } } });
   }
 
