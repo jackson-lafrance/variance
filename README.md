@@ -66,7 +66,7 @@ The app uses Firebase for:
 - Firestore database for session tracking
 - Real-time statistics and bankroll management
 
-See FIREBASE_SETUP.md for configuration instructions.
+See `PROJECT_SUMMARY.md` for detailed architecture and setup information.
 
 ## Learning Path
 
