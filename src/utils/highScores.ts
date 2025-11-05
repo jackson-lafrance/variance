@@ -78,7 +78,7 @@ export async function getUserHighScores(
     return scores;
   } catch (error: any) {
     if (error.code === 'failed-precondition') {
-      console.log('Firestore index needed for high scores query');
+      // Firestore index needed for high scores query
       return [];
     }
     console.error('Error loading high scores:', error);

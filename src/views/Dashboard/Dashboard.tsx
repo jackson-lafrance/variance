@@ -114,7 +114,7 @@ export default function Dashboard() {
       } catch (queryError: any) {
         // If orderBy fails (missing index), try without orderBy and sort in memory
         if (queryError.code === 'failed-precondition') {
-          console.log('Firestore index needed - loading without orderBy');
+          // Firestore index needed - loading without orderBy and sorting in memory
           const sessionsQuery = query(
             collection(db, 'casinoSessions'),
             where('userId', '==', currentUser.uid)
