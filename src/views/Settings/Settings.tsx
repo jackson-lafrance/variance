@@ -7,7 +7,6 @@ import Header from '../../components/Header';
 import './Settings.css';
 
 interface UserSettings {
-  darkMode: boolean;
   defaultDeckCount: number;
   defaultPenetration: number;
   enableNotifications: boolean;
@@ -19,7 +18,6 @@ export default function Settings() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
   const [settings, setSettings] = useState<UserSettings>({
-    darkMode: localStorage.getItem('darkMode') === 'true',
     defaultDeckCount: 6,
     defaultPenetration: 75,
     enableNotifications: false,
@@ -56,16 +54,6 @@ export default function Settings() {
     setSaving(true);
     try {
       await setDoc(doc(db, 'userSettings', currentUser.uid), settings);
-      
-      // Apply dark mode immediately
-      if (settings.darkMode) {
-        document.body.classList.add('dark-mode');
-        localStorage.setItem('darkMode', 'true');
-      } else {
-        document.body.classList.remove('dark-mode');
-        localStorage.setItem('darkMode', 'false');
-      }
-      
       alert('Settings saved successfully!');
     } catch (error) {
       console.error('Error saving settings:', error);
@@ -93,20 +81,6 @@ export default function Settings() {
       <Header />
       <div className="settings-content">
         <h1>Settings</h1>
-
-        <div className="settings-section">
-          <h2>Appearance</h2>
-          <div className="setting-item">
-            <label>
-              <input
-                type="checkbox"
-                checked={settings.darkMode}
-                onChange={(e) => updateSetting('darkMode', e.target.checked)}
-              />
-              Dark Mode
-            </label>
-          </div>
-        </div>
 
         <div className="settings-section">
           <h2>Simulation Defaults</h2>

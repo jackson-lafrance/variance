@@ -34,22 +34,6 @@ export default function Header() {
               Sign In
             </button>
           )}
-          {!isDashboard && currentUser && (
-            <button
-              className="header-action-button"
-              onClick={() => navigate('/dashboard')}
-            >
-              Dashboard
-            </button>
-          )}
-          {currentUser && (
-            <button
-              className="header-action-button"
-              onClick={() => navigate('/settings')}
-            >
-              Settings
-            </button>
-          )}
           {currentUser && (
             <button
               className="header-action-button"
