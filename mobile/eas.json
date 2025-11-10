@@ -15,7 +15,8 @@
       "ios": {
         "simulator": false,
         "buildConfiguration": "Release"
-      }
+      },
+      "credentialsSource": "auto"
     },
     "production": {
       "distribution": "store",
