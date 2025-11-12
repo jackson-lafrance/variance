@@ -10,7 +10,7 @@
         "simulator": false,
         "buildConfiguration": "Debug"
       },
-      "credentialsSource": "local"
+      "credentialsSource": "remote"
     },
     "preview": {
       "distribution": "internal",
@@ -18,7 +18,7 @@
         "simulator": false,
         "buildConfiguration": "Release"
       },
-      "credentialsSource": "local"
+      "credentialsSource": "remote"
     },
     "production": {
       "distribution": "store",
