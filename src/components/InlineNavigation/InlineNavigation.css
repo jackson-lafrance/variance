@@ -57,17 +57,50 @@
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height var(--transition-slow), 
+  transition: max-height var(--transition-slow),
               opacity var(--transition-normal),
               margin-top var(--transition-slow);
   margin-top: 0;
 }
 
 .inline-navigation:hover .nav-dropdown {
-  max-height: 25em;
+  max-height: 60em;
   opacity: 1;
   margin-top: 1em;
 }
+
+/* --- Section groups --- */
+
+.nav-section {
+  margin-bottom: 0.25em;
+}
+
+.nav-section-header {
+  padding: 1em 1.25em;
+  font-size: 1.25em;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  user-select: none;
+  cursor: default;
+}
+
+.nav-section-items {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease-out, opacity 0.25s ease-out;
+}
+
+.nav-section-items.open {
+  max-height: 20em;
+  opacity: 1;
+}
+
+.nav-section:hover .nav-section-header {
+  color: var(--color-primary);
+}
+
+/* --- Dropdown items --- */
 
 .nav-dropdown-item {
   padding: 1em 1.25em;
@@ -90,7 +123,7 @@
 
 .nav-dropdown-item.auth-item {
   border-top: 1px solid var(--color-border);
-  margin-top: 0.75em;
+  margin-top: 0.5em;
   padding-top: 1.25em;
   color: var(--color-primary);
   font-weight: var(--font-weight-bold);

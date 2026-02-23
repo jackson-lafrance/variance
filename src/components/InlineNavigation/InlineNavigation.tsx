@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import './InlineNavigation.css';
@@ -8,78 +8,124 @@ interface Page {
   title: string;
 }
 
-const pages: Page[] = [
-  { path: '/', title: 'Blackjack Basics' },
-  { path: '/counting', title: 'Card Counting' },
-  { path: '/simulations', title: 'Simulations' },
-  { path: '/bankroll', title: 'Bankroll Management' },
-  { path: '/advanced', title: 'Advanced Techniques' },
-  { path: '/progress', title: 'Progress Tracking' },
-  { path: '/betting', title: 'Betting Calculator' },
-  { path: '/risk', title: 'Risk Calculator' },
+interface NavSection {
+  label: string;
+  pages: Page[];
+}
+
+const sections: NavSection[] = [
+  {
+    label: 'Learn',
+    pages: [
+      { path: '/', title: 'Blackjack Basics' },
+      { path: '/counting', title: 'Card Counting' },
+      { path: '/advanced', title: 'Advanced Techniques' },
+      { path: '/bankroll', title: 'Bankroll Management' },
+    ],
+  },
+  {
+    label: 'Practice',
+    pages: [
+      { path: '/simulations', title: 'Simulations' },
+      { path: '/betting', title: 'Betting Calculator' },
+      { path: '/risk', title: 'Risk Calculator' },
+      { path: '/progress', title: 'Progress Tracking' },
+    ],
+  },
 ];
+
+const allPages = sections.flatMap((s) => s.pages);
 
 export default function InlineNavigation() {
   const location = useLocation();
   const navigate = useNavigate();
   const { currentUser } = useAuth();
 
-  const currentPage = pages.find(page => page.path === location.pathname);
+  const currentPage = allPages.find((p) => p.path === location.pathname);
+  const specialTitles: Record<string, string> = {
+    '/dashboard': 'Dashboard',
+    '/auth': 'Sign In',
+    '/settings': 'Settings',
+  };
+  const currentTitle =
+    specialTitles[location.pathname] ?? currentPage?.title ?? 'Blackjack Basics';
+
   const isDashboard = location.pathname === '/dashboard';
-  const isAuth = location.pathname === '/auth';
   const isSettings = location.pathname === '/settings';
-  const isProgress = location.pathname === '/progress';
-  const isBetting = location.pathname === '/betting';
-  const isRisk = location.pathname === '/risk';
-  const currentTitle = isDashboard ? 'Dashboard' 
-    : isAuth ? 'Sign In' 
-    : isSettings ? 'Settings'
-    : isProgress ? 'Progress Tracking'
-    : isBetting ? 'Betting Calculator'
-    : isRisk ? 'Risk Calculator'
-    : (currentPage ? currentPage.title : 'Blackjack Basics');
+  const isAuth = location.pathname === '/auth';
+
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set());
 
   const handleNavigate = (path: string) => {
     navigate(path);
   };
 
-  const otherPages = pages.filter(page => page.path !== location.pathname && page.path !== '/dashboard');
+  const handleSectionEnter = useCallback((label: string) => {
+    setOpenSections((prev) => new Set(prev).add(label));
+  }, []);
+
+  const handleNavLeave = useCallback(() => {
+    setOpenSections(new Set());
+  }, []);
 
   return (
-    <div className="inline-navigation">
+    <div className="inline-navigation" onMouseLeave={handleNavLeave}>
       <h1 className="nav-title">{currentTitle}</h1>
       <div className="nav-dropdown">
-        {otherPages.map((page) => (
-          <div
-            key={page.path}
-            className="nav-dropdown-item"
-            onClick={() => handleNavigate(page.path)}
-          >
-            {page.title}
-          </div>
-        ))}
+        {sections.map((section) => {
+          const visiblePages = section.pages.filter(
+            (p) => p.path !== location.pathname
+          );
+          if (visiblePages.length === 0) return null;
+
+          const isOpen = openSections.has(section.label);
+
+          return (
+            <div key={section.label} className="nav-section" onMouseEnter={() => handleSectionEnter(section.label)}>
+              <div className="nav-section-header">{section.label}</div>
+              <div className={`nav-section-items ${isOpen ? 'open' : ''}`}>
+                {visiblePages.map((page) => (
+                  <div
+                    key={page.path}
+                    className="nav-dropdown-item"
+                    onClick={() => handleNavigate(page.path)}
+                  >
+                    {page.title}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+
         {currentUser && !isDashboard && (
-          <div
-            className="nav-dropdown-item auth-item"
-            onClick={() => handleNavigate('/dashboard')}
-          >
-            Dashboard
+          <div className="nav-section">
+            <div
+              className="nav-dropdown-item auth-item"
+              onClick={() => handleNavigate('/dashboard')}
+            >
+              Dashboard
+            </div>
           </div>
         )}
         {currentUser && !isSettings && (
-          <div
-            className="nav-dropdown-item auth-item"
-            onClick={() => handleNavigate('/settings')}
-          >
-            Settings
+          <div className="nav-section">
+            <div
+              className="nav-dropdown-item auth-item"
+              onClick={() => handleNavigate('/settings')}
+            >
+              Settings
+            </div>
           </div>
         )}
         {!isAuth && !currentUser && (
-          <div
-            className="nav-dropdown-item auth-item"
-            onClick={() => handleNavigate('/auth')}
-          >
-            Sign In
+          <div className="nav-section">
+            <div
+              className="nav-dropdown-item auth-item"
+              onClick={() => handleNavigate('/auth')}
+            >
+              Sign In
+            </div>
           </div>
         )}
       </div>
