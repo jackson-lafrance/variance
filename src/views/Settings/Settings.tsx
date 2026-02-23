@@ -9,8 +9,6 @@ import './Settings.css';
 interface UserSettings {
   defaultDeckCount: number;
   defaultPenetration: number;
-  enableNotifications: boolean;
-  practiceReminders: boolean;
   autoSaveScores: boolean;
 }
 
@@ -20,8 +18,6 @@ export default function Settings() {
   const [settings, setSettings] = useState<UserSettings>({
     defaultDeckCount: 6,
     defaultPenetration: 75,
-    enableNotifications: false,
-    practiceReminders: false,
     autoSaveScores: true,
   });
   const [loading, setLoading] = useState(true);
@@ -120,31 +116,6 @@ export default function Settings() {
                 onChange={(e) => updateSetting('autoSaveScores', e.target.checked)}
               />
               Automatically save high scores
-            </label>
-          </div>
-        </div>
-
-        <div className="settings-section">
-          <h2>Notifications</h2>
-          <div className="setting-item">
-            <label>
-              <input
-                type="checkbox"
-                checked={settings.enableNotifications}
-                onChange={(e) => updateSetting('enableNotifications', e.target.checked)}
-              />
-              Enable notifications
-            </label>
-          </div>
-          <div className="setting-item">
-            <label>
-              <input
-                type="checkbox"
-                checked={settings.practiceReminders}
-                onChange={(e) => updateSetting('practiceReminders', e.target.checked)}
-                disabled={!settings.enableNotifications}
-              />
-              Practice reminders
             </label>
           </div>
         </div>
