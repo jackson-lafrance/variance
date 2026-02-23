@@ -207,6 +207,46 @@
   font-weight: var(--font-weight-semibold);
 }
 
+.betting-spread-table-wrapper {
+  overflow-x: auto;
+}
+
+.betting-spread-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.betting-spread-table th,
+.betting-spread-table td {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+.betting-spread-table th {
+  font-weight: var(--font-weight-semibold);
+  color: inherit;
+  opacity: 0.6;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.betting-spread-table td {
+  color: inherit;
+  font-weight: var(--font-weight-medium);
+}
+
+.betting-spread-table tr.positive-count td {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.betting-spread-table tbody tr:hover {
+  background-color: var(--color-background-light);
+}
+
 @media (max-width: 768px) {
   .betting-results-grid {
     grid-template-columns: 1fr;

@@ -9,6 +9,16 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     static: './dist',
+    client: {
+      overlay: {
+        runtimeErrors: (error) => {
+          if (error?.message === 'The user aborted a request.' || error?.name === 'AbortError') {
+            return false;
+          }
+          return true;
+        },
+      },
+    },
   },
   plugins: [
     new webpack.DefinePlugin({

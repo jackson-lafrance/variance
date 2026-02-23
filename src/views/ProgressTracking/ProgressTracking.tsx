@@ -14,30 +14,39 @@ export default function ProgressTracking() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (currentUser) {
-      loadData();
-    }
-  }, [currentUser, selectedSimulation]);
-
-  const loadData = async () => {
     if (!currentUser) return;
-    setLoading(true);
-    try {
-      const sessions = selectedSimulation === 'all'
-        ? await getUserPracticeSessions(currentUser.uid)
-        : await getUserPracticeSessions(currentUser.uid, selectedSimulation);
-      const scores = selectedSimulation === 'all'
-        ? await getUserHighScores(currentUser.uid)
-        : await getUserHighScores(currentUser.uid, selectedSimulation);
-      
-      setPracticeSessions(sessions);
-      setHighScores(scores);
-    } catch (error) {
-      console.error('Error loading progress data:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+
+    let cancelled = false;
+
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const sessions = selectedSimulation === 'all'
+          ? await getUserPracticeSessions(currentUser.uid)
+          : await getUserPracticeSessions(currentUser.uid, selectedSimulation);
+        const scores = selectedSimulation === 'all'
+          ? await getUserHighScores(currentUser.uid)
+          : await getUserHighScores(currentUser.uid, selectedSimulation);
+
+        if (!cancelled) {
+          setPracticeSessions(sessions);
+          setHighScores(scores);
+        }
+      } catch (error: any) {
+        if (!cancelled && error?.name !== 'AbortError' && error?.message !== 'The user aborted a request.') {
+          console.error('Error loading progress data:', error);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadData();
+
+    return () => { cancelled = true; };
+  }, [currentUser, selectedSimulation]);
 
   const formatDate = (timestamp: number) => {
     return new Date(timestamp).toLocaleDateString();
