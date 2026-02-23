@@ -70,39 +70,28 @@ export default function Dashboard() {
   const [notes, setNotes] = useState('');
   const [bankrollToAdd, setBankrollToAdd] = useState('');
 
-  useEffect(() => {
-    if (authLoading) return;
-    
-    if (!currentUser) {
-      navigate('/');
-      return;
-    }
-
-    loadData();
-  }, [currentUser, authLoading]);
-
-  const loadData = async () => {
+  const loadData = async (cancelled?: () => boolean) => {
     if (!currentUser) return;
 
     try {
       setLoading(true);
       
-      // Load user stats
       const statsDoc = await getDoc(doc(db, 'userStats', currentUser.uid));
+      if (cancelled?.()) return;
+
       if (statsDoc.exists()) {
         setStats(statsDoc.data() as UserStats);
       } else {
-        // Initialize stats if they don't exist
         await setDoc(doc(db, 'userStats', currentUser.uid), {
           totalBankroll: 0,
           totalProfit: 0,
           totalSessions: 0,
           totalHours: 0
         });
+        if (cancelled?.()) return;
         setStats({ totalBankroll: 0, totalProfit: 0, totalSessions: 0, totalHours: 0 });
       }
 
-      // Load sessions - try with orderBy first, fallback to without if index missing
       let sessionsSnapshot;
       try {
         const sessionsQuery = query(
@@ -112,9 +101,7 @@ export default function Dashboard() {
         );
         sessionsSnapshot = await getDocs(sessionsQuery);
       } catch (queryError: any) {
-        // If orderBy fails (missing index), try without orderBy and sort in memory
         if (queryError.code === 'failed-precondition') {
-          // Firestore index needed - loading without orderBy and sorting in memory
           const sessionsQuery = query(
             collection(db, 'casinoSessions'),
             where('userId', '==', currentUser.uid)
@@ -124,28 +111,46 @@ export default function Dashboard() {
           throw queryError;
         }
       }
+
+      if (cancelled?.()) return;
       
       const loadedSessions: CasinoSession[] = [];
       sessionsSnapshot.forEach((doc) => {
         loadedSessions.push({ id: doc.id, ...doc.data() } as CasinoSession);
       });
       
-      // Sort by timestamp descending if we don't have orderBy
       loadedSessions.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
       
       setSessions(loadedSessions);
     } catch (error: any) {
+      if (cancelled?.()) return;
       console.error('Dashboard load error:', error);
       if (error.code === 'permission-denied') {
         alert('Permission denied. Please check your Firebase security rules.');
-      } else {
+      } else if (error.name !== 'AbortError' && error.message !== 'The user aborted a request.') {
         alert('Failed to load dashboard data. Please refresh the page.');
       }
       setSessions([]);
     } finally {
-      setLoading(false);
+      if (!cancelled?.()) {
+        setLoading(false);
+      }
     }
   };
+
+  useEffect(() => {
+    if (authLoading) return;
+    
+    if (!currentUser) {
+      navigate('/');
+      return;
+    }
+
+    let isCancelled = false;
+    loadData(() => isCancelled);
+
+    return () => { isCancelled = true; };
+  }, [currentUser, authLoading]);
 
   const handleAddSession = async (e: React.FormEvent) => {
     e.preventDefault();
