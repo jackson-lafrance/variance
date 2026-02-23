@@ -15,7 +15,7 @@ import {
   updateDoc
 } from 'firebase/firestore';
 import { db } from '../../firebase/config';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Header from '../../components/Header';
 import { calculateAdvancedStats, exportToCSV, exportToJSON } from '../../utils/dashboardUtils';
 import './Dashboard.css';
@@ -403,28 +403,32 @@ export default function Dashboard() {
       return a.casino.localeCompare(b.casino);
     });
 
-  // Prepare chart data
-  const chartData = sessions
-    .slice()
-    .reverse()
-    .reduce((acc, session, index) => {
-      const prevTotal = index > 0 ? acc[index - 1].total : (stats.totalBankroll - stats.totalProfit);
-      acc.push({
-        date: new Date(session.timestamp).toLocaleDateString(),
-        total: prevTotal + session.profit,
-        profit: session.profit
-      });
-      return acc;
-    }, [] as any[]);
+  // Sort sessions chronologically (oldest first) for charts
+  const chronologicalSessions = sessions.slice().sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
 
-  // Profit trend chart data
-  const profitChartData = sessions
-    .slice()
-    .reverse()
-    .map(session => ({
+  // Bankroll over time — build from the first session's starting bankroll
+  const chartData = chronologicalSessions.reduce((acc, session, index) => {
+    const startingPoint = index === 0 ? session.startingBankroll : acc[index - 1].total;
+    acc.push({
       date: new Date(session.timestamp).toLocaleDateString(),
-      profit: session.profit
-    }));
+      total: startingPoint + session.profit,
+    });
+    return acc;
+  }, [] as { date: string; total: number }[]);
+
+  // Per-session profit/loss by date
+  const profitChartData = chronologicalSessions.map((session, i) => {
+    const dateStr = new Date(session.timestamp).toLocaleDateString();
+    const dupeCount = chronologicalSessions.slice(0, i).filter(
+      s => new Date(s.timestamp).toLocaleDateString() === dateStr
+    ).length;
+    return {
+      label: dupeCount > 0 ? `${dateStr} (${dupeCount + 1})` : dateStr,
+      date: dateStr,
+      casino: session.casino,
+      profit: session.profit,
+    };
+  });
 
   if (loading || authLoading) {
     return <div className="dashboard-loading">Loading...</div>;
@@ -468,7 +472,7 @@ export default function Dashboard() {
               <div className="stat-card">
                 <div className="stat-label">Avg Hourly Rate</div>
                 <div className={`stat-value ${advancedStats.avgHourlyRate >= 0 ? 'profit' : 'loss'}`}>
-                  ${advancedStats.avgHourlyRate >= 0 ? '+' : ''}${advancedStats.avgHourlyRate.toFixed(2)}/hr
+                  {advancedStats.avgHourlyRate >= 0 ? '+' : ''}${advancedStats.avgHourlyRate.toFixed(2)}/hr
                 </div>
               </div>
               <div className="stat-card">
@@ -534,11 +538,20 @@ export default function Dashboard() {
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={profitChartData}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="date" />
+                  <XAxis dataKey="label" />
                   <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="profit" fill="#4caf50" name="Profit" />
+                  <Tooltip
+                    labelFormatter={(_label, payload) => {
+                      const entry = payload?.[0]?.payload;
+                      return entry ? `${entry.date} — ${entry.casino}` : _label;
+                    }}
+                    formatter={(value: number) => [`$${value.toFixed(2)}`, 'Profit/Loss']}
+                  />
+                  <Bar dataKey="profit" name="Profit/Loss">
+                    {profitChartData.map((entry, index) => (
+                      <Cell key={index} fill={entry.profit >= 0 ? '#4caf50' : '#ef4444'} />
+                    ))}
+                  </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>

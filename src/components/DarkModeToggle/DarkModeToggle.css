@@ -1311,3 +1311,264 @@ body.dark-mode .betting-info p {
 body.dark-mode .betting-info strong {
   color: #e0e0e0;
 }
+
+/* Progress Tracking dark mode */
+body.dark-mode .progress-tracking-page {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .progress-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .progress-subtitle {
+  color: #999;
+}
+
+body.dark-mode .progress-filter label {
+  color: #e0e0e0;
+}
+
+body.dark-mode .progress-select {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #1976d2;
+}
+
+body.dark-mode .progress-select:focus {
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.2);
+}
+
+body.dark-mode .progress-stat-card {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .progress-stat-label {
+  color: #b0b0b0;
+}
+
+body.dark-mode .progress-stat-value {
+  color: #e0e0e0;
+}
+
+body.dark-mode .progress-chart-section {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .progress-chart-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .progress-chart-section .recharts-cartesian-grid line {
+  stroke: #444;
+}
+
+body.dark-mode .progress-chart-section .recharts-text {
+  fill: #b0b0b0;
+}
+
+body.dark-mode .progress-chart-section .recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: #333 !important;
+  border-color: #555 !important;
+  color: #e0e0e0;
+}
+
+body.dark-mode .progress-empty {
+  color: #666;
+}
+
+body.dark-mode .progress-sessions-list {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .progress-table-header {
+  background: #1a1a1a;
+  color: #e0e0e0;
+  border-bottom-color: #1976d2;
+}
+
+body.dark-mode .progress-table-row {
+  border-bottom-color: #333;
+}
+
+body.dark-mode .progress-table-row:hover {
+  background: #333;
+}
+
+body.dark-mode .progress-table-cell {
+  color: #e0e0e0;
+}
+
+/* Risk Calculator dark mode */
+body.dark-mode .risk-calculator-page {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .risk-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .risk-subtitle {
+  color: #999;
+}
+
+body.dark-mode .risk-mode-button {
+  background: #2a2a2a;
+  color: #64b5f6;
+  border-color: #1976d2;
+}
+
+body.dark-mode .risk-mode-button:hover {
+  background: #333;
+}
+
+body.dark-mode .risk-mode-button.active {
+  background: #1976d2;
+  color: #fff;
+}
+
+body.dark-mode .risk-mode-button.active:hover {
+  background: #1565c0;
+}
+
+body.dark-mode .risk-inputs {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .risk-input-group label {
+  color: #e0e0e0;
+}
+
+body.dark-mode .risk-input-group input {
+  background: #1a1a1a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-mode .risk-input-group input:focus {
+  border-color: #2196f3;
+}
+
+body.dark-mode .risk-input-group small {
+  color: #999;
+}
+
+body.dark-mode .risk-results {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .risk-results-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .risk-result-card {
+  background: #1a1a1a;
+  border-color: #444;
+}
+
+body.dark-mode .risk-result-card.primary {
+  background: #1a1a1a;
+  border-color: #1976d2;
+}
+
+body.dark-mode .risk-result-label {
+  color: #b0b0b0;
+}
+
+body.dark-mode .risk-result-value {
+  color: #e0e0e0;
+}
+
+body.dark-mode .risk-result-subtext {
+  color: #999;
+}
+
+body.dark-mode .risk-bankroll-recommendations {
+  border-top-color: #444;
+}
+
+body.dark-mode .risk-bankroll-recommendations h3 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .risk-recommendation-card {
+  background: #1a1a1a;
+  border-color: #1976d2;
+}
+
+body.dark-mode .risk-recommendation-label {
+  color: #b0b0b0;
+}
+
+body.dark-mode .risk-recommendation-value {
+  color: #64b5f6;
+}
+
+body.dark-mode .risk-info {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .risk-info h3 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .risk-info p,
+body.dark-mode .risk-info li {
+  color: #b0b0b0;
+}
+
+body.dark-mode .risk-info strong {
+  color: #e0e0e0;
+}
+
+/* Settings page dark mode */
+body.dark-mode .settings-page {
+  background: #1a1a1a;
+}
+
+body.dark-mode .settings-content h1 {
+  color: #e0e0e0;
+}
+
+body.dark-mode .settings-section {
+  background: #2a2a2a;
+}
+
+body.dark-mode .settings-section h2 {
+  color: #e0e0e0;
+  border-bottom-color: #444;
+}
+
+body.dark-mode .setting-item label {
+  color: #e0e0e0;
+}
+
+body.dark-mode .setting-item input[type="number"] {
+  background: #1a1a1a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark-mode .setting-item input[type="number"]:focus {
+  border-color: #2196f3;
+}
+
+body.dark-mode .settings-footer {
+  border-top-color: #333;
+}
+
+body.dark-mode .footer-link {
+  color: #64b5f6;
+}
+
+body.dark-mode .footer-separator {
+  color: #666;
+}

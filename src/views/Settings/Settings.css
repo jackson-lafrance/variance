@@ -160,31 +160,4 @@
   font-size: 0.9375em;
 }
 
-.dark-mode .settings-page {
-  background: #1a1a1a;
-}
-
-.dark-mode .settings-content h1 {
-  color: #fff;
-}
-
-.dark-mode .settings-section {
-  background: #2a2a2a;
-  color: #fff;
-}
-
-.dark-mode .settings-section h2 {
-  color: #fff;
-  border-bottom-color: #444;
-}
-
-.dark-mode .setting-item label {
-  color: #fff;
-}
-
-.dark-mode .setting-item input[type="number"] {
-  background: #333;
-  border-color: #555;
-  color: #fff;
-}
 
