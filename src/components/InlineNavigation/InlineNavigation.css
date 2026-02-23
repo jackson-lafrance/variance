@@ -9,8 +9,8 @@
   box-sizing: border-box;
   cursor: pointer;
   transition: all var(--transition-normal);
-  min-height: 2.5rem;
-  padding: 0 1rem;
+  min-height: 5rem;
+  padding: 0 2rem;
 }
 
 .inline-navigation:hover {
@@ -19,9 +19,9 @@
 }
 
 .nav-title {
-  font-size: 0.875rem;
+  font-size: 1.75rem;
   font-weight: var(--font-weight-bold);
-  line-height: calc(2.5rem - 2px);
+  line-height: calc(5rem - 2px);
   color: var(--color-text-primary);
   margin: 0;
   transition: all var(--transition-normal);

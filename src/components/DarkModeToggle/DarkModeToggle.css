@@ -10,8 +10,8 @@
   cursor: pointer;
   transition: all var(--transition-normal);
   color: var(--color-text-primary);
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 5rem;
+  width: 5rem;
   padding: 0;
 }
 
