@@ -1,6 +1,6 @@
 .advanced-techniques-page {
   min-height: 100vh;
-  padding: 0 4em 2em 4em;
+  padding: 0 2em 2.5em 2em;
   text-align: left;
   background: transparent;
   animation: fadeIn var(--transition-slow) ease-out;

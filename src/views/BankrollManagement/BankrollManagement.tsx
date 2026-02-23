@@ -160,21 +160,32 @@ export default function BankrollManagement() {
               </div>
               <div className="result-item">
                 <span className="result-label">Expected Value:</span>
-                <span className="result-value positive">${ev.toFixed(2)}</span>
+                <span className="result-value positive">${ev.toFixed(2)} ({((ev / bankroll) * 100).toFixed(1)}% of bankroll)</span>
               </div>
               <div className="result-item">
                 <span className="result-label">Standard Deviation:</span>
                 <span className="result-value">${sd.toFixed(2)}</span>
               </div>
               <div className="result-item">
-                <span className="result-label">95% Confidence Range:</span>
+                <span className="result-label">Expected Bankroll:</span>
+                <span className="result-value positive">${(bankroll + ev).toFixed(2)}</span>
+              </div>
+              <div className="result-item">
+                <span className="result-label">95% Bankroll Range:</span>
                 <span className="result-value">
-                  ${range.lower.toFixed(2)} to ${range.upper.toFixed(2)}
+                  ${(bankroll + range.lower).toFixed(2)} to ${(bankroll + range.upper).toFixed(2)}
+                </span>
+              </div>
+              <div className="result-item">
+                <span className="result-label">Worst Case (95%):</span>
+                <span className={`result-value ${(bankroll + range.lower) >= 0 ? 'positive' : 'negative'}`}>
+                  {((range.lower / bankroll) * 100).toFixed(1)}% of bankroll
                 </span>
               </div>
               <div className="result-note">
-                This means you have a 95% chance of ending up within this range after {hoursPlayed} hours of play.
-                Variance can be brutal in the short term, even with a positive edge!
+                After {hoursPlayed} hours, your bankroll of ${bankroll.toLocaleString()} has a 95% chance of being
+                between ${(bankroll + range.lower).toFixed(2)} and ${(bankroll + range.upper).toFixed(2)}.
+                {bankroll + range.lower < 0 && ' Warning: there is a significant chance of going bust with this bankroll size!'}
               </div>
             </div>
           </div>

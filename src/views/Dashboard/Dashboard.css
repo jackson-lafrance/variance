@@ -19,7 +19,7 @@
 }
 
 .dashboard-header-section .page-header-wrapper {
-  padding: 2.5em 1.25em 0 1.25em;
+  padding: 1.25em 1.25em 0 1.25em;
   background: var(--color-background);
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-card);
