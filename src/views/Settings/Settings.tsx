@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import Header from '../../components/Header';
+import { useToast } from '../../components/Toast';
 import './Settings.css';
 
 interface UserSettings {
@@ -15,6 +16,7 @@ interface UserSettings {
 export default function Settings() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [settings, setSettings] = useState<UserSettings>({
     defaultDeckCount: 6,
     defaultPenetration: 75,
@@ -50,10 +52,10 @@ export default function Settings() {
     setSaving(true);
     try {
       await setDoc(doc(db, 'userSettings', currentUser.uid), settings);
-      alert('Settings saved successfully!');
+      showToast('Settings saved successfully!', 'success');
     } catch (error) {
       console.error('Error saving settings:', error);
-      alert('Error saving settings');
+      showToast('Error saving settings', 'error');
     } finally {
       setSaving(false);
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../Toast';
 import InlineNavigation from '../InlineNavigation';
 import DarkModeToggle from '../DarkModeToggle';
 import './Header.css';
@@ -9,6 +10,7 @@ export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const { currentUser, logout } = useAuth();
+  const { showToast } = useToast();
   const isAuth = location.pathname === '/auth';
   const isDashboard = location.pathname === '/dashboard';
 
@@ -17,7 +19,7 @@ export default function Header() {
       await logout();
       navigate('/');
     } catch (error) {
-      alert('Failed to log out. Please try again.');
+      showToast('Failed to log out. Please try again.', 'error');
     }
   };
 

@@ -17,6 +17,7 @@ import {
 import { db } from '../../firebase/config';
 import { LineChart, Line, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import Header from '../../components/Header';
+import { useToast } from '../../components/Toast';
 import { calculateAdvancedStats, exportToCSV, exportToJSON } from '../../utils/dashboardUtils';
 import './Dashboard.css';
 
