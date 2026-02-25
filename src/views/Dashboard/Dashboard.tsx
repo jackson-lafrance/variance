@@ -45,6 +45,7 @@ interface UserStats {
 export default function Dashboard() {
   const { currentUser, logout, loading: authLoading } = useAuth();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [sessions, setSessions] = useState<CasinoSession[]>([]);
   const [stats, setStats] = useState<UserStats>({
     totalBankroll: 0,
@@ -127,9 +128,9 @@ export default function Dashboard() {
       if (cancelled?.()) return;
       console.error('Dashboard load error:', error);
       if (error.code === 'permission-denied') {
-        alert('Permission denied. Please check your Firebase security rules.');
+        showToast('Permission denied. Please check your Firebase security rules.', 'error');
       } else if (error.name !== 'AbortError' && error.message !== 'The user aborted a request.') {
-        alert('Failed to load dashboard data. Please refresh the page.');
+        showToast('Failed to load dashboard data. Please refresh the page.', 'error');
       }
       setSessions([]);
     } finally {
@@ -163,17 +164,17 @@ export default function Dashboard() {
 
     // Validation
     if (isNaN(starting) || isNaN(ending) || isNaN(hours)) {
-      alert('Please enter valid numbers for all required fields');
+      showToast('Please enter valid numbers for all required fields', 'error');
       return;
     }
 
     if (starting <= 0 || ending < 0) {
-      alert('Bankroll amounts must be positive numbers');
+      showToast('Bankroll amounts must be positive numbers', 'error');
       return;
     }
 
     if (hours <= 0 || hours > 24) {
-      alert('Hours played must be between 0 and 24');
+      showToast('Hours played must be between 0 and 24', 'error');
       return;
     }
 
@@ -181,12 +182,12 @@ export default function Dashboard() {
     const today = new Date();
     today.setHours(23, 59, 59, 999);
     if (sessionDateObj > today) {
-      alert('Session date cannot be in the future');
+      showToast('Session date cannot be in the future', 'error');
       return;
     }
 
     if (handsPlayed && (isNaN(parseInt(handsPlayed)) || parseInt(handsPlayed) < 0)) {
-      alert('Hands played must be a valid positive number');
+      showToast('Hands played must be a valid positive number', 'error');
       return;
     }
 
@@ -234,7 +235,7 @@ export default function Dashboard() {
       const errorMessage = error.code === 'permission-denied' 
         ? 'Permission denied. Please check your Firebase security rules.'
         : error.message || 'Failed to add session. Please check your connection and try again.';
-      alert(errorMessage);
+      showToast(errorMessage, 'error');
     }
   };
 
@@ -245,7 +246,7 @@ export default function Dashboard() {
     const amount = parseFloat(bankrollToAdd);
 
     if (isNaN(amount) || amount < 0) {
-      alert('Please enter a valid non-negative amount');
+      showToast('Please enter a valid non-negative amount', 'error');
       return;
     }
 
@@ -260,7 +261,7 @@ export default function Dashboard() {
       setBankrollToAdd('');
       setShowAddBankroll(false);
     } catch (error) {
-      alert('Failed to set bankroll. Please check your connection and try again.');
+      showToast('Failed to set bankroll. Please check your connection and try again.', 'error');
     }
   };
 
@@ -288,7 +289,7 @@ export default function Dashboard() {
 
     // Validation
     if (isNaN(starting) || isNaN(ending) || isNaN(hours)) {
-      alert('Please enter valid numbers for all required fields');
+      showToast('Please enter valid numbers for all required fields', 'error');
       return;
     }
 
@@ -339,7 +340,7 @@ export default function Dashboard() {
       // Reload data
       await loadData();
     } catch (error) {
-      alert('Failed to update session. Please try again.');
+      showToast('Failed to update session. Please try again.', 'error');
     }
   };
 
@@ -366,7 +367,7 @@ export default function Dashboard() {
       // Reload data
       await loadData();
     } catch (error) {
-      alert('Failed to delete session. Please try again.');
+      showToast('Failed to delete session. Please try again.', 'error');
     }
   };
 
@@ -375,7 +376,7 @@ export default function Dashboard() {
       await logout();
       navigate('/');
     } catch (error) {
-      alert('Failed to log out. Please try again.');
+      showToast('Failed to log out. Please try again.', 'error');
     }
   };
 
