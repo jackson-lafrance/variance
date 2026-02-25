@@ -1,5 +1,6 @@
 import { db } from '../services/firebase';
 import { collection, addDoc, query, where, orderBy, getDocs, limit } from 'firebase/firestore';
+import type { QueryConstraint } from 'firebase/firestore';
 
 export interface HighScore {
   id?: string;
@@ -52,33 +53,44 @@ export async function getUserHighScores(
   userId: string,
   simulationType?: string
 ): Promise<HighScore[]> {
+  const constraints: QueryConstraint[] = [where('userId', '==', userId)];
+  if (simulationType) {
+    constraints.push(where('simulationType', '==', simulationType));
+  }
+
+  const mapSnapshotToScores = (snapshot: any): HighScore[] => {
+    const scores: HighScore[] = [];
+    snapshot.forEach((doc: any) => {
+      scores.push({ id: doc.id, ...doc.data() } as HighScore);
+    });
+    return scores;
+  };
+
   try {
-    let q = query(
+    const orderedQuery = query(
       collection(db, 'highScores'),
-      where('userId', '==', userId),
+      ...constraints,
       orderBy('score', 'desc'),
       limit(10)
     );
 
-    if (simulationType) {
-      q = query(
-        collection(db, 'highScores'),
-        where('userId', '==', userId),
-        where('simulationType', '==', simulationType),
-        orderBy('score', 'desc'),
-        limit(10)
-      );
-    }
-
-    const snapshot = await getDocs(q);
-    const scores: HighScore[] = [];
-    snapshot.forEach((doc) => {
-      scores.push({ id: doc.id, ...doc.data() } as HighScore);
-    });
-    return scores;
+    const snapshot = await getDocs(orderedQuery);
+    return mapSnapshotToScores(snapshot);
   } catch (error: any) {
     if (error.code === 'failed-precondition') {
-      return [];
+      try {
+        const fallbackQuery = query(
+          collection(db, 'highScores'),
+          ...constraints,
+        );
+        const fallbackSnapshot = await getDocs(fallbackQuery);
+        const scores = mapSnapshotToScores(fallbackSnapshot);
+        scores.sort((a, b) => (b.score || 0) - (a.score || 0));
+        return scores.slice(0, 10);
+      } catch (fallbackError) {
+        console.error('Error loading high scores (fallback):', fallbackError);
+        return [];
+      }
     }
     console.error('Error loading high scores:', error);
     return [];
@@ -105,6 +117,11 @@ export async function getUserBestScore(
     }
     return null;
   } catch (error: any) {
+    if (error.code === 'failed-precondition') {
+      const fallbackScores = await getUserHighScores(userId, simulationType);
+      return fallbackScores.length > 0 ? fallbackScores[0] : null;
+    }
+    console.error('Error loading best score:', error);
     return null;
   }
 }
