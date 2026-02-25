@@ -41,6 +41,7 @@ export default function CardSpeedDrill() {
   const [correctGuesses, setCorrectGuesses] = useState(0);
   const [totalGuesses, setTotalGuesses] = useState(0);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
+  const [saving, setSaving] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const drawRandomCard = () => {
@@ -87,8 +88,9 @@ export default function CardSpeedDrill() {
   };
 
   const handleSaveSession = async () => {
-    if (!currentUser || totalGuesses === 0) return;
+    if (!currentUser || totalGuesses === 0 || saving) return;
     
+    setSaving(true);
     const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
     const score = correctGuesses * 100 - (totalGuesses - correctGuesses) * 50;
 
@@ -113,10 +115,12 @@ export default function CardSpeedDrill() {
         duration
       );
 
-      showToast('Session saved successfully!', 'success');
-    } catch (error) {
+      showToast('Session saved!', 'success');
+    } catch (error: any) {
       console.error('Error saving session:', error);
-      showToast('Failed to save session. Please try again.', 'error');
+      showToast(error?.message || 'Failed to save session. Please try again.', 'error');
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -288,8 +292,8 @@ export default function CardSpeedDrill() {
           {totalGuesses > 0 && (
             <div className="drill-actions">
               {currentUser && (
-                <button className="drill-action-button" onClick={handleSaveSession}>
-                  Save Session
+                <button className="drill-action-button" onClick={handleSaveSession} disabled={saving}>
+                  {saving ? 'Saving...' : 'Save Session'}
                 </button>
               )}
               <button className="drill-action-button" onClick={handleReset}>

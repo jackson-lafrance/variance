@@ -23,17 +23,22 @@ export async function savePracticeSession(
   handsPlayed?: number,
   duration?: number
 ): Promise<void> {
-  await addDoc(collection(db, 'practiceSessions'), {
-    userId,
-    simulationType,
-    accuracy,
-    correctCount,
-    incorrectCount,
-    handsPlayed,
-    duration,
-    timestamp: Date.now(),
-    date: new Date().toISOString().split('T')[0],
-  });
+  try {
+    await addDoc(collection(db, 'practiceSessions'), {
+      userId,
+      simulationType,
+      accuracy,
+      correctCount,
+      incorrectCount,
+      handsPlayed,
+      duration,
+      timestamp: Date.now(),
+      date: new Date().toISOString().split('T')[0],
+    });
+  } catch (error) {
+    console.error('Error saving practice session:', error);
+    throw error;
+  }
 }
 
 export async function getUserPracticeSessions(

@@ -64,6 +64,7 @@ export default function BlackjackSimulation() {
   const [dealerRevealing, setDealerRevealing] = useState(false);
   const [handsPlayed, setHandsPlayed] = useState(0);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
+  const [saving, setSaving] = useState(false);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   const drawCard = (): Card => {
@@ -175,10 +176,11 @@ export default function BlackjackSimulation() {
   };
 
   const handleSaveSession = async () => {
-    if (!currentUser || handsPlayed === 0) return;
+    if (!currentUser || handsPlayed === 0 || saving) return;
     
+    setSaving(true);
     const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
-    const score = handsPlayed * 100; // Simple scoring for basic game
+    const score = handsPlayed * 100;
 
     try {
       await saveHighScore(
@@ -201,10 +203,12 @@ export default function BlackjackSimulation() {
         duration
       );
 
-      showToast('Session saved successfully!', 'success');
-    } catch (error) {
+      showToast('Session saved!', 'success');
+    } catch (error: any) {
       console.error('Error saving session:', error);
-      showToast('Failed to save session. Please try again.', 'error');
+      showToast(error?.message || 'Failed to save session. Please try again.', 'error');
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -306,8 +310,8 @@ export default function BlackjackSimulation() {
             {handsPlayed > 0 && (
               <>
                 {currentUser && (
-                  <button className="bj-button bj-button-outline" onClick={handleSaveSession}>
-                    Save Session
+                  <button className="bj-button bj-button-outline" onClick={handleSaveSession} disabled={saving}>
+                    {saving ? 'Saving...' : 'Save Session'}
                   </button>
                 )}
                 <button className="bj-button bj-button-outline" onClick={handleReset}>

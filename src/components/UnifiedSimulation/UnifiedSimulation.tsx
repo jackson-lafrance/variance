@@ -212,6 +212,7 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
   const [countCorrectCount, setCountCorrectCount] = useState(0);
   const [countIncorrectCount, setCountIncorrectCount] = useState(0);
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
+  const [saving, setSaving] = useState(false);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -608,8 +609,9 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
   };
 
   const handleSaveSession = async () => {
-    if (!currentUser || (correctCount + incorrectCount === 0)) return;
+    if (!currentUser || (correctCount + incorrectCount === 0) || saving) return;
     
+    setSaving(true);
     const accuracy = Math.round((correctCount / (correctCount + incorrectCount)) * 100);
     const duration = sessionStartTime ? Math.floor((Date.now() - sessionStartTime) / 1000) : undefined;
     const score = correctCount * 100 - incorrectCount * 50;
@@ -635,10 +637,12 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
         duration
       );
 
-      showToast('Session saved successfully!', 'success');
-    } catch (error) {
+      showToast('Session saved!', 'success');
+    } catch (error: any) {
       console.error('Error saving session:', error);
-      showToast('Failed to save session. Please try again.', 'error');
+      showToast(error?.message || 'Failed to save session. Please try again.', 'error');
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -781,8 +785,8 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
             {(correctCount + incorrectCount > 0) && (
               <>
                 {currentUser && (
-                  <button className="unified-button unified-button-outline" onClick={handleSaveSession}>
-                    Save Session
+                  <button className="unified-button unified-button-outline" onClick={handleSaveSession} disabled={saving}>
+                    {saving ? 'Saving...' : 'Save Session'}
                   </button>
                 )}
                 <button className="unified-button unified-button-outline" onClick={handleReset}>

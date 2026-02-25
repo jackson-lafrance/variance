@@ -31,17 +31,22 @@ export async function saveHighScore(
   incorrectCount: number,
   handsPlayed?: number
 ): Promise<void> {
-  await addDoc(collection(db, 'highScores'), {
-    userId,
-    simulationType,
-    score,
-    accuracy,
-    correctCount,
-    incorrectCount,
-    handsPlayed,
-    timestamp: Date.now(),
-    date: new Date().toISOString().split('T')[0],
-  });
+  try {
+    await addDoc(collection(db, 'highScores'), {
+      userId,
+      simulationType,
+      score,
+      accuracy,
+      correctCount,
+      incorrectCount,
+      handsPlayed,
+      timestamp: Date.now(),
+      date: new Date().toISOString().split('T')[0],
+    });
+  } catch (error) {
+    console.error('Error saving high score:', error);
+    throw error;
+  }
 }
 
 export async function getUserHighScores(
