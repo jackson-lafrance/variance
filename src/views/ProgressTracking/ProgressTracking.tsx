@@ -8,7 +8,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import './ProgressTracking.css';
 
 export default function ProgressTracking() {
-  const { currentUser } = useAuth();
+  const { currentUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [practiceSessions, setPracticeSessions] = useState<PracticeSession[]>([]);
   const [highScores, setHighScores] = useState<HighScore[]>([]);
@@ -16,6 +16,8 @@ export default function ProgressTracking() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (authLoading) return;
+
     if (!currentUser) {
       navigate('/');
       return;
@@ -51,7 +53,7 @@ export default function ProgressTracking() {
     loadData();
 
     return () => { cancelled = true; };
-  }, [currentUser, selectedSimulation]);
+  }, [currentUser, authLoading, selectedSimulation, navigate]);
 
   const formatDate = (timestamp: number) => {
     return new Date(timestamp).toLocaleDateString();
@@ -120,7 +122,7 @@ export default function ProgressTracking() {
     { value: 'card-speed', label: 'Card Speed' },
   ];
 
-  if (loading) {
+  if (loading || authLoading) {
     return (
       <div className="progress-tracking-page">
         <div className="progress-loading">Loading progress data...</div>

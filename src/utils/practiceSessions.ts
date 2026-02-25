@@ -1,5 +1,6 @@
 import { db } from '../firebase/config';
 import { collection, addDoc, query, where, orderBy, getDocs } from 'firebase/firestore';
+import type { QueryConstraint } from 'firebase/firestore';
 
 export interface PracticeSession {
   id?: string;
@@ -45,31 +46,43 @@ export async function getUserPracticeSessions(
   userId: string,
   simulationType?: string
 ): Promise<PracticeSession[]> {
-  try {
-    let q = query(
-      collection(db, 'practiceSessions'),
-      where('userId', '==', userId),
-      orderBy('timestamp', 'desc'),
-    );
+  const constraints: QueryConstraint[] = [where('userId', '==', userId)];
+  if (simulationType) {
+    constraints.push(where('simulationType', '==', simulationType));
+  }
 
-    if (simulationType) {
-      q = query(
-        collection(db, 'practiceSessions'),
-        where('userId', '==', userId),
-        where('simulationType', '==', simulationType),
-        orderBy('timestamp', 'desc'),
-      );
-    }
-
-    const snapshot = await getDocs(q);
+  const mapSnapshotToSessions = (snapshot: any): PracticeSession[] => {
     const sessions: PracticeSession[] = [];
-    snapshot.forEach((doc) => {
+    snapshot.forEach((doc: any) => {
       sessions.push({ id: doc.id, ...doc.data() } as PracticeSession);
     });
     return sessions;
+  };
+
+  try {
+    const orderedQuery = query(
+      collection(db, 'practiceSessions'),
+      ...constraints,
+      orderBy('timestamp', 'desc'),
+    );
+    const snapshot = await getDocs(orderedQuery);
+    return mapSnapshotToSessions(snapshot);
   } catch (error: any) {
     if (error.code === 'failed-precondition') {
-      return [];
+      // Fallback for missing composite indexes: query without orderBy, then sort in memory.
+      try {
+        const fallbackQuery = query(
+          collection(db, 'practiceSessions'),
+          ...constraints,
+        );
+        const fallbackSnapshot = await getDocs(fallbackQuery);
+        const sessions = mapSnapshotToSessions(fallbackSnapshot);
+        sessions.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+        return sessions;
+      } catch (fallbackError) {
+        console.error('Error loading practice sessions (fallback):', fallbackError);
+        return [];
+      }
     }
     console.error('Error loading practice sessions:', error);
     return [];
