@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../Toast';
 import { saveHighScore, SimulationTypes } from '../../utils/highScores';
 import { savePracticeSession } from '../../utils/practiceSessions';
 import './UnifiedSimulation.css';
@@ -186,6 +187,7 @@ interface UnifiedSimulationProps {
 
 export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) {
   const { currentUser } = useAuth();
+  const { showToast } = useToast();
   const [shoe, setShoe] = useState<Card[]>(() => createShoe(settings.deckCount));
   const [cardsDealt, setCardsDealt] = useState(0);
   const [playerHands, setPlayerHands] = useState<Card[][]>([]);
@@ -633,10 +635,10 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
         duration
       );
 
-      alert('Session saved successfully!');
+      showToast('Session saved successfully!', 'success');
     } catch (error) {
       console.error('Error saving session:', error);
-      alert('Failed to save session. Please try again.');
+      showToast('Failed to save session. Please try again.', 'error');
     }
   };
 
@@ -778,9 +780,11 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
             )}
             {(correctCount + incorrectCount > 0) && (
               <>
-                <button className="unified-button unified-button-outline" onClick={handleSaveSession}>
-                  Save Session
-                </button>
+                {currentUser && (
+                  <button className="unified-button unified-button-outline" onClick={handleSaveSession}>
+                    Save Session
+                  </button>
+                )}
                 <button className="unified-button unified-button-outline" onClick={handleReset}>
                   Reset Stats
                 </button>

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../Toast';
 import { saveHighScore, SimulationTypes } from '../../utils/highScores';
 import { savePracticeSession } from '../../utils/practiceSessions';
 import './DeviationsSimulation.css';
@@ -365,9 +366,11 @@ export default function DeviationsSimulation() {
             )}
             {(correctCount + incorrectCount > 0) && (
               <>
-                <button className="dev-button dev-button-outline" onClick={handleSaveSession}>
-                  Save Session
-                </button>
+                {currentUser && (
+                  <button className="dev-button dev-button-outline" onClick={handleSaveSession}>
+                    Save Session
+                  </button>
+                )}
                 <button className="dev-button dev-button-outline" onClick={handleReset}>
                   Reset Stats
                 </button>

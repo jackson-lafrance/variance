@@ -498,9 +498,11 @@ export default function BasicHiLoSimulation() {
             </button>
             {(correctCount + incorrectCount > 0) && (
               <>
-                <button className="hilo-button hilo-button-outline" onClick={handleSaveSession}>
-                  Save Session
-                </button>
+                {currentUser && (
+                  <button className="hilo-button hilo-button-outline" onClick={handleSaveSession}>
+                    Save Session
+                  </button>
+                )}
                 <button className="hilo-button hilo-button-outline" onClick={resetSimulation}>
                   Reset Stats
                 </button>

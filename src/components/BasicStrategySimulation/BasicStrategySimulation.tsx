@@ -561,9 +561,11 @@ export default function BasicStrategySimulation() {
             </button>
             {(correctCount + incorrectCount > 0) && (
               <>
-                <button className="bs-button bs-button-outline" onClick={handleSaveSession}>
-                  Save Session
-                </button>
+                {currentUser && (
+                  <button className="bs-button bs-button-outline" onClick={handleSaveSession}>
+                    Save Session
+                  </button>
+                )}
                 <button className="bs-button bs-button-outline" onClick={handleReset}>
                   Reset Stats
                 </button>

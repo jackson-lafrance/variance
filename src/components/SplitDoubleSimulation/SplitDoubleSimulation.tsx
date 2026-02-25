@@ -485,9 +485,11 @@ export default function SplitDoubleSimulation() {
             </button>
             {handsPlayed > 0 && (
               <>
-                <button className="adv-bj-button adv-bj-button-outline" onClick={handleSaveSession}>
-                  Save Session
-                </button>
+                {currentUser && (
+                  <button className="adv-bj-button adv-bj-button-outline" onClick={handleSaveSession}>
+                    Save Session
+                  </button>
+                )}
                 <button className="adv-bj-button adv-bj-button-outline" onClick={handleReset}>
                   Reset Stats
                 </button>

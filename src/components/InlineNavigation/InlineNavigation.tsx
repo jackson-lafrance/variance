@@ -74,7 +74,7 @@ export default function InlineNavigation() {
       <div className="nav-dropdown">
         {sections.map((section) => {
           const visiblePages = section.pages.filter(
-            (p) => p.path !== location.pathname
+            (p) => p.path !== location.pathname && (p.path !== '/progress' || currentUser)
           );
           if (visiblePages.length === 0) return null;
 

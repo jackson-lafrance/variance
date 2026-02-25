@@ -285,9 +285,11 @@ export default function CardSpeedDrill() {
 
           {totalGuesses > 0 && (
             <div className="drill-actions">
-              <button className="drill-action-button" onClick={handleSaveSession}>
-                Save Session
-              </button>
+              {currentUser && (
+                <button className="drill-action-button" onClick={handleSaveSession}>
+                  Save Session
+                </button>
+              )}
               <button className="drill-action-button" onClick={handleReset}>
                 Reset Stats
               </button>

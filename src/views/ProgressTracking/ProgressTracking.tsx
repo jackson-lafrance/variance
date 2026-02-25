@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { getUserPracticeSessions, PracticeSession } from '../../utils/practiceSessions';
 import { getUserHighScores, HighScore } from '../../utils/highScores';
@@ -8,13 +9,17 @@ import './ProgressTracking.css';
 
 export default function ProgressTracking() {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
   const [practiceSessions, setPracticeSessions] = useState<PracticeSession[]>([]);
   const [highScores, setHighScores] = useState<HighScore[]>([]);
   const [selectedSimulation, setSelectedSimulation] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!currentUser) return;
+    if (!currentUser) {
+      navigate('/');
+      return;
+    }
 
     let cancelled = false;
 

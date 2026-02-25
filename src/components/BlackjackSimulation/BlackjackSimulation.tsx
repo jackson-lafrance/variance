@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../Toast';
 import { saveHighScore, SimulationTypes } from '../../utils/highScores';
 import { savePracticeSession } from '../../utils/practiceSessions';
 import './BlackjackSimulation.css';
@@ -55,6 +56,7 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string; is
 
 export default function BlackjackSimulation() {
   const { currentUser } = useAuth();
+  const { showToast } = useToast();
   const [playerHand, setPlayerHand] = useState<Card[]>([]);
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
   const [gameStatus, setGameStatus] = useState<string>('');
@@ -199,10 +201,10 @@ export default function BlackjackSimulation() {
         duration
       );
 
-      alert('Session saved successfully!');
+      showToast('Session saved successfully!', 'success');
     } catch (error) {
       console.error('Error saving session:', error);
-      alert('Failed to save session. Please try again.');
+      showToast('Failed to save session. Please try again.', 'error');
     }
   };
 
@@ -303,9 +305,11 @@ export default function BlackjackSimulation() {
             </button>
             {handsPlayed > 0 && (
               <>
-                <button className="bj-button bj-button-outline" onClick={handleSaveSession}>
-                  Save Session
-                </button>
+                {currentUser && (
+                  <button className="bj-button bj-button-outline" onClick={handleSaveSession}>
+                    Save Session
+                  </button>
+                )}
                 <button className="bj-button bj-button-outline" onClick={handleReset}>
                   Reset Stats
                 </button>
