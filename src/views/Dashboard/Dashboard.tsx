@@ -19,6 +19,8 @@ import { LineChart, Line, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tool
 import Header from '../../components/Header';
 import { useToast } from '../../components/Toast';
 import { calculateAdvancedStats, exportToCSV, exportToJSON } from '../../utils/dashboardUtils';
+import { getUserPracticeSessions } from '../../utils/practiceSessions';
+import type { PracticeSession } from '../../utils/practiceSessions';
 import './Dashboard.css';
 
 interface CasinoSession {
@@ -42,11 +44,24 @@ interface UserStats {
   totalHours: number;
 }
 
+const simulationTypeLabels: Record<string, string> = {
+  'basic-strategy': 'Basic Strategy',
+  counting: 'Card Counting',
+  deviations: 'Deviations',
+  unified: 'Unified',
+  'card-speed': 'Card Speed',
+};
+
+const formatSimulationType = (simulationType: string): string => {
+  return simulationTypeLabels[simulationType] || simulationType;
+};
+
 export default function Dashboard() {
   const { currentUser, logout, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const { showToast } = useToast();
   const [sessions, setSessions] = useState<CasinoSession[]>([]);
+  const [simulationSessions, setSimulationSessions] = useState<PracticeSession[]>([]);
   const [stats, setStats] = useState<UserStats>({
     totalBankroll: 0,
     totalProfit: 0,
@@ -77,6 +92,7 @@ export default function Dashboard() {
 
     try {
       setLoading(true);
+      const practiceSessionsPromise = getUserPracticeSessions(currentUser.uid);
       
       const statsDoc = await getDoc(doc(db, 'userStats', currentUser.uid));
       if (cancelled?.()) return;
@@ -124,6 +140,10 @@ export default function Dashboard() {
       loadedSessions.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
       
       setSessions(loadedSessions);
+
+      const loadedPracticeSessions = await practiceSessionsPromise;
+      if (cancelled?.()) return;
+      setSimulationSessions(loadedPracticeSessions);
     } catch (error: any) {
       if (cancelled?.()) return;
       console.error('Dashboard load error:', error);
@@ -133,6 +153,7 @@ export default function Dashboard() {
         showToast('Failed to load dashboard data. Please refresh the page.', 'error');
       }
       setSessions([]);
+      setSimulationSessions([]);
     } finally {
       if (!cancelled?.()) {
         setLoading(false);
@@ -382,6 +403,16 @@ export default function Dashboard() {
 
   // Calculate advanced stats
   const advancedStats = calculateAdvancedStats(sessions, stats.totalHours);
+  const simulationSessionCount = simulationSessions.length;
+  const averageSimulationAccuracy = simulationSessionCount > 0
+    ? simulationSessions.reduce((sum, session) => sum + session.accuracy, 0) / simulationSessionCount
+    : 0;
+  const totalSimulationHands = simulationSessions.reduce((sum, session) => sum + (session.handsPlayed || 0), 0);
+
+  const formatDuration = (duration?: number): string => {
+    if (!duration) return '-';
+    return `${Math.floor(duration / 60)}m ${duration % 60}s`;
+  };
 
   // Filter and sort sessions
   const filteredSessions = sessions
@@ -465,6 +496,22 @@ export default function Dashboard() {
             <div className="stat-label">Total Hours</div>
             <div className="stat-value">{stats.totalHours.toFixed(1)}</div>
           </div>
+          <div className="stat-card">
+            <div className="stat-label">Simulation Sessions</div>
+            <div className="stat-value">{simulationSessionCount}</div>
+          </div>
+          {simulationSessionCount > 0 && (
+            <>
+              <div className="stat-card">
+                <div className="stat-label">Avg Simulation Accuracy</div>
+                <div className="stat-value">{averageSimulationAccuracy.toFixed(1)}%</div>
+              </div>
+              <div className="stat-card">
+                <div className="stat-label">Simulation Hands</div>
+                <div className="stat-value">{totalSimulationHands.toLocaleString()}</div>
+              </div>
+            </>
+          )}
           {sessions.length > 0 && (
             <>
               <div className="stat-card">
@@ -674,6 +721,50 @@ export default function Dashboard() {
                     >
                       Delete
                     </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="dashboard-simulation-section">
+          <div className="sessions-header">
+            <h2>Simulation Sessions</h2>
+          </div>
+          {simulationSessions.length === 0 ? (
+            <p className="no-sessions">
+              No simulation sessions yet. Save a simulation session to see it here.
+            </p>
+          ) : (
+            <div className="simulation-sessions-list">
+              {simulationSessions.slice(0, 20).map((session, index) => (
+                <div key={session.id || `${session.timestamp}-${index}`} className="session-card simulation-session-card">
+                  <div className="session-header">
+                    <div className="session-date">{new Date(session.timestamp).toLocaleDateString()}</div>
+                    <div className="simulation-type-badge">{formatSimulationType(session.simulationType)}</div>
+                  </div>
+                  <div className="session-details">
+                    <div className="session-detail">
+                      <span className="detail-label">Accuracy:</span>
+                      <span className="detail-value">{session.accuracy}%</span>
+                    </div>
+                    <div className="session-detail">
+                      <span className="detail-label">Correct:</span>
+                      <span className="detail-value">{session.correctCount}</span>
+                    </div>
+                    <div className="session-detail">
+                      <span className="detail-label">Incorrect:</span>
+                      <span className="detail-value">{session.incorrectCount}</span>
+                    </div>
+                    <div className="session-detail">
+                      <span className="detail-label">Hands:</span>
+                      <span className="detail-value">{session.handsPlayed || '-'}</span>
+                    </div>
+                    <div className="session-detail">
+                      <span className="detail-label">Duration:</span>
+                      <span className="detail-value">{formatDuration(session.duration)}</span>
+                    </div>
                   </div>
                 </div>
               ))}
