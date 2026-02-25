@@ -44,12 +44,12 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string; is
     if (card.rank === 'A') aces++;
   });
 
-  const isSoft = aces > 0 && value <= 21;
-
   while (value > 21 && aces > 0) {
     value -= 10;
     aces--;
   }
+
+  const isSoft = aces > 0 && value <= 21;
 
   return { value, display: value.toString(), isSoft };
 };

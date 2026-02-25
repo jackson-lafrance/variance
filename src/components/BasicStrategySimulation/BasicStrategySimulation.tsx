@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../Toast';
 import { saveHighScore, SimulationTypes } from '../../utils/highScores';
 import { savePracticeSession } from '../../utils/practiceSessions';
 import './BasicStrategySimulation.css';
@@ -97,13 +98,28 @@ const getCorrectAction = (playerHand: Card[], dealerUpcard: Card, canDouble: boo
   if (handCalc.isSoft) {
     const softValue = handCalc.value;
     
-    if (softValue >= 19) return 'stand';
-    if (softValue === 18) {
-      if (dealerValue >= 9) return 'hit';
-      if (dealerValue >= 3 && dealerValue <= 6 && canDouble) return 'double';
+    if (softValue >= 20) return 'stand';
+    if (softValue === 19) {
+      if (dealerValue === 6 && canDouble) return 'double';
       return 'stand';
     }
-    if (dealerValue >= 4 && dealerValue <= 6 && canDouble) return 'double';
+    if (softValue === 18) {
+      if (dealerValue >= 9) return 'hit';
+      if (dealerValue >= 2 && dealerValue <= 6 && canDouble) return 'double';
+      return 'stand';
+    }
+    if (softValue === 17) {
+      if (dealerValue >= 3 && dealerValue <= 6 && canDouble) return 'double';
+      return 'hit';
+    }
+    if (softValue === 16 || softValue === 15) {
+      if (dealerValue >= 4 && dealerValue <= 6 && canDouble) return 'double';
+      return 'hit';
+    }
+    if (softValue === 14 || softValue === 13) {
+      if (dealerValue >= 5 && dealerValue <= 6 && canDouble) return 'double';
+      return 'hit';
+    }
     return 'hit';
   }
 
@@ -136,6 +152,7 @@ const getCorrectAction = (playerHand: Card[], dealerUpcard: Card, canDouble: boo
 
 export default function BasicStrategySimulation() {
   const { currentUser } = useAuth();
+  const { showToast } = useToast();
   const [playerHands, setPlayerHands] = useState<Card[][]>([]);
   const [activeHandIndex, setActiveHandIndex] = useState(0);
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
@@ -485,10 +502,10 @@ export default function BasicStrategySimulation() {
         duration
       );
 
-      alert('Session saved successfully!');
+      showToast('Session saved successfully!', 'success');
     } catch (error) {
       console.error('Error saving session:', error);
-      alert('Failed to save session. Please try again.');
+      showToast('Failed to save session. Please try again.', 'error');
     }
   };
 

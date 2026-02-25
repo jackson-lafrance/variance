@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../Toast';
 import { saveHighScore, SimulationTypes } from '../../utils/highScores';
 import { savePracticeSession } from '../../utils/practiceSessions';
 import './BasicHiLoSimulation.css';
@@ -65,18 +66,19 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string; is
     if (card.rank === 'A') aces++;
   });
 
-  const isSoft = aces > 0 && value <= 21;
-
   while (value > 21 && aces > 0) {
     value -= 10;
     aces--;
   }
+
+  const isSoft = aces > 0 && value <= 21;
 
   return { value, display: value.toString(), isSoft };
 };
 
 export default function BasicHiLoSimulation() {
   const { currentUser } = useAuth();
+  const { showToast } = useToast();
   const [deckCount, setDeckCount] = useState(6);
   const [penetration, setPenetration] = useState(75);
   const [shoe, setShoe] = useState<Card[]>(() => createShoe(6));
@@ -336,10 +338,10 @@ export default function BasicHiLoSimulation() {
         duration
       );
 
-      alert('Session saved successfully!');
+      showToast('Session saved successfully!', 'success');
     } catch (error) {
       console.error('Error saving session:', error);
-      alert('Failed to save session. Please try again.');
+      showToast('Failed to save session. Please try again.', 'error');
     }
   };
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../Toast';
 import { saveHighScore, SimulationTypes } from '../../utils/highScores';
 import { savePracticeSession } from '../../utils/practiceSessions';
 import './CardSpeedDrill.css';
@@ -28,6 +29,7 @@ const getHiLoValue = (rank: string): number => {
 
 export default function CardSpeedDrill() {
   const { currentUser } = useAuth();
+  const { showToast } = useToast();
   const [isActive, setIsActive] = useState(false);
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
   const [runningCount, setRunningCount] = useState(0);

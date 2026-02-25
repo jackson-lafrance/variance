@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useToast } from '../Toast';
 import { saveHighScore, SimulationTypes } from '../../utils/highScores';
 import { savePracticeSession } from '../../utils/practiceSessions';
 import './SplitDoubleSimulation.css';
@@ -43,18 +44,19 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string; is
     if (card.rank === 'A') aces++;
   });
 
-  const isSoft = aces > 0 && value <= 21;
-
   while (value > 21 && aces > 0) {
     value -= 10;
     aces--;
   }
+
+  const isSoft = aces > 0 && value <= 21;
 
   return { value, display: value.toString(), isSoft };
 };
 
 export default function SplitDoubleSimulation() {
   const { currentUser } = useAuth();
+  const { showToast } = useToast();
   const [playerHands, setPlayerHands] = useState<Card[][]>([]);
   const [activeHandIndex, setActiveHandIndex] = useState(0);
   const [dealerHand, setDealerHand] = useState<Card[]>([]);
@@ -408,10 +410,10 @@ export default function SplitDoubleSimulation() {
         duration
       );
 
-      alert('Session saved successfully!');
+      showToast('Session saved successfully!', 'success');
     } catch (error) {
       console.error('Error saving session:', error);
-      alert('Failed to save session. Please try again.');
+      showToast('Failed to save session. Please try again.', 'error');
     }
   };
 

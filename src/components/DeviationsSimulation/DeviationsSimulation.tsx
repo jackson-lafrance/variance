@@ -104,6 +104,7 @@ const calculateHandValue = (cards: Card[]): { value: number; display: string } =
 
 export default function DeviationsSimulation() {
   const { currentUser } = useAuth();
+  const { showToast } = useToast();
   const [deckCount, setDeckCount] = useState(6);
   const [penetration, setPenetration] = useState(75);
   const [shoe, setShoe] = useState<Card[]>(() => createShoe(6));
@@ -213,10 +214,10 @@ export default function DeviationsSimulation() {
         duration
       );
 
-      alert('Session saved successfully!');
+      showToast('Session saved successfully!', 'success');
     } catch (error) {
       console.error('Error saving session:', error);
-      alert('Failed to save session. Please try again.');
+      showToast('Failed to save session. Please try again.', 'error');
     }
   };
 

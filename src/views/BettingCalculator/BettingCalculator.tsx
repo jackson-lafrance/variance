@@ -49,6 +49,51 @@ export default function BettingCalculator() {
     }
   }, [bankroll, baseUnit, maxBet, kellyFraction]);
 
+  const riskOfRuin = useMemo(() => {
+    if (!spreadResults) return null;
+
+    const bankrollVal = parseFloat(bankroll);
+    const baseUnitVal = parseFloat(baseUnit);
+    if (bankrollVal <= 0 || baseUnitVal <= 0) return null;
+
+    // Approximate TC frequency distribution for a 6-deck shoe
+    const tcFrequencies: Record<number, number> = {
+      [-1]: 0.240,
+      [0]: 0.240,
+      [1]: 0.180,
+      [2]: 0.130,
+      [3]: 0.080,
+      [4]: 0.050,
+      [5]: 0.030,
+      [6]: 0.020,
+      [7]: 0.010,
+      [8]: 0.008,
+      [9]: 0.005,
+      [10]: 0.007,
+    };
+
+    const HOUSE_EDGE = 0.005;
+    const EDGE_PER_TC = 0.005;
+    const BJ_VARIANCE = 1.32; // ≈ 1.15²
+
+    let avgEV = 0;
+    let avgVar = 0;
+
+    for (const row of spreadResults) {
+      const freq = tcFrequencies[row.trueCount] ?? 0;
+      const bet = Math.max(baseUnitVal, row.bet);
+      const edge = row.trueCount * EDGE_PER_TC - HOUSE_EDGE;
+
+      avgEV += freq * bet * edge;
+      avgVar += freq * bet * bet * BJ_VARIANCE;
+    }
+
+    if (avgEV <= 0 || avgVar === 0) return 100;
+
+    const ror = Math.exp((-2 * avgEV * bankrollVal) / avgVar) * 100;
+    return Math.min(ror, 100);
+  }, [spreadResults, bankroll, baseUnit]);
+
   return (
     <div className="betting-calculator-page">
       <Header />
@@ -193,6 +238,27 @@ export default function BettingCalculator() {
                 </tbody>
               </table>
             </div>
+
+            {riskOfRuin !== null && (
+              <div className="betting-ror-summary">
+                <div className="betting-ror-card">
+                  <div className="betting-ror-label">Risk of Ruin</div>
+                  <div className={`betting-ror-value ${riskOfRuin < 1 ? 'low' : riskOfRuin < 5 ? 'moderate' : 'high'}`}>
+                    {riskOfRuin < 0.01 ? '<0.01' : riskOfRuin.toFixed(2)}%
+                  </div>
+                  <div className="betting-ror-rating">
+                    {riskOfRuin < 1 && 'Excellent — very low risk of going broke.'}
+                    {riskOfRuin >= 1 && riskOfRuin < 5 && 'Acceptable for most players.'}
+                    {riskOfRuin >= 5 && riskOfRuin < 13 && 'Moderate risk — consider a larger bankroll or smaller bets.'}
+                    {riskOfRuin >= 13 && riskOfRuin < 100 && 'High risk — increase your bankroll or reduce your spread.'}
+                    {riskOfRuin >= 100 && 'No positive edge with this spread — you will lose long term.'}
+                  </div>
+                </div>
+                <div className="betting-ror-note">
+                  Assumes a 6-deck shoe with 0.5% house edge and ~0.5% edge shift per true count point.
+                </div>
+              </div>
+            )}
           </div>
         )}
 
