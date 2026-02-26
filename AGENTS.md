@@ -2,6 +2,16 @@
 
 > Blackjack card counting training application with a React web app and React Native mobile app sharing a Firebase backend.
 
+## Agent Requirements
+
+**Work Logging**: Agents MUST document their work in the `logs/` folder using markdown files. Each log entry must include:
+
+- **Detailed timestamps** — Use ISO 8601 format (e.g. `2025-02-26T14:30:00Z`) for all significant actions and milestones
+- **Descriptive titles** — Clear, human-readable titles that summarize the work (e.g. `Add dark mode toggle to Settings`)
+- **Structured content** — Document decisions, changes made, files touched, and any blockers or follow-ups
+
+Example log filename: `logs/2025-02-26-add-settings-dark-mode.md`. Create or append to logs as work progresses, not only at task completion.
+
 ## Quick Reference
 
 | Aspect | Web App | Mobile App |
@@ -58,7 +68,8 @@
 ├── firebase.json                # Firebase Hosting config (serves from dist/)
 ├── firestore.rules              # Firestore security rules
 ├── tsconfig.json                # TypeScript config (ES5, React JSX, strict: false)
-└── .firebaserc                  # Firebase project: variance-954d1
+├── .firebaserc                  # Firebase project: variance-954d1
+└── logs/                        # Agent work logs (markdown, detailed timestamps + titles)
 ```
 
 ## Architecture
