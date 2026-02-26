@@ -98,23 +98,28 @@ export default function BasicHiLoSimulation() {
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const gameAreaRef = useRef<HTMLDivElement>(null);
+  const cardsDealtRef = useRef(0);
 
   const drawCard = (): Card => {
     const totalCards = deckCount * 52;
     const penetrationLimit = Math.floor(totalCards * (penetration / 100));
-    
-    if (cardsDealt >= penetrationLimit) {
+    const index = cardsDealtRef.current;
+
+    if (index >= penetrationLimit) {
       const newShoe = createShoe(deckCount);
       setShoe(newShoe);
       setCardsDealt(0);
+      cardsDealtRef.current = 0;
       setRunningCount(0);
       const card = newShoe[0];
+      cardsDealtRef.current = 1;
       setCardsDealt(1);
       return card;
     }
-    
-    const card = shoe[cardsDealt];
-    setCardsDealt(prev => prev + 1);
+
+    const card = shoe[index];
+    cardsDealtRef.current = index + 1;
+    setCardsDealt(index + 1);
     return card;
   };
 
@@ -392,6 +397,7 @@ export default function BasicHiLoSimulation() {
     const newShoe = createShoe(count);
     setShoe(newShoe);
     setCardsDealt(0);
+    cardsDealtRef.current = 0;
     setRunningCount(0);
   };
 

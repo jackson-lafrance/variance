@@ -214,11 +214,13 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
   const [sessionStartTime, setSessionStartTime] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const gameAreaRef = useRef<HTMLDivElement>(null);
+  const cardsDealtRef = useRef(0);
 
   useEffect(() => {
     const newShoe = createShoe(settings.deckCount);
     setShoe(newShoe);
     setCardsDealt(0);
+    cardsDealtRef.current = 0;
     setRunningCount(0);
   }, [settings.deckCount, settings.penetration]);
 
@@ -236,19 +238,23 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
   const drawCard = (): Card => {
     const totalCards = settings.deckCount * 52;
     const penetrationLimit = Math.floor(totalCards * (settings.penetration / 100));
-    
-    if (cardsDealt >= penetrationLimit) {
+    const index = cardsDealtRef.current;
+
+    if (index >= penetrationLimit) {
       const newShoe = createShoe(settings.deckCount);
       setShoe(newShoe);
       setCardsDealt(0);
+      cardsDealtRef.current = 0;
       setRunningCount(0);
       const card = newShoe[0];
+      cardsDealtRef.current = 1;
       setCardsDealt(1);
       return card;
     }
-    
-    const card = shoe[cardsDealt];
-    setCardsDealt(prev => prev + 1);
+
+    const card = shoe[index];
+    cardsDealtRef.current = index + 1;
+    setCardsDealt(index + 1);
     return card;
   };
 
@@ -263,8 +269,11 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
       ];
       const scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
       return {
-        playerCards: scenario.player.map(r => ({ rank: r, suit: suits[Math.floor(Math.random() * suits.length)], code: `${r}C` })),
-        dealerCard: { rank: scenario.dealer, suit: suits[Math.floor(Math.random() * suits.length)], code: `${scenario.dealer}C` }
+        playerCards: scenario.player.map(r => {
+          const suit = suits[Math.floor(Math.random() * suits.length)];
+          return { rank: r, suit, code: `${r}${suit}` };
+        }),
+        dealerCard: (() => { const s = suits[Math.floor(Math.random() * suits.length)]; return { rank: scenario.dealer, suit: s, code: `${scenario.dealer}${s}` }; })()
       };
     }
     
@@ -272,7 +281,10 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
       const softCards = [['A', '2'], ['A', '3'], ['A', '4'], ['A', '5'], ['A', '6'], ['A', '7'], ['A', '8']];
       const hand = softCards[Math.floor(Math.random() * softCards.length)];
       return {
-        playerCards: hand.map(r => ({ rank: r, suit: suits[Math.floor(Math.random() * suits.length)], code: `${r}C` })),
+        playerCards: hand.map(r => {
+          const suit = suits[Math.floor(Math.random() * suits.length)];
+          return { rank: r, suit, code: `${r}${suit}` };
+        }),
         dealerCard: drawCard()
       };
     }
@@ -281,8 +293,8 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
       const pairRank = ranks[Math.floor(Math.random() * ranks.length)];
       return {
         playerCards: [
-          { rank: pairRank, suit: suits[0], code: `${pairRank}C` },
-          { rank: pairRank, suit: suits[1], code: `${pairRank}D` }
+          { rank: pairRank, suit: suits[0], code: `${pairRank}${suits[0]}` },
+          { rank: pairRank, suit: suits[1], code: `${pairRank}${suits[1]}` }
         ],
         dealerCard: drawCard()
       };
@@ -292,7 +304,10 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
       const doublingHands = [['6', '5'], ['7', '4'], ['8', '3'], ['6', '4'], ['7', '3'], ['5', '4'], ['6', '3']];
       const hand = doublingHands[Math.floor(Math.random() * doublingHands.length)];
       return {
-        playerCards: hand.map(r => ({ rank: r, suit: suits[Math.floor(Math.random() * suits.length)], code: `${r}C` })),
+        playerCards: hand.map(r => {
+          const suit = suits[Math.floor(Math.random() * suits.length)];
+          return { rank: r, suit, code: `${r}${suit}` };
+        }),
         dealerCard: drawCard()
       };
     }
@@ -653,6 +668,7 @@ export default function UnifiedSimulation({ settings }: UnifiedSimulationProps) 
     setSessionStartTime(null);
     setRunningCount(0);
     setCardsDealt(0);
+    cardsDealtRef.current = 0;
     const newShoe = createShoe(settings.deckCount);
     setShoe(newShoe);
     setGameStarted(false);
